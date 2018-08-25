@@ -6,25 +6,25 @@ import { User } from '../../models/user';
 import { UpdateUserVM } from '../../models/updateUserVM';
 import { ChangePasswordUserVM } from '../../models/ChangePasswordUserVM';
 import { Profile } from '../../models/profile';
-import {APP_CONFIG, AppConfig} from "../../app/app-config.module";
+import {config} from "../../../environments/environment";
 
 @Injectable()
 export class UserService {
 
     private _subject = new Subject<any>();
 
-    constructor(private _http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
+    constructor(private _http: HttpClient) { }
 
     getAll() {
-        return this._http.get<User[]>(`${this.config.apiEndpoint}/users`);
+        return this._http.get<User[]>(`${config.apiEndpoint}/users`);
     }
 
     getUserData() {
-        return this._http.get<UpdateUserVM>(`${this.config.apiEndpoint}/Account`);
+        return this._http.get<UpdateUserVM>(`${config.apiEndpoint}/Account`);
     }
 
     register(user: User) {
-        return this._http.post<any>(`${this.config.apiEndpoint}/Account/Register`, user)
+        return this._http.post<any>(`${config.apiEndpoint}/Account/Register`, user)
             .pipe(map(response => {
                 // login successful if there's a jwt token in the response
                 if (response.success || response.authenticated) {
@@ -37,15 +37,15 @@ export class UserService {
     }
 
     update(updateUserVM: UpdateUserVM) {
-        return this._http.put<any>(`${this.config.apiEndpoint}/Account`, updateUserVM);
+        return this._http.put<any>(`${config.apiEndpoint}/Account`, updateUserVM);
     }
 
     changePassword(changePasswordUserVM: ChangePasswordUserVM) {
-        return this._http.put<any>(`${this.config.apiEndpoint}/Account/ChangePassword/`, changePasswordUserVM);
+        return this._http.put<any>(`${config.apiEndpoint}/Account/ChangePassword/`, changePasswordUserVM);
     }
 
     delete(id: number) {
-        // return this._http.delete(`${this.config.apiEndpoint}/users/` + id);
+        // return this._http.delete(`${config.apiEndpoint}/users/` + id);
     }
 
     setLoggedUser(user: User) {
@@ -64,6 +64,6 @@ export class UserService {
     }
 
     getProfile() {
-        return this._http.get<Profile>(`${this.config.apiEndpoint}/account/profile`);
+        return this._http.get<Profile>(`${config.apiEndpoint}/account/profile`);
     }
 }

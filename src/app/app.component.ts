@@ -39,6 +39,6 @@ export class MyApp {
   }
 
   verifyUserSession() {
-    this.menuCtrl.enable(false);
+    
   }
 }

@@ -5,6 +5,8 @@ import {MyApp} from './app.component';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {UserService} from "../services/user/user.service";
+import {AuthenticationService} from "../services/authentication/authentication.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -12,6 +14,7 @@ import {UserService} from "../services/user/user.service";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -22,6 +25,7 @@ import {UserService} from "../services/user/user.service";
     StatusBar,
     SplashScreen,
     UserService,
+    AuthenticationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
