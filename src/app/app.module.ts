@@ -7,6 +7,9 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {UserService} from "../services/user/user.service";
 import {AuthenticationService} from "../services/authentication/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
+import {CategoryService} from "../services/category/category.service";
+import {BookService} from "../services/book/book.service";
+import {AlertService} from "../services/alert/alert.service";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import {HttpClientModule} from "@angular/common/http";
     StatusBar,
     SplashScreen,
     UserService,
+    // CategoryService,
+    BookService,
+    AlertService,
     AuthenticationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
