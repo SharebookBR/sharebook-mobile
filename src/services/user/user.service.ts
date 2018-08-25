@@ -2,13 +2,11 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { User } from '../../models/user';
 import { UpdateUserVM } from '../../models/updateUserVM';
 import { ChangePasswordUserVM } from '../../models/ChangePasswordUserVM';
 import { Profile } from '../../models/profile';
-
-import { APP_CONFIG, AppConfig } from '../../../app-config.module';
+import {APP_CONFIG, AppConfig} from "../../app/app-config.module";
 
 @Injectable()
 export class UserService {

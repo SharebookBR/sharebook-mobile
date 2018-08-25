@@ -4,12 +4,9 @@ import { Book } from '../../models/book';
 import { BooksVM } from '../../models/booksVM';
 import { DonateBookUser } from '../../models/donateBookUser';
 import { map } from 'rxjs/operators';
+import {APP_CONFIG, AppConfig} from "../../app/app-config.module";
 
-import { APP_CONFIG, AppConfig } from '../../../app-config.module';
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BookService {
   // TODO TypicodeInterceptor
   constructor(private _http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {}

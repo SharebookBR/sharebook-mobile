@@ -1,16 +1,12 @@
 ﻿import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
-
 import { UserService } from '../user/user.service';
-
-import { APP_CONFIG, AppConfig } from '../../../app-config.module';
+import {APP_CONFIG, AppConfig} from "../../app/app-config.module";
 
 @Injectable()
 export class AuthenticationService {
     constructor(private http: HttpClient,
-      private router: Router,
       private _user: UserService,
       @Inject(APP_CONFIG) private config: AppConfig) { }
 
