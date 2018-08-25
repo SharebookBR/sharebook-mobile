@@ -1,0 +1,31 @@
+<ion-content padding>
+  <div text-center class="logo-wrapper">
+    <img src="assets/imgs/logo.png">
+  </div>
+
+  <form class="form-wrapper" [formGroup]="form">
+    <ion-item>
+      <ion-label stacked>E-mail</ion-label>
+      <ion-input placeholder="Insira seu e-mail" [formControl]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Senha</ion-label>
+      <ion-input placeholder="Insira sua senha" [formControl]="password" type="password"></ion-input>
+    </ion-item>
+
+    <div margin padding-top text-center>
+      <button ion-button color="primary-light" (click)="login()">
+        Entrar
+      </button>
+
+      <button ion-button color="light">
+        Registrar
+      </button>
+    </div>
+  </form>
+</ion-content>
+
+<ion-footer text-center padding>
+  © 2018 Copyleft: SharebookBR
+</ion-footer>
