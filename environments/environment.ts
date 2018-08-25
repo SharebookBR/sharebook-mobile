@@ -1,2 +1,2 @@
-import {environment} from "./environment.prod";
+import {environment} from "./environment.dev";
 export let config = environment;
