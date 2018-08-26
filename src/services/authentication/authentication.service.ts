@@ -1,13 +1,16 @@
 ﻿import {Injectable, Inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {UserService} from '../user/user.service';
 import {config} from "../../../environments/environment";
+import {SessionService} from "../session/session.service";
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: HttpClient,
-              private _user: UserService) {
+  constructor(
+    private http: HttpClient,
+    private sessionService: SessionService,
+  ) {
+
   }
 
   login(email: string, password: string) {
@@ -16,8 +19,7 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         if (response.success || response.value.authenticated) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          // localStorage.setItem('shareBookUser', JSON.stringify(response.value));
-          // this._user.setLoggedUser(response.value);
+          this.sessionService.setSession({user: response.value});
         }
 
         return response.value;
@@ -25,8 +27,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
-    // localStorage.removeItem('shareBookUser');
-    // this._user.setLoggedUser(null);
+    this.sessionService.clearSession();
   }
 }

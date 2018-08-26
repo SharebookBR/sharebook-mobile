@@ -1,19 +1,23 @@
 import {Injectable, Inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {User} from '../../models/user';
 import {UpdateUserVM} from '../../models/updateUserVM';
 import {ChangePasswordUserVM} from '../../models/ChangePasswordUserVM';
 import {Profile} from '../../models/profile';
 import {config} from "../../../environments/environment";
+import {Storage} from "@ionic/storage";
+import {SessionService} from "../session/session.service";
 
 @Injectable()
 export class UserService {
 
-  private _subject = new Subject<any>();
+  constructor(
+    private _http: HttpClient,
+    private sessionService: SessionService,
+    @Inject(Storage) public storage: Storage
+  ) {
 
-  constructor(private _http: HttpClient) {
   }
 
   getAll() {
@@ -30,8 +34,7 @@ export class UserService {
         // login successful if there's a jwt token in the response
         if (response.success || response.authenticated) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          // localStorage.setItem('shareBookUser', JSON.stringify(response));
-          this.setLoggedUser(response);
+          this.sessionService.setSession({user: response})
         }
         return response;
       }));
@@ -47,21 +50,6 @@ export class UserService {
 
   delete(id: number) {
     // return this._http.delete(`${config.apiEndpoint}/users/` + id);
-  }
-
-  setLoggedUser(user: User) {
-    this._subject.next(user);
-  }
-
-  getLoggedUser(): Observable<any> {
-    return this._subject.asObservable();
-  }
-
-  getLoggedUserFromLocalStorage() {
-    if (localStorage.getItem('shareBookUser')) {
-      return JSON.parse(localStorage.getItem('shareBookUser'));
-    }
-    return;
   }
 
   getProfile() {

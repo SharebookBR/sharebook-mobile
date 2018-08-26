@@ -7,8 +7,9 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {UserService} from "../services/user/user.service";
 import {AuthenticationService} from "../services/authentication/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
-import {CategoryService} from "../services/category/category.service";
 import {BookService} from "../services/book/book.service";
+import {IonicStorageModule} from "@ionic/storage";
+import {SessionService} from "../services/session/session.service";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {BookService} from "../services/book/book.service";
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,7 +32,8 @@ import {BookService} from "../services/book/book.service";
     // CategoryService,
     BookService,
     AuthenticationService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SessionService,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {
