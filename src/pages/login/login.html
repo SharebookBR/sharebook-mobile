@@ -6,13 +6,26 @@
   <form class="form-wrapper" [formGroup]="form">
     <ion-item>
       <ion-label stacked>E-mail</ion-label>
-      <ion-input placeholder="Insira seu e-mail" [formControl]="email"></ion-input>
+      <ion-input placeholder="Insira seu e-mail" [formControl]="email" type="email"></ion-input>
     </ion-item>
+    <div *ngIf="email.touched && email.invalid">
+      <small margin-left ion-text color="danger" *ngIf="email.hasError('required')">
+        E-mail obrigatório.
+      </small>
+      <small margin-left ion-text color="danger" *ngIf="email.hasError('pattern') ">
+        O e-mail deve ser um e-mail válido.
+      </small>
+    </div>
 
     <ion-item>
       <ion-label stacked>Senha</ion-label>
       <ion-input placeholder="Insira sua senha" [formControl]="password" type="password"></ion-input>
     </ion-item>
+    <div *ngIf="password.touched && password.invalid">
+      <small margin-left ion-text color="danger" *ngIf="password.invalid && password.touched">
+        Senha inválida
+      </small>
+    </div>
 
     <div margin padding-top text-center>
       <button ion-button color="primary-light" (click)="login()">

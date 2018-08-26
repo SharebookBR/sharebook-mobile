@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, MenuController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../../models/status";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
+import * as AppConst from "../../core/utils/app.const";
 
 @IonicPage()
 @Component({
@@ -22,9 +23,10 @@ export class LoginPage {
     public authService: AuthenticationService,
     public loadingCtrl: LoadingController,
     public menuCtrl: MenuController,
+    public toastCtrl: ToastController,
   ) {
     this.form = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)])],
+      email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
       password: ['', [Validators.required]],
     });
 
@@ -49,16 +51,16 @@ export class LoginPage {
 
     loading.present();
     this.authService.login(this.email.value, this.password.value).subscribe(data => {
-      this.status.setAsSuccess();
-      console.log(data);
       loading.dismiss();
 
       this.menuCtrl.enable(true);
       this.navCtrl.setRoot('HomePage');
     }, err => {
-      console.log(err);
       loading.dismiss();
-      this.status.setAsError();
+      this.toastCtrl.create({
+        message: 'E-mail e/ou senha inválido',
+        duration: 2500
+      }).present();
     })
   }
 
