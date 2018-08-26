@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Status} from "../../models/status";
+import {AlertController, IonicPage, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import * as AppConst from '../../core/utils/app.const';
 import {PasswordValidation} from "../../core/utils/passwordValidation";
 import {UserService} from "../../services/user/user.service";
@@ -19,8 +18,9 @@ export class RegisterPage {
   constructor(public navCtrl: NavController,
               private userService: UserService,
               private toastController: ToastController,
-              public navParams: NavParams,
+              private menuController: MenuController,
               private alertController: AlertController,
+              private loadingController: LoadingController,
               private _formBuilder: FormBuilder) {
 
     this.form = _formBuilder.group({
@@ -47,13 +47,15 @@ export class RegisterPage {
   }
 
   submit(values) {
-    console.log(values)
-    if (Math.random) return;
 
     if (this.form.valid) {
+      const loading = this.loadingController.create();
+      loading.present();
       this.userService.register(values).subscribe(
         data => {
+          loading.dismiss();
           if (data.success || data.authenticated) {
+            this.menuController.enable(true);
             this.navCtrl.setRoot('HomePage');
           } else {
             const alert = this.alertController.create();
@@ -64,6 +66,7 @@ export class RegisterPage {
           }
         },
         error => {
+          loading.dismiss();
           const alert = this.alertController.create();
           alert.setTitle('Ops...');
           alert.setMessage('Não foi possível efetuar seu registro. Verifique sua conexão e tente novamente');
