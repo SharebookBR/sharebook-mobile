@@ -1,4 +1,4 @@
-# PRIMEIROS PASSOS DEVELOPER FRONTEND
+# PRIMEIROS PASSOS DEVELOPER MOBILE
 
 ## 1 - CONHEÇA O PROJETO SHAREBOOK
 
@@ -8,7 +8,7 @@ https://www.linkedin.com/pulse/projeto-sharebook-raffaello-damgaard/
 
 https://join.slack.com/t/sharebookworkspace/shared_invite/enQtMzQ2Nzc5OTk3MDc4LTZlMmJlMjA3NGE1NDczN2QxYzc2ZWZhM2UxMzFkMDIyYjliMGI3YzdlYzg2ZjZhYjQ2YWY1ZTUyZGViNzViOWQ
 
-### 2.2 - LÁ NO SLACK, ENTRE NO CANAL #FRONTEND
+### 2.2 - LÁ NO SLACK, ENTRE NO CANAL #MOBILE
 
 - Se apresente. Nome, cidade, profissão, e principais habilidades.
 - Pergunte sobre as tarefas em aberto.
@@ -20,7 +20,7 @@ https://trello.com/invite/sharebook6/928f21ef82592b5edafde06f171d338b
 
 ### 3.2 - PEGUE UMA TAREFA NO TRELLO.
 
-- https://trello.com/b/YoIL8NKf/front-end
+- https://trello.com/b/uTc3JDOz/mobile
 - Coloque no seu nome e mova para DOING.
 
 ## 4 - GITHUB
@@ -38,6 +38,10 @@ Hora de colocar a mão na massa. A parte mais divertida, trabalhar no código-fo
 # Rodar o app pela primeira vez
 
 ```bash
+# Verique se possui o Node instalado
+# caso não tenha, baixe em (https://nodejs.org)
+$ node -v
+
 $ npm install -g ionic
 
 $ npm install

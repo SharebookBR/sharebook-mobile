@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
+import {SessionService} from "../../services/session/session.service";
 
 @IonicPage()
 @Component({
@@ -8,7 +9,10 @@ import {IonicPage, NavController} from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    public sessionService: SessionService
+  ) {
 
   }
 

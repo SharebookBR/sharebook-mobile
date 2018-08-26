@@ -15,18 +15,24 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.toolbar-background {
-  background: color($colors, primary);
-}
+.toolbar {
+  .toolbar-background {
+    background: color($colors, primary);
+  }
 
-.toolbar-title {
-  color: white;
-}
+  .toolbar-title {
+    color: white;
+  }
 
-.bar-button-menutoggle {
-  color: white;
-}
+  .button-inner {
+    color: white;
+  }
 
-ion-header ion-icon.back-button-icon.icon {
-  color: #fff;
+  .bar-button-menutoggle {
+    color: white;
+  }
+
+  ion-header ion-icon.back-button-icon.icon {
+    color: #fff;
+  }
 }
