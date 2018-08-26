@@ -63,7 +63,7 @@ export class LoginPage {
   }
 
   cadastrar() {
-
+    this.navCtrl.push('RegisterPage');
   }
 }
 

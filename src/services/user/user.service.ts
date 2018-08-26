@@ -29,7 +29,7 @@ export class UserService {
                 // login successful if there's a jwt token in the response
                 if (response.success || response.authenticated) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('shareBookUser', JSON.stringify(response));
+                    // localStorage.setItem('shareBookUser', JSON.stringify(response));
                     this.setLoggedUser(response);
                 }
                 return response;
