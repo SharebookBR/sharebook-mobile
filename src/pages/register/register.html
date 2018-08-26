@@ -1,6 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Registro</ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="submit(form.value)">
+        Registrar
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -101,9 +107,7 @@
             </small>
           </div>
 
-          <div text-center margin-top>
-            <button ion-button [disabled]="form.invalid">Registrar</button>
-          </div>
+          <button style="display: none;"></button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -6,7 +6,9 @@ import {PasswordValidation} from "../../core/utils/passwordValidation";
 import {UserService} from "../../services/user/user.service";
 import {formatCep, formatPhone} from "../../core/utils/formatters";
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['LoginPage']
+})
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
