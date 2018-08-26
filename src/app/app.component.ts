@@ -4,6 +4,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {HomePage} from '../pages/home/home';
 import {SessionService} from "../services/session/session.service";
+import { AppVersion } from '@ionic-native/app-version';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,6 +13,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any;
   pages: Array<{ title: string, component: any }>;
+  version: string;
 
   constructor(
     public platform: Platform,
@@ -19,6 +21,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public sessionService: SessionService,
+    public appVersion: AppVersion,
   ) {
     this.initializeApp();
 
@@ -33,6 +36,7 @@ export class MyApp {
       await this.sessionService.restoreSession();
       this.statusBar.backgroundColorByHexString('#1f3b60');
       this.setRootPage();
+      this.getAppVersion();
       this.splashScreen.hide();
     });
   }
@@ -48,6 +52,14 @@ export class MyApp {
     } else {
       this.nav.setRoot('LoginPage');
     }
+  }
+
+  getAppVersion() {
+    this.appVersion.getVersionNumber().then((version) => {
+      this.version = version;
+    }, err => {
+      // not running on cordova
+    })
   }
 
   logout() {

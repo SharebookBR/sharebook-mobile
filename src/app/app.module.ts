@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {BookService} from "../services/book/book.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {SessionService} from "../services/session/session.service";
+import {AppVersion} from "@ionic-native/app-version";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {SessionService} from "../services/session/session.service";
     BookService,
     AuthenticationService,
     SessionService,
+    AppVersion,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
