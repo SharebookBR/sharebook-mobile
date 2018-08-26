@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Registro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-12 col-md-6 push-md-3>
+          <ion-item>
+            <ion-label stacked>Nome</ion-label>
+            <ion-input formControlName="name" placeholder="Seu nome"></ion-input>
+          </ion-item>
+          <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('name').hasError('required')">
+              Nome obrigatório.
+            </small>
+            <small margin-left ion-text color="danger" *ngIf="form.get('name').hasError('minlength')">
+              O nome deve conter no mínimo 3 caracteres.
+            </small>
+            <small margin-left ion-text color="danger" *ngIf="form.get('name').hasError('maxlength') ">
+              O nome deve conter no máximo 50 caracteres.
+            </small>
+          </div>
+
+          <ion-item>
+            <ion-label stacked>E-mail</ion-label>
+            <ion-input formControlName="email" type="email" placeholder="Seu e-mail"></ion-input>
+          </ion-item>
+          <div *ngIf="form.get('email').touched && form.get('email').invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('email').hasError('required')">
+              E-mail obrigatório.
+            </small>
+            <small margin-left ion-text color="danger" *ngIf="form.get('email').hasError('pattern') ">
+              O e-mail deve ser um e-mail válido.
+            </small>
+          </div>
+
+          <ion-item>
+            <ion-label stacked>Senha</ion-label>
+            <ion-input formControlName="password" type="password" placeholder="Crie uma senha"></ion-input>
+          </ion-item>
+          <div *ngIf="form.get('password').touched && form.get('password').invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('password').hasError('required')">
+              Senha obrigatória.
+            </small>
+            <small margin-left ion-text color="danger" *ngIf="form.get('password').hasError('pattern')">
+              A senha não atende os requisitos. Mínimo oito caracteres, um caractere especial (&#64;&#36;&#33;&#37;&#42;&#63;&#38;&#35;&#46;&#44;&#45;&#95;&#58;&#59;), um
+              caractere numérico e uma letra em maiúsculo.
+            </small>
+          </div>
+
+          <ion-item>
+            <ion-label stacked>Confirmar Senha</ion-label>
+            <ion-input formControlName="confirmPassword" type="password" placeholder="Confirme sua senha"></ion-input>
+          </ion-item>
+          <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('confirmPassword').hasError('required')">
+              Confirmação de senha obrigatória.
+            </small>
+            <small margin-left ion-text color="danger" *ngIf="form.get('confirmPassword').hasError('MatchPassword') ">
+              A confirmação de senha não confere com a senha informada.
+            </small>
+          </div>
+
+          <ion-item>
+            <ion-label stacked>DDD + Telefone</ion-label>
+            <ion-input formControlName="phone" placeholder="(XX) XXXXX-XXXX" type="tel" maxlength="15"></ion-input>
+          </ion-item>
+
+          <div *ngIf="form.get('phone').touched && form.get('phone').invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('phone').hasError('pattern')">
+              Telefone deve estar no formato (99) 99999-9999
+            </small>
+          </div>
+
+          <ion-item>
+            <ion-label stacked>LinkedIn</ion-label>
+            <ion-input formControlName="linkedin" placeholder="Link para seu linkedin"></ion-input>
+          </ion-item>
+          <div *ngIf="form.get('linkedin').touched && form.get('linkedin').invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('linkedin').hasError('pattern')">
+              O LinkedIn deve ser uma URL para o seu perfil no LinkedIn.
+            </small>
+          </div>
+
+          <ion-item>
+            <ion-label stacked>CEP</ion-label>
+            <ion-input formControlName="postalCode" type="tel" placeholder="XXXXX-XXX" maxlength="9"></ion-input>
+          </ion-item>
+          <div *ngIf="form.get('postalCode').touched && form.get('postalCode').invalid">
+            <small margin-left ion-text color="danger" *ngIf="form.get('postalCode').hasError('required')">
+              CEP obrigatório.
+            </small>
+            <small margin-left ion-text color="danger" *ngIf="form.get('postalCode').hasError('pattern')">
+              CEP deve estar no formato 99999-999.
+            </small>
+          </div>
+
+          <div text-center margin-top>
+            <button ion-button [disabled]="form.invalid">Registrar</button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>
