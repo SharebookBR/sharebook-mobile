@@ -86,4 +86,5 @@
     <plugin name="cordova-sqlite-storage" spec="^2.4.0" />
     <allow-navigation href="http://192.168.15.26:8100" />
     <engine name="android" spec="7.0.0" />
+    <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
 </widget>

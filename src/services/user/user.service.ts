@@ -55,4 +55,8 @@ export class UserService {
   getProfile() {
     return this._http.get<Profile>(`${config.apiEndpoint}/account/profile`);
   }
+
+  consultarCEP(cep) {
+    return this._http.get("http://viacep.com.br/ws/" + cep + "/json/")
+  }
 }

@@ -11,6 +11,7 @@ import {BookService} from "../services/book/book.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {SessionService} from "../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
+import {PhotoViewer} from "@ionic-native/photo-viewer";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {AppVersion} from "@ionic-native/app-version";
     AuthenticationService,
     SessionService,
     AppVersion,
+    PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

@@ -45,4 +45,12 @@ export class HomePage {
       this.randomStatus.setAsError();
     })
   }
+
+  openDetails(book) {
+    this.navCtrl.push('BookDetailsPage', {book});
+  }
+
+  onImgLoadError(book) {
+    book.imageUrl = 'assets/imgs/img-placeholder.png';
+  }
 }

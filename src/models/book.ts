@@ -1,4 +1,5 @@
 import { Category } from './category';
+import {User} from "./user";
 
 export class Book {
   id: string;
@@ -13,4 +14,13 @@ export class Book {
   categoryId: number;
   freightOption: string;
   category: Category;
+  user: User;
+
+  static freightLabels = {
+    City: 'Cidade',
+    State: 'Estado',
+    Country: 'País',
+    World: 'Mundo',
+    WithoutFreight: 'Não',
+  };
 }
