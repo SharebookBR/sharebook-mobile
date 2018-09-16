@@ -13,7 +13,7 @@ import {PhotoViewer, PhotoViewerOptions} from "@ionic-native/photo-viewer";
 })
 export class BookDetailsPage {
   book: Book;
-  city: string;
+  city: string = '-';
   freightLabels = Book.freightLabels;
 
   constructor(
@@ -35,7 +35,10 @@ export class BookDetailsPage {
 
   getCity(cep) {
     this.userService.consultarCEP(cep).subscribe(address => {
-      this.city = `${address['localidade']}-${address['uf']}`;
+      const {localidade, uf} = <any>address;
+      if (localidade && uf) {
+        this.city = `${localidade}-${uf}`;
+      }
     }, err => {
 
     })
