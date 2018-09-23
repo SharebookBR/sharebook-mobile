@@ -5,7 +5,7 @@ import {Session} from "../../models/session";
 
 @Injectable()
 export class SessionService {
-  private data: Session = {};
+  private _data: Session = {};
 
   constructor(
     @Inject(Storage) public storage: Storage
@@ -13,22 +13,26 @@ export class SessionService {
 
   }
 
+  get data(): any {
+    return this._data;
+  }
+
   get user(): User {
-    return this.data.user;
+    return this._data.user;
   }
 
   setSession(data: Session) {
-    this.data = {...this.data, ...data};
+    this._data = {...this.data, ...data};
     this.storage.set('session', JSON.stringify(data));
   }
 
   async restoreSession() {
     const data = await this.storage.get('session');
-    if (data) this.data = JSON.parse(data);
+    if (data) this._data = JSON.parse(data);
   }
 
   clearSession() {
-    this.data = {};
+    this._data = {};
     this.storage.remove('session');
   }
 }

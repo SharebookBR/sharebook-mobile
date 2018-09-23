@@ -3,6 +3,7 @@ import {MenuController, Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {HomePage} from '../pages/home/home';
+import {MyRequestsPage} from '../pages/my-requests/my-requests';
 import {SessionService} from "../services/session/session.service";
 import { AppVersion } from '@ionic-native/app-version';
 
@@ -27,6 +28,7 @@ export class MyApp {
 
     this.pages = [
       {title: 'Home', component: 'HomePage'},
+      {title: 'Meus pedidos', component: 'MyRequestsPage'},
     ];
 
   }

@@ -8,7 +8,7 @@ import {config} from "../../../environments/environment";
 
 @Injectable()
 export class BookService {
-  // TODO TypicodeInterceptor
+  
   constructor(private _http: HttpClient) {}
 
   public getAll() {
@@ -67,4 +67,7 @@ export class BookService {
     return this._http.get<any>(`${config.apiEndpoint}/book/Requested/${bookId}`);
   }
 
+  public getRequestedBooks() {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyRequests`);
+  }
 }
