@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{book?.title}}</ion-title>
+
+    <!--<ion-buttons right>-->
+      <!--<button ion-button>-->
+        <!--Tenho interesse-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item tappable text-center class="book-cover" (click)="openBookCover()">
+    <img [src]="book?.imageUrl">
+  </ion-item>
+
+  <ion-item>
+    <p>Título</p>
+    <h4>{{book?.title}}</h4>
+  </ion-item>
+
+  <ion-item>
+    <p>Autor</p>
+    <h4>{{book?.author}}</h4>
+  </ion-item>
+
+  <ion-item>
+    <p>Categoria</p>
+    <h4>{{book?.category?.name}}</h4>
+  </ion-item>
+
+  <ion-item>
+    <p>Doado por:</p>
+    <h4>{{book?.user?.name}}</h4>
+  </ion-item>
+
+  <ion-item>
+    <p>Cidade:</p>
+    <h4>{{city}}</h4>
+  </ion-item>
+
+  <ion-item>
+    <p>Envia para:</p>
+    <h4>{{freightLabels[book?.freightOption]}}</h4>
+  </ion-item>
+</ion-content>

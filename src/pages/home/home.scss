@@ -1,3 +1,10 @@
 page-home {
-
+  .book-avatar {
+    img {
+      border-radius: unset;
+      max-width: 100px;
+      min-width: 75px;
+      height: auto;
+    }
+  }
 }

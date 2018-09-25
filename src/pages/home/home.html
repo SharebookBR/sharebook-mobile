@@ -3,10 +3,52 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Sharebook</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  Logado com: <h2>{{sessionService?.user?.name}}</h2>
+<ion-content>
+  <ion-item-divider>
+    <h2>Livros mais novos</h2>
+  </ion-item-divider>
+
+  <ion-item *ngIf="newStatus.isDownloading()" text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+  </ion-item>
+
+  <ion-item no-lines padding text-center *ngIf="newStatus.isError()">
+    <button ion-button (click)="getTop15()">
+      Tentar Novamente
+    </button>
+  </ion-item>
+
+  <button ion-item *ngFor="let book of newBooks" (click)="openDetails(book)">
+    <ion-avatar item-left class="book-avatar">
+      <img [src]="book.imageUrl" (error)="onImgLoadError(book)">
+    </ion-avatar>
+    <h4>{{book.title}}</h4>
+    <p>{{book.author}}</p>
+  </button>
+
+  <ion-item-divider>
+    <h2>Livros em destaque</h2>
+  </ion-item-divider>
+
+  <ion-item *ngIf="randomStatus.isDownloading()" text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+  </ion-item>
+
+  <ion-item no-lines padding text-center *ngIf="randomStatus.isError()">
+    <button ion-button (click)="getTop15()">
+      Tentar Novamente
+    </button>
+  </ion-item>
+
+  <button ion-item *ngFor="let book of randomBooks" (click)="openDetails(book)">
+    <ion-avatar item-left class="book-avatar">
+      <img [src]="book.imageUrl">
+    </ion-avatar>
+    <h4>{{book.title}}</h4>
+    <p>{{book.author}}</p>
+  </button>
 </ion-content>
