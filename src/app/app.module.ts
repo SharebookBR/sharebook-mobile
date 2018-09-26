@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {StatusBar} from '@ionic-native/status-bar';
@@ -11,6 +12,7 @@ import {BookService} from "../services/book/book.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {SessionService} from "../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
+import {JwtInterceptor} from '../core/interceptors/jwt.interceptor';
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 
 @NgModule({
@@ -38,6 +40,11 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
     AppVersion,
     PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
   ]
 })
 export class AppModule {

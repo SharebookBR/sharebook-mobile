@@ -19,7 +19,10 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         if (response.success || response.value.authenticated) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.sessionService.setSession({user: response.value});
+          this.sessionService.setSession({
+            user: response.value,
+            accessToken: response.value.accessToken
+          });
         }
 
         return response.value;
