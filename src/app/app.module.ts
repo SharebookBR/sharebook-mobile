@@ -13,6 +13,7 @@ import {IonicStorageModule} from "@ionic/storage";
 import {SessionService} from "../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
 import {JwtInterceptor} from '../core/interceptors/jwt.interceptor';
+import {PhotoViewer} from "@ionic-native/photo-viewer";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {JwtInterceptor} from '../core/interceptors/jwt.interceptor';
     AuthenticationService,
     SessionService,
     AppVersion,
+    PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {
       provide: HTTP_INTERCEPTORS,
