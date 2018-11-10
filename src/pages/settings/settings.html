@@ -6,7 +6,10 @@
 
 <ion-content>
   <ion-item>
-    Versão {{version}}
+    Versão
+    <span item-right class="version">
+      {{version}}
+    </span>
   </ion-item>
 
   <ion-item (click)="logOut()">
