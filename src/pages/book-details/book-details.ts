@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Book} from "../../models/book";
 import {UserService} from "../../services/user/user.service";
-import {PhotoViewer, PhotoViewerOptions} from "@ionic-native/photo-viewer";
+import {PhotoViewer} from "@ionic-native/photo-viewer";
 
 @IonicPage({
   defaultHistory: ['HomePage']
@@ -21,6 +21,7 @@ export class BookDetailsPage {
     public navParams: NavParams,
     public userService: UserService,
     public photoViewer: PhotoViewer,
+    public modalCtrl: ModalController,
   ) {
     this.book = this.navParams.get('book');
   }
@@ -34,6 +35,8 @@ export class BookDetailsPage {
   }
 
   getCity(cep) {
+    if (!cep) return;
+
     this.userService.consultarCEP(cep).subscribe(address => {
       const {localidade, uf} = <any>address;
       if (localidade && uf) {
@@ -46,5 +49,13 @@ export class BookDetailsPage {
 
   openBookCover() {
     this.photoViewer.show(this.book.imageUrl);
+  }
+
+  openBookRequest() {
+    const modal = this.modalCtrl.create('BookRequestPage', {
+      book: this.book
+    });
+
+    modal.present();
   }
 }

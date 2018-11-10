@@ -2,11 +2,11 @@
   <ion-navbar>
     <ion-title>{{book?.title}}</ion-title>
 
-    <!--<ion-buttons right>-->
-      <!--<button ion-button>-->
-        <!--Tenho interesse-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
+    <ion-buttons right>
+      <button ion-button (click)="openBookRequest()">
+        Tenho interesse
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -41,7 +41,7 @@
   </ion-item>
 
   <ion-item>
-    <p>Envia para:</p>
+    <p>Doador paga o frete:</p>
     <h4>{{freightLabels[book?.freightOption]}}</h4>
   </ion-item>
 </ion-content>

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {App, IonicPage, NavController, ViewController} from 'ionic-angular';
 import {SessionService} from "../../services/session/session.service";
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
@@ -18,9 +18,9 @@ export class HomePage {
   randomStatus = new Status();
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     public bookService: BookService,
-    public sessionService: SessionService
   ) {
     this.getTop15();
     this.getRandomBooks();
@@ -47,7 +47,7 @@ export class HomePage {
   }
 
   openDetails(book) {
-    this.navCtrl.push('BookDetailsPage', {book});
+    this.app.getRootNav().push('BookDetailsPage', {book});
   }
 
   onImgLoadError(book) {
