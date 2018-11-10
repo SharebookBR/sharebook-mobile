@@ -8,4 +8,30 @@ page-home {
       width: auto;
     }
   }
+
+  .books-shelf {
+    white-space: nowrap;
+    overflow-x: scroll;
+    margin-left: 10px;
+    padding-bottom: 5px;
+
+    .books-shelf-item {
+      border-right: 1px solid #ddd;
+      display: inline-block;
+      padding: 0 11px;
+      max-width: 160px;
+      text-align: center;
+      vertical-align: top;
+
+      .book-cover {
+        width: 135px;
+        height: 190px;
+      }
+
+      .book-name {
+        color: gray;
+        white-space: normal;
+      }
+    }
+  }
 }
