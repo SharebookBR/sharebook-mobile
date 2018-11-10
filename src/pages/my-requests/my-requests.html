@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div *ngIf="status.isDownloading()" text-center padding no-lines>
     <ion-spinner></ion-spinner>
     <h6>Carregando...</h6>
@@ -29,12 +29,12 @@
       🙂
     </div>
 
-    <ion-item *ngFor="let item of requestedBooks">
+    <button ion-item *ngFor="let item of requestedBooks">
       <h2>{{item.title}}</h2>
       <p>{{item.author}}</p>
-      <ion-badge color="{{getBadgeStatusColor(item.status)}}">
+      <ion-badge color="{{getBadgeStatusColor(item.status)}}" item-right>
         {{item.status}}
       </ion-badge>
-    </ion-item>
+    </button>
   </ion-list>
 </ion-content>

@@ -4,6 +4,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-item>
+    Versão {{version}}
+  </ion-item>
 
+  <ion-item (click)="logOut()">
+    Sair
+  </ion-item>
 </ion-content>

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { BookService } from '../../services/book/book.service';
 import { BookRequestStatus } from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
+import {Book} from "../../models/book";
 
 @IonicPage()
 @Component({
@@ -11,7 +12,7 @@ import {Status} from "../../models/status";
 })
 export class MyRequestsPage {
 
-  requestedBooks = [];
+  requestedBooks: Array<Book> = [];
   status = new Status();
 
   constructor(

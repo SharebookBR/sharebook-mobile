@@ -12,9 +12,7 @@ import { AppVersion } from '@ionic-native/app-version';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any;
   pages: Array<{ title: string, component: any }>;
-  version: string;
 
   constructor(
     public platform: Platform,
@@ -22,7 +20,6 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public sessionService: SessionService,
-    public appVersion: AppVersion,
   ) {
     this.initializeApp();
 
@@ -31,7 +28,6 @@ export class MyApp {
       {title: 'Meus pedidos', component: 'MyRequestsPage'},
       {title: 'Livros', component: 'HomePage'},
     ];
-
   }
 
   initializeApp() {
@@ -39,13 +35,8 @@ export class MyApp {
       await this.sessionService.restoreSession();
       this.statusBar.backgroundColorByHexString('#1f3b60');
       this.setRootPage();
-      this.getAppVersion();
       this.splashScreen.hide();
     });
-  }
-
-  openPage(page) {
-    this.nav.setRoot(page.component);
   }
 
   setRootPage() {
@@ -55,18 +46,5 @@ export class MyApp {
     } else {
       this.nav.setRoot('LoginPage');
     }
-  }
-
-  getAppVersion() {
-    this.appVersion.getVersionNumber().then((version) => {
-      this.version = version;
-    }, err => {
-      // not running on cordova
-    })
-  }
-
-  logout() {
-    this.sessionService.clearSession();
-    this.nav.setRoot('LoginPage');
   }
 }
