@@ -1,10 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../models/book';
 import { BooksVM } from '../../models/booksVM';
 import { DonateBookUser } from '../../models/donateBookUser';
 import { map } from 'rxjs/operators';
-import {config} from "../../../environments/environment";
+import { config } from "../../../environments/environment";
 
 @Injectable()
 export class BookService {

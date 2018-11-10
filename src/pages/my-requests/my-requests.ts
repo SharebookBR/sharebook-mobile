@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { BookService } from '../../services/book/book.service';
 import { BookRequestStatus } from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";

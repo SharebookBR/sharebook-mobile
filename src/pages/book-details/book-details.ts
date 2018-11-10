@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {Book} from "../../models/book";
 import {UserService} from "../../services/user/user.service";
 import {PhotoViewer} from "@ionic-native/photo-viewer";

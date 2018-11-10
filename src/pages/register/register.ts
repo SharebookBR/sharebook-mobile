@@ -23,9 +23,9 @@ export class RegisterPage {
               private menuController: MenuController,
               private alertController: AlertController,
               private loadingController: LoadingController,
-              private _formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder) {
 
-    this.form = _formBuilder.group({
+    this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
       password: ['', [Validators.required, Validators.pattern(AppConst.passwordPattern)]],

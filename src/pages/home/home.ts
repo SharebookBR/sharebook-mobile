@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, NavController, ViewController} from 'ionic-angular';
-import {SessionService} from "../../services/session/session.service";
+import {App, IonicPage, NavController} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";

@@ -2,17 +2,13 @@ import {Component, ViewChild} from '@angular/core';
 import {MenuController, Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import {HomePage} from '../pages/home/home';
-import {MyRequestsPage} from '../pages/my-requests/my-requests';
 import {SessionService} from "../services/session/session.service";
-import { AppVersion } from '@ionic-native/app-version';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  pages: Array<{ title: string, component: any }>;
 
   constructor(
     public platform: Platform,
@@ -22,12 +18,6 @@ export class MyApp {
     public sessionService: SessionService,
   ) {
     this.initializeApp();
-
-    this.pages = [
-      {title: 'Home', component: 'HomePage'},
-      {title: 'Meus pedidos', component: 'MyRequestsPage'},
-      {title: 'Livros', component: 'HomePage'},
-    ];
   }
 
   initializeApp() {
