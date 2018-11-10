@@ -51,7 +51,7 @@ export class MyApp {
   setRootPage() {
     if (this.sessionService.user) {
       this.menuCtrl.enable(true);
-      this.nav.setRoot('HomePage');
+      this.nav.setRoot('TabsPage');
     } else {
       this.nav.setRoot('LoginPage');
     }

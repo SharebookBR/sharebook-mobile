@@ -67,7 +67,11 @@ export class BookService {
     return this._http.get<any>(`${config.apiEndpoint}/book/Requested/${bookId}`);
   }
 
-  public getRequestedBooks() {
-    return this._http.get<any>(`${config.apiEndpoint}/book/MyRequests`);
+  public getRequestedBooks(page: number, items: number) {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyRequests/${page}/${items}`);
+  }
+
+  public getDonatedBooks() {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyDonations`);
   }
 }
