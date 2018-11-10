@@ -1,10 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../models/book';
 import { BooksVM } from '../../models/booksVM';
 import { DonateBookUser } from '../../models/donateBookUser';
 import { map } from 'rxjs/operators';
-import {config} from "../../../environments/environment";
+import { config } from "../../../environments/environment";
 
 @Injectable()
 export class BookService {
@@ -59,15 +59,19 @@ export class BookService {
     return this._http.put<any>(`${config.apiEndpoint}/book/Donate/${bookId}`, donateBookUser);
   }
 
-  public requestBook(bookId: string) {
-    return this._http.post<any>(`${config.apiEndpoint}/book/Request/${bookId}`, null);
+  public requestBook(bookId: string, reason: string) {
+    return this._http.post<any>(`${config.apiEndpoint}/book/Request`, {bookId, reason});
   }
 
   public getRequested(bookId: string) {
     return this._http.get<any>(`${config.apiEndpoint}/book/Requested/${bookId}`);
   }
 
-  public getRequestedBooks() {
-    return this._http.get<any>(`${config.apiEndpoint}/book/MyRequests`);
+  public getRequestedBooks(page: number, items: number) {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyRequests/${page}/${items}`);
+  }
+
+  public getDonatedBooks() {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyDonations`);
   }
 }

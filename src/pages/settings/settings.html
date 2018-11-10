@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Configurações</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    Versão
+    <span item-right class="version">
+      {{version}}
+    </span>
+  </ion-item>
+
+  <ion-item (click)="logOut()">
+    Sair
+  </ion-item>
+</ion-content>

@@ -1,15 +1,39 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Sharebook</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <!------------- Livros em destaque ------------->
+
+  <ion-item-divider no-lines>
+    <h2>Livros em destaque</h2>
+  </ion-item-divider>
+
+  <ion-item *ngIf="randomStatus.isDownloading()" text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+  </ion-item>
+
+  <ion-item no-lines padding text-center *ngIf="randomStatus.isError()">
+    <button ion-button (click)="getRandomBooks()">
+      Tentar Novamente
+    </button>
+  </ion-item>
+
+  <div class="books-shelf">
+    <div class="books-shelf-item" *ngFor="let book of randomBooks" tappable (click)="openDetails(book)">
+      <img class="book-cover" [src]="book.imageUrl" (error)="onImgLoadError(book)">
+      <div class="book-name">
+        {{ book.title }}
+      </div>
+    </div>
+  </div>
+
+  <!------------- Livros mais recentes ------------->
+
   <ion-item-divider>
-    <h2>Livros mais novos</h2>
+    <h2>Livros mais recentes</h2>
   </ion-item-divider>
 
   <ion-item *ngIf="newStatus.isDownloading()" text-center padding no-lines>
@@ -25,28 +49,6 @@
   <button ion-item *ngFor="let book of newBooks" (click)="openDetails(book)">
     <ion-avatar item-left class="book-avatar">
       <img [src]="book.imageUrl" (error)="onImgLoadError(book)">
-    </ion-avatar>
-    <h4>{{book.title}}</h4>
-    <p>{{book.author}}</p>
-  </button>
-
-  <ion-item-divider>
-    <h2>Livros em destaque</h2>
-  </ion-item-divider>
-
-  <ion-item *ngIf="randomStatus.isDownloading()" text-center padding no-lines>
-    <ion-spinner></ion-spinner>
-  </ion-item>
-
-  <ion-item no-lines padding text-center *ngIf="randomStatus.isError()">
-    <button ion-button (click)="getTop15()">
-      Tentar Novamente
-    </button>
-  </ion-item>
-
-  <button ion-item *ngFor="let book of randomBooks" (click)="openDetails(book)">
-    <ion-avatar item-left class="book-avatar">
-      <img [src]="book.imageUrl">
     </ion-avatar>
     <h4>{{book.title}}</h4>
     <p>{{book.author}}</p>

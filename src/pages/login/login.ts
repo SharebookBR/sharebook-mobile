@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../../models/status";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import * as AppConst from "../../core/utils/app.const";
@@ -18,7 +18,6 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     public formBuilder: FormBuilder,
     public authService: AuthenticationService,
     public loadingCtrl: LoadingController,
@@ -54,7 +53,7 @@ export class LoginPage {
       loading.dismiss();
 
       this.menuCtrl.enable(true);
-      this.navCtrl.setRoot('HomePage');
+      this.navCtrl.setRoot('TabsPage');
     }, err => {
       loading.dismiss();
       this.toastCtrl.create({

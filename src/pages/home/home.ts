@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
-import {SessionService} from "../../services/session/session.service";
+import {App, IonicPage, NavController} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
+import {User} from "../../models/user";
 
 @IonicPage()
 @Component({
@@ -18,9 +18,9 @@ export class HomePage {
   randomStatus = new Status();
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     public bookService: BookService,
-    public sessionService: SessionService
   ) {
     this.getTop15();
     this.getRandomBooks();
@@ -47,10 +47,20 @@ export class HomePage {
   }
 
   openDetails(book) {
-    this.navCtrl.push('BookDetailsPage', {book});
+    this.app.getRootNav().push('BookDetailsPage', {book});
   }
 
   onImgLoadError(book) {
     book.imageUrl = 'assets/imgs/img-placeholder.png';
+  }
+
+  getShortName(user: User) {
+    const names = user.name.split(' ');
+
+    if (names.length > 1) {
+      return `${names[0]} ${names[names.length-1]}`;
+    }
+
+    return names[0];
   }
 }

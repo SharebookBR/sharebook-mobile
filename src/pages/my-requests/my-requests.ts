@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { BookService } from '../../services/book/book.service';
 import { BookRequestStatus } from '../../models/BookRequestStatus';
-
-/**
- * Generated class for the MyRequestsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Status} from "../../models/status";
+import {Book} from "../../models/book";
 
 @IonicPage()
 @Component({
@@ -17,39 +12,28 @@ import { BookRequestStatus } from '../../models/BookRequestStatus';
 })
 export class MyRequestsPage {
 
-  requestedBooks = new Array<any>();
+  requestedBooks: Array<Book> = [];
+  status = new Status();
 
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams,
     private bookService: BookService,
-    private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
   ) {
+    this.getRequestedBooks();
   }
 
-  ionViewDidLoad() {
-    const loader = this.loadingCtrl.create({
-      content: "Aguarde..."
-    });
-
-    loader.present();
+  getRequestedBooks() {
+    this.status.setAsDownloading();
 
     this
       .bookService
-      .getRequestedBooks()
+      .getRequestedBooks(1, 100)
       .subscribe(resp => {
-        this.requestedBooks = resp;
-        loader.dismiss();
+        this.status.setAsSuccess();
+
+        this.requestedBooks = resp.items;
       }, err => {
-        loader.dismiss();
-
-        const toast = this.toastCtrl.create({
-          message: 'Erro ao carregar os livros solicitados!',
-          duration: 3000
-        });
-
-        toast.present();
+        this.status.setAsError();
       });
   }
 
