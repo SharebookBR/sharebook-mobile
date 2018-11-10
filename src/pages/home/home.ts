@@ -4,6 +4,7 @@ import {SessionService} from "../../services/session/session.service";
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
+import {User} from "../../models/user";
 
 @IonicPage()
 @Component({
@@ -52,5 +53,15 @@ export class HomePage {
 
   onImgLoadError(book) {
     book.imageUrl = 'assets/imgs/img-placeholder.png';
+  }
+
+  getShortName(user: User) {
+    const names = user.name.split(' ');
+
+    if (names.length > 1) {
+      return `${names[0]} ${names[names.length-1]}`;
+    }
+
+    return names[0];
   }
 }
