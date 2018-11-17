@@ -20,4 +20,8 @@ page-login {
     background: color($colors, primary);
     color: white;
   }
+
+  .forgot-pass {
+    text-transform: none;
+  }
 }

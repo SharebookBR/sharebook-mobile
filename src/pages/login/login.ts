@@ -1,9 +1,17 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
+import {
+  AlertController,
+  IonicPage,
+  LoadingController,
+  MenuController,
+  NavController,
+  ToastController
+} from 'ionic-angular';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../../models/status";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import * as AppConst from "../../core/utils/app.const";
+import {UserService} from "../../services/user/user.service";
 
 @IonicPage()
 @Component({
@@ -23,6 +31,8 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public menuCtrl: MenuController,
     public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public userService: UserService,
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
@@ -65,6 +75,64 @@ export class LoginPage {
 
   cadastrar() {
     this.navCtrl.push('RegisterPage');
+  }
+
+  forgotPassword() {
+    const alert = this.alertCtrl.create({
+      title: 'Login',
+      inputs: [{
+        name: 'email',
+        placeholder: 'E-mail',
+        value: this.form.get('email').value
+      }],
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      }, {
+        text: 'Resetar',
+        handler: data => {
+          const patt = new RegExp(AppConst.emailPattern);
+
+          const success = this.toastCtrl.create({
+            message: 'Sucesso, verifique seu e-mail.',
+            duration: 2500,
+            cssClass: 'toast-success'
+          });
+
+          const error = this.toastCtrl.create({
+            message: 'E-mail inválido',
+            duration: 2500,
+            cssClass: 'toast-error'
+          });
+
+          const loading = this.loadingCtrl.create({
+            content: 'Processando'
+          });
+
+          const email = data.email.toLowerCase();
+
+          if (patt.test(email)) {
+            loading.present();
+
+            this.userService.forgotPassword(email).subscribe(resp => {
+              loading.dismiss();
+
+              success.present();
+            }, err => {
+              loading.dismiss();
+
+              error.setMessage('Erro ao processar, tente novamente');
+              error.present();
+            });
+          } else {
+            error.setMessage('E-mail inválido');
+            error.present();
+          }
+        }
+      }]
+    });
+
+    alert.present();
   }
 }
 
