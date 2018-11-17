@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {App, IonicPage} from 'ionic-angular';
 import {SessionService} from "../../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
 
@@ -13,8 +13,7 @@ export class SettingsPage {
   version: string;
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
+    public app: App,
     public sessionService: SessionService,
     public appVersion: AppVersion,
   ) {
@@ -31,6 +30,6 @@ export class SettingsPage {
 
   logOut() {
     this.sessionService.clearSession();
-    this.navCtrl.setRoot('LoginPage');
+    this.app.getRootNav().setRoot('LoginPage');
   }
 }
