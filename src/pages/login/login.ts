@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../../models/status";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
