@@ -22,15 +22,15 @@
             <ion-input formControlName="name" placeholder="Seu nome"></ion-input>
           </ion-item>
           <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('name').hasError('required')">
+            <div class="form-error" *ngIf="form.get('name').hasError('required')">
               Nome obrigatório.
-            </small>
-            <small margin-left ion-text color="danger" *ngIf="form.get('name').hasError('minlength')">
+            </div>
+            <div class="form-error" *ngIf="form.get('name').hasError('minlength')">
               O nome deve conter no mínimo 3 caracteres.
-            </small>
-            <small margin-left ion-text color="danger" *ngIf="form.get('name').hasError('maxlength') ">
+            </div>
+            <div class="form-error" *ngIf="form.get('name').hasError('maxlength') ">
               O nome deve conter no máximo 50 caracteres.
-            </small>
+            </div>
           </div>
 
           <ion-item>
@@ -38,12 +38,12 @@
             <ion-input formControlName="email" type="email" placeholder="Seu e-mail"></ion-input>
           </ion-item>
           <div *ngIf="form.get('email').touched && form.get('email').invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('email').hasError('required')">
+            <div class="form-error" *ngIf="form.get('email').hasError('required')">
               E-mail obrigatório.
-            </small>
-            <small margin-left ion-text color="danger" *ngIf="form.get('email').hasError('pattern') ">
+            </div>
+            <div class="form-error" *ngIf="form.get('email').hasError('pattern') ">
               O e-mail deve ser um e-mail válido.
-            </small>
+            </div>
           </div>
 
           <ion-item>
@@ -51,13 +51,13 @@
             <ion-input formControlName="password" type="password" placeholder="Crie uma senha"></ion-input>
           </ion-item>
           <div *ngIf="form.get('password').touched && form.get('password').invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('password').hasError('required')">
+            <div class="form-error" *ngIf="form.get('password').hasError('required')">
               Senha obrigatória.
-            </small>
-            <small margin-left ion-text color="danger" *ngIf="form.get('password').hasError('pattern')">
+            </div>
+            <div class="form-error" *ngIf="form.get('password').hasError('pattern')">
               A senha não atende os requisitos. Mínimo oito caracteres, um caractere especial (&#64;&#36;&#33;&#37;&#42;&#63;&#38;&#35;&#46;&#44;&#45;&#95;&#58;&#59;), um
               caractere numérico e uma letra em maiúsculo.
-            </small>
+            </div>
           </div>
 
           <ion-item>
@@ -65,12 +65,12 @@
             <ion-input formControlName="confirmPassword" type="password" placeholder="Confirme sua senha"></ion-input>
           </ion-item>
           <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('confirmPassword').hasError('required')">
+            <div class="form-error" *ngIf="form.get('confirmPassword').hasError('required')">
               Confirmação de senha obrigatória.
-            </small>
-            <small margin-left ion-text color="danger" *ngIf="form.get('confirmPassword').hasError('MatchPassword') ">
+            </div>
+            <div class="form-error" *ngIf="form.get('confirmPassword').hasError('MatchPassword') ">
               A confirmação de senha não confere com a senha informada.
-            </small>
+            </div>
           </div>
 
           <ion-item>
@@ -79,9 +79,9 @@
           </ion-item>
 
           <div *ngIf="form.get('phone').touched && form.get('phone').invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('phone').hasError('pattern')">
+            <div class="form-error" *ngIf="form.get('phone').hasError('pattern')">
               Telefone deve estar no formato (99) 99999-9999
-            </small>
+            </div>
           </div>
 
           <ion-item>
@@ -89,9 +89,9 @@
             <ion-input formControlName="linkedin" placeholder="Link para seu linkedin"></ion-input>
           </ion-item>
           <div *ngIf="form.get('linkedin').touched && form.get('linkedin').invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('linkedin').hasError('pattern')">
+            <div class="form-error" *ngIf="form.get('linkedin').hasError('pattern')">
               O LinkedIn deve ser uma URL para o seu perfil no LinkedIn.
-            </small>
+            </div>
           </div>
 
           <ion-item>
@@ -99,12 +99,12 @@
             <ion-input formControlName="postalCode" type="tel" placeholder="XXXXX-XXX" maxlength="9"></ion-input>
           </ion-item>
           <div *ngIf="form.get('postalCode').touched && form.get('postalCode').invalid">
-            <small margin-left ion-text color="danger" *ngIf="form.get('postalCode').hasError('required')">
+            <div class="form-error" *ngIf="form.get('postalCode').hasError('required')">
               CEP obrigatório.
-            </small>
-            <small margin-left ion-text color="danger" *ngIf="form.get('postalCode').hasError('pattern')">
+            </div>
+            <div class="form-error" *ngIf="form.get('postalCode').hasError('pattern')">
               CEP deve estar no formato 99999-999.
-            </small>
+            </div>
           </div>
 
           <div *ngIf="form.get('postalCode').valid">
@@ -112,55 +112,55 @@
               <ion-label stacked>Endereço*</ion-label>
               <ion-input formControlName="street" placeholder="Insira a rua"></ion-input>
             </ion-item>
-            <small margin-left ion-text color="danger"
+            <div class="form-error" ion-text color="danger"
                    *ngIf="form.get('street').touched && form.get('street').invalid">
               Endereço obrigatório
-            </small>
+            </div>
 
             <ion-item>
               <ion-label stacked>Número*</ion-label>
               <ion-input type="number" formControlName="number" placeholder="Insira o número"></ion-input>
             </ion-item>
-            <small margin-left ion-text color="danger"
+            <div class="form-error" ion-text color="danger"
                    *ngIf="form.get('number').touched && form.get('number').invalid">
               Número obrigatório
-            </small>
+            </div>
 
             <ion-item>
               <ion-label stacked>Bairro*</ion-label>
               <ion-input formControlName="neighborhood" placeholder="Insira o bairro"></ion-input>
             </ion-item>
-            <small margin-left ion-text color="danger"
+            <div class="form-error" ion-text color="danger"
                    *ngIf="form.get('neighborhood').touched && form.get('neighborhood').invalid">
               Bairro obrigatório
-            </small>
+            </div>
 
             <ion-item>
               <ion-label stacked>Cidade*</ion-label>
               <ion-input formControlName="city" placeholder="Insira a cidade"></ion-input>
             </ion-item>
-            <small margin-left ion-text color="danger"
+            <div class="form-error" ion-text color="danger"
                    *ngIf="form.get('city').touched && form.get('city').invalid">
               Cidade obrigatória
-            </small>
+            </div>
 
             <ion-item>
               <ion-label stacked>Estado*</ion-label>
               <ion-input formControlName="state" placeholder="Insira o estado"></ion-input>
             </ion-item>
-            <small margin-left ion-text color="danger"
+            <div class="form-error" ion-text color="danger"
                    *ngIf="form.get('state').touched && form.get('state').invalid">
               Estado obrigatório
-            </small>
+            </div>
 
             <ion-item>
               <ion-label stacked>País*</ion-label>
               <ion-input formControlName="country" placeholder="Insira o país"></ion-input>
             </ion-item>
-            <small margin-left ion-text color="danger"
+            <div class="form-error" ion-text color="danger"
                    *ngIf="form.get('country').touched && form.get('country').invalid">
               País obrigatório
-            </small>
+            </div>
 
             <ion-item>
               <ion-label stacked>Complemento</ion-label>
