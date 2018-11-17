@@ -59,4 +59,8 @@ export class UserService {
   consultarCEP(cep) {
     return this._http.get("http://viacep.com.br/ws/" + cep + "/json/")
   }
+
+  forgotPassword(email) {
+    return this._http.post(`${config.apiEndpoint}/Account/ForgotMyPassword/${email}`, {});
+  }
 }
