@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <form [formGroup]="form" (ngSubmit)="submit(form.value)">
 
@@ -18,7 +18,7 @@
       <ion-row>
         <ion-col col-12 col-md-6 push-md-3>
           <ion-item>
-            <ion-label stacked>Nome</ion-label>
+            <ion-label stacked>Nome*</ion-label>
             <ion-input formControlName="name" placeholder="Seu nome"></ion-input>
           </ion-item>
           <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
@@ -34,7 +34,7 @@
           </div>
 
           <ion-item>
-            <ion-label stacked>E-mail</ion-label>
+            <ion-label stacked>E-mail*</ion-label>
             <ion-input formControlName="email" type="email" placeholder="Seu e-mail"></ion-input>
           </ion-item>
           <div *ngIf="form.get('email').touched && form.get('email').invalid">
@@ -95,7 +95,7 @@
           </div>
 
           <ion-item>
-            <ion-label stacked>CEP</ion-label>
+            <ion-label stacked>CEP*</ion-label>
             <ion-input formControlName="postalCode" type="tel" placeholder="XXXXX-XXX" maxlength="9"></ion-input>
           </ion-item>
           <div *ngIf="form.get('postalCode').touched && form.get('postalCode').invalid">
@@ -105,6 +105,67 @@
             <small margin-left ion-text color="danger" *ngIf="form.get('postalCode').hasError('pattern')">
               CEP deve estar no formato 99999-999.
             </small>
+          </div>
+
+          <div *ngIf="form.get('postalCode').valid">
+            <ion-item>
+              <ion-label stacked>Endereço*</ion-label>
+              <ion-input formControlName="street" placeholder="Insira a rua"></ion-input>
+            </ion-item>
+            <small margin-left ion-text color="danger"
+                   *ngIf="form.get('street').touched && form.get('street').invalid">
+              Endereço obrigatório
+            </small>
+
+            <ion-item>
+              <ion-label stacked>Número*</ion-label>
+              <ion-input type="number" formControlName="number" placeholder="Insira o número"></ion-input>
+            </ion-item>
+            <small margin-left ion-text color="danger"
+                   *ngIf="form.get('number').touched && form.get('number').invalid">
+              Número obrigatório
+            </small>
+
+            <ion-item>
+              <ion-label stacked>Bairro*</ion-label>
+              <ion-input formControlName="neighborhood" placeholder="Insira o bairro"></ion-input>
+            </ion-item>
+            <small margin-left ion-text color="danger"
+                   *ngIf="form.get('neighborhood').touched && form.get('neighborhood').invalid">
+              Bairro obrigatório
+            </small>
+
+            <ion-item>
+              <ion-label stacked>Cidade*</ion-label>
+              <ion-input formControlName="city" placeholder="Insira a cidade"></ion-input>
+            </ion-item>
+            <small margin-left ion-text color="danger"
+                   *ngIf="form.get('city').touched && form.get('city').invalid">
+              Cidade obrigatória
+            </small>
+
+            <ion-item>
+              <ion-label stacked>Estado*</ion-label>
+              <ion-input formControlName="state" placeholder="Insira o estado"></ion-input>
+            </ion-item>
+            <small margin-left ion-text color="danger"
+                   *ngIf="form.get('state').touched && form.get('state').invalid">
+              Estado obrigatório
+            </small>
+
+            <ion-item>
+              <ion-label stacked>País*</ion-label>
+              <ion-input formControlName="country" placeholder="Insira o país"></ion-input>
+            </ion-item>
+            <small margin-left ion-text color="danger"
+                   *ngIf="form.get('country').touched && form.get('country').invalid">
+              País obrigatório
+            </small>
+
+            <ion-item>
+              <ion-label stacked>Complemento</ion-label>
+              <ion-input formControlName="complement" placeholder="Insira o complemento"></ion-input>
+            </ion-item>
           </div>
 
           <button style="display: none;"></button>

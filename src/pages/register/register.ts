@@ -32,7 +32,15 @@ export class RegisterPage {
       confirmPassword: ['', [Validators.required]],
       phone: ['', [Validators.pattern(AppConst.phonePattern)]],
       linkedin: ['', [Validators.pattern(AppConst.linkedInUrlPattern)]],
-      postalCode: ['', [Validators.required, Validators.pattern(AppConst.postalCodePattern)]]
+      postalCode: ['', [Validators.required, Validators.pattern(AppConst.postalCodePattern)]],
+
+      street: ['', [Validators.required]],
+      number: [null, [Validators.required]],
+      complement: [''],
+      neighborhood: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      country: ['', [Validators.required]],
     }, {
       validator: PasswordValidation.MatchPassword
     });
@@ -46,6 +54,37 @@ export class RegisterPage {
     postalCodeControl.valueChanges.subscribe(value => {
       postalCodeControl.setValue(formatCep(value), {emitEvent: false})
     });
+    postalCodeControl.statusChanges.subscribe(validity => {
+      if (validity === 'VALID') {
+        this.getAddress(postalCodeControl.value);
+      }
+    })
+  }
+
+  getAddress(cep) {
+    this.userService.consultarCEP(cep).subscribe(address => {
+      const {localidade, uf, bairro, logradouro, erro} = <any>address;
+
+      if (erro) {
+        this.clearAddress();
+      } else {
+        this.form.get('street').setValue(logradouro);
+        this.form.get('neighborhood').setValue(bairro);
+        this.form.get('city').setValue(localidade);
+        this.form.get('state').setValue(uf);
+        this.form.get('country').setValue('Brasil');
+      }
+    }, err => {
+      this.clearAddress();
+    })
+  }
+
+  clearAddress() {
+    this.form.get('street').setValue('');
+    this.form.get('neighborhood').setValue('');
+    this.form.get('city').setValue('');
+    this.form.get('state').setValue('');
+    this.form.get('country').setValue('');
   }
 
   submit(values) {
@@ -58,7 +97,7 @@ export class RegisterPage {
           loading.dismiss();
           if (data.success || data.authenticated) {
             this.menuController.enable(true);
-            this.navCtrl.setRoot('HomePage');
+            this.navCtrl.setRoot('TabsPage');
           } else {
             const alert = this.alertController.create();
             alert.setTitle('Ops...');
