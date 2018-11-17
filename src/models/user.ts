@@ -9,4 +9,9 @@ export class User {
   linkedin: string;
   postalCode: string;
   profile: Profile;
+  street: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  country: string;
 }

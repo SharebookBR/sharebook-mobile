@@ -90,8 +90,12 @@ export class RegisterPage {
   submit(values) {
 
     if (this.form.valid) {
-      const loading = this.loadingController.create();
+      const loading = this.loadingController.create({
+        content: 'Processando'
+      });
+
       loading.present();
+
       this.userService.register(values).subscribe(
         data => {
           loading.dismiss();

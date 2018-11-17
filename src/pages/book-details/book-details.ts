@@ -13,7 +13,6 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
 })
 export class BookDetailsPage {
   book: Book;
-  city: string = '-';
   freightLabels = Book.freightLabels;
 
   constructor(
@@ -30,17 +29,18 @@ export class BookDetailsPage {
     return !!this.book;
   }
 
-  ionViewWillEnter() {
-    this.getCity(this.book.user.postalCode);
+  ionViewDidLoad() {
+    if (!this.book.user.city && this.book.user.postalCode) {
+      this.getCity(this.book.user.postalCode);
+    }
   }
 
   getCity(cep) {
-    if (!cep) return;
-
     this.userService.consultarCEP(cep).subscribe(address => {
       const {localidade, uf} = <any>address;
       if (localidade && uf) {
-        this.city = `${localidade}-${uf}`;
+        this.book.user.city = localidade;
+        this.book.user.state = uf;
       }
     }, err => {
 
