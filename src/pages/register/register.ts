@@ -1,10 +1,20 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {
+  AlertController,
+  IonicPage,
+  LoadingController,
+  MenuController,
+  NavController, NavParams,
+  ToastController
+} from 'ionic-angular';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import * as AppConst from '../../core/utils/app.const';
 import {PasswordValidation} from "../../core/utils/passwordValidation";
 import {UserService} from "../../services/user/user.service";
 import {formatCep, formatPhone} from "../../core/utils/formatters";
+import 'rxjs/add/operator/timeout';
+import {User} from "../../models/user";
+import {SessionService} from "../../services/session/session.service";
 
 @IonicPage({
   defaultHistory: ['LoginPage']
@@ -16,6 +26,8 @@ import {formatCep, formatPhone} from "../../core/utils/formatters";
 export class RegisterPage {
 
   form: FormGroup;
+  isEditing: boolean;
+  showAddressForm: boolean;
 
   constructor(public navCtrl: NavController,
               private userService: UserService,
@@ -23,7 +35,11 @@ export class RegisterPage {
               private menuController: MenuController,
               private alertController: AlertController,
               private loadingController: LoadingController,
+              private navParams: NavParams,
+              private sessionService: SessionService,
               private formBuilder: FormBuilder) {
+
+    this.isEditing = this.navParams.get('isEditing');
 
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -33,7 +49,6 @@ export class RegisterPage {
       phone: ['', [Validators.pattern(AppConst.phonePattern)]],
       linkedin: ['', [Validators.pattern(AppConst.linkedInUrlPattern)]],
       postalCode: ['', [Validators.required, Validators.pattern(AppConst.postalCodePattern)]],
-
       street: ['', [Validators.required]],
       number: [null, [Validators.required]],
       complement: [''],
@@ -54,11 +69,53 @@ export class RegisterPage {
     postalCodeControl.valueChanges.subscribe(value => {
       postalCodeControl.setValue(formatCep(value), {emitEvent: false})
     });
+
     postalCodeControl.statusChanges.subscribe(validity => {
       if (validity === 'VALID') {
-        this.getAddress(postalCodeControl.value);
+        this.showAddressForm = true;
+
+        if (!postalCodeControl.pristine) {
+          this.getAddress(postalCodeControl.value);
+        }
       }
+    });
+
+    if (this.isEditing) {
+      this.form.get('password').setValidators([]);
+      this.form.get('confirmPassword').setValidators([]);
+
+      this.loadUser();
+    }
+  }
+
+  loadUser() {
+    const loading = this.loadingController.create({
+      content: 'Carregando...'
+    });
+
+    loading.present();
+    this.userService.getUserData().timeout(15000).subscribe(user => {
+      loading.dismiss();
+
+      this.setUserData(user);
+    }, err => {
+      loading.dismiss();
     })
+  }
+
+  setUserData(user) {
+    this.form.get('name').setValue(user.name);
+    this.form.get('email').setValue(user.email);
+    this.form.get('phone').setValue(user.phone);
+    this.form.get('linkedin').setValue(user.linkedin);
+    this.form.get('postalCode').setValue(user.address.postalCode);
+    this.form.get('street').setValue(user.address.street);
+    this.form.get('number').setValue(user.address.number);
+    this.form.get('complement').setValue(user.address.complement);
+    this.form.get('neighborhood').setValue(user.address.neighborhood);
+    this.form.get('city').setValue(user.address.city);
+    this.form.get('state').setValue(user.address.state);
+    this.form.get('country').setValue(user.address.country);
   }
 
   getAddress(cep) {
@@ -90,35 +147,9 @@ export class RegisterPage {
   submit(values) {
 
     if (this.form.valid) {
-      const loading = this.loadingController.create({
-        content: 'Processando'
-      });
-
-      loading.present();
-
-      this.userService.register(values).subscribe(
-        data => {
-          loading.dismiss();
-          if (data.success || data.authenticated) {
-            this.menuController.enable(true);
-            this.navCtrl.setRoot('TabsPage');
-          } else {
-            const alert = this.alertController.create();
-            alert.setTitle('Ops...');
-            alert.setMessage(data.messages[0]);
-            alert.addButton('Ok');
-            alert.present();
-          }
-        },
-        error => {
-          loading.dismiss();
-          const alert = this.alertController.create();
-          alert.setTitle('Ops...');
-          alert.setMessage('Não foi possível efetuar seu registro. Verifique sua conexão e tente novamente');
-          alert.addButton('Ok');
-          alert.present();
-        }
-      );
+      this.isEditing ?
+        this.update(values) :
+        this.create(values);
     } else {
       for (const key of Object.keys(this.form.controls)) {
         this.form.get(key).markAsTouched();
@@ -127,5 +158,83 @@ export class RegisterPage {
     }
   }
 
+  create(values) {
+    const loading = this.loadingController.create({
+      content: 'Processando'
+    });
 
+    loading.present();
+    this.userService.register(values).subscribe(
+      data => {
+        loading.dismiss();
+
+        if (data.success || data.authenticated) {
+          this.menuController.enable(true);
+          this.navCtrl.setRoot('TabsPage');
+        } else {
+          const alert = this.alertController.create();
+          alert.setTitle('Ops...');
+          alert.setMessage(data.messages[0]);
+          alert.addButton('Ok');
+          alert.present();
+        }
+      },
+      err => {
+        loading.dismiss();
+        this.onRequestError(err.error);
+      }
+    );
+  }
+
+  update(values) {
+    const loading = this.loadingController.create({
+      content: 'Processando'
+    });
+
+    loading.present();
+    const user: User = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      linkedin: values.linkedin,
+
+      address: {
+        street: values.street,
+        number: values.number,
+        complement: values.complement,
+        neighborhood: values.neighborhood,
+        postalCode: values.postalCode,
+        city: values.city,
+        country: values.country,
+        state: values.state,
+      }
+    };
+
+    this.userService.update(user).subscribe(
+      user => {
+        loading.dismiss();
+
+        this.sessionService.user.name = user.name;
+        this.sessionService.user.email = user.email;
+
+        this.navCtrl.pop();
+      },
+      err => {
+        loading.dismiss();
+        this.onRequestError(err.error);
+      }
+    );
+  }
+
+  onRequestError(error) {
+    const msg = error && error.messages && error.messages[0] ?
+      error.messages[0] :
+      `Não foi possível ${this.isEditing ? 'atualizar seus dados' : 'criar seu usuário'}, tente novamente.`;
+
+    const alert = this.alertController.create();
+    alert.setTitle('Ops...');
+    alert.setMessage(msg);
+    alert.addButton('Ok');
+    alert.present();
+  }
 }

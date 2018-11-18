@@ -28,6 +28,12 @@ export class SettingsPage {
     })
   }
 
+  edit() {
+    this.app.getRootNav().push('RegisterPage', {
+      isEditing: true
+    });
+  }
+
   logOut() {
     this.sessionService.clearSession();
     this.app.getRootNav().setRoot('LoginPage');

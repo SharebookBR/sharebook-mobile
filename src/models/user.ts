@@ -1,14 +1,14 @@
 import { Profile } from './profile';
 
 export class User {
-  id: number;
+  id?: number;
   name: string;
-  email: string;
-  password: string;
-  passwordSalt: string;
-  linkedin: string;
-  profile: Profile;
   phone: string;
+  email: string;
+  linkedin: string;
+  password?: string;
+  passwordSalt?: string;
+  profile?: Profile;
   address: {
     street?: string,
     number?: string,

@@ -5,14 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
+  <button ion-item (click)="edit()">
+    <ion-icon item-start color="primary" name="person"></ion-icon>
+
+    Editar dados
+  </button>
+
+  <button ion-item>
+    <ion-icon item-start color="primary" name="information-circle"></ion-icon>
+
     Versão
     <span item-right class="version">
-      {{version}}
+      v{{version || '0.0.1'}}
     </span>
-  </ion-item>
+  </button>
 
-  <ion-item (click)="logOut()">
+  <button ion-item (click)="logOut()">
+    <ion-icon item-start color="primary" name="log-out"></ion-icon>
+
     Sair
-  </ion-item>
+  </button>
 </ion-content>
