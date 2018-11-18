@@ -30,8 +30,15 @@ export class BookDetailsPage {
   }
 
   ionViewDidLoad() {
-    if (!this.book.user.city && this.book.user.postalCode) {
-      this.getCity(this.book.user.postalCode);
+    const { address } = this.book.user;
+
+    if (address) {
+
+      if (!address.city && address.postalCode) {
+        this.getCity(address.postalCode);
+      }
+    } else {
+      this.book.user.address = {};
     }
   }
 
@@ -39,8 +46,8 @@ export class BookDetailsPage {
     this.userService.consultarCEP(cep).subscribe(address => {
       const {localidade, uf} = <any>address;
       if (localidade && uf) {
-        this.book.user.city = localidade;
-        this.book.user.state = uf;
+        this.book.user.address.city = localidade;
+        this.book.user.address.state = uf;
       }
     }, err => {
 

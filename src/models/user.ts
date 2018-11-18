@@ -7,11 +7,17 @@ export class User {
   password: string;
   passwordSalt: string;
   linkedin: string;
-  postalCode: string;
   profile: Profile;
-  street: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-  country: string;
+  phone: string;
+  address: {
+    street?: string,
+    number?: string,
+    complement?: string,
+    neighborhood?: string,
+    postalCode?: string,
+    city?: string,
+    state?: string,
+    country?: string,
+    creationDate?: string,
+  };
 }
