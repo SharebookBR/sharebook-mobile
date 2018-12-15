@@ -23,7 +23,7 @@ export class BookService {
     return this._http.get<Book[]>(`${config.apiEndpoint}/book/Random15Books`);
   }
 
-  public create(book: Book) {
+  public create(book) {
     return this._http.post<any>(`${config.apiEndpoint}/book`, book);
   }
 

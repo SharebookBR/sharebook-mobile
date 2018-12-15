@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {IonicPage, ModalController, NavController} from 'ionic-angular';
 import { BookService } from '../../services/book/book.service';
 import { BookRequestStatus } from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
+import {DonatePage} from "../donate/donate";
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class MyRequestsPage {
   constructor(
     public navCtrl: NavController, 
     private bookService: BookService,
+    private modalCtrl: ModalController,
   ) {
     this.getRequestedBooks();
   }
@@ -46,5 +48,10 @@ export class MyRequestsPage {
       default:
         return 'primary';
     }
+  }
+
+  donate() {
+    const modal = this.modalCtrl.create('DonatePage');
+    modal.present();
   }
 }

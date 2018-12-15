@@ -2,8 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Category} from '../../models/category';
 import {map} from 'rxjs/operators';
 import {config} from "../../../environments/environment";
+import {Injectable} from "@angular/core";
 
-
+@Injectable()
 export class CategoryService {
   constructor(
     private _http: HttpClient) {

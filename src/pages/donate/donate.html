@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left margin-left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Quero doar
+      <span class="heart-icon">
+        ❤
+      </span>
+    </ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="submit()">
+        Enviar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Título do livro *</ion-label>
+        <ion-input [formControl]="title" placeholder="Digite o título"></ion-input>
+      </ion-item>
+      <div class="form-error" *ngIf="title.touched && title.invalid">
+        Título inválido
+      </div>
+
+      <ion-item>
+        <ion-label stacked>Autor *</ion-label>
+        <ion-input [formControl]="author" placeholder="Digite o nome do autor"></ion-input>
+      </ion-item>
+      <div class="form-error" *ngIf="author.touched && author.invalid">
+        Autor inválido
+      </div>
+
+      <ion-item>
+        <ion-label>
+          <div>Adicione uma foto :)</div>
+          <div class="images-wrapper" *ngIf="imageBytes.value">
+            <img [src]="'data:image/jpeg;base64,' + imageBytes.value"/>
+          </div>
+        </ion-label>
+
+        <button ion-button item-right (click)="attach()" type="button">
+          Anexar
+        </button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Categoria *</ion-label>
+        <ion-select placeholder="Selecione a categoria" [formControl]="categoryId">
+          <ion-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="form-error" *ngIf="categoryId.touched && categoryId.invalid">
+        Categoria inválida
+      </div>
+
+      <ion-item>
+        <ion-label stacked>Você pagaria o frete? *</ion-label>
+        <ion-select placeholder="Escolha uma das opções" [formControl]="freightOption">
+          <ion-option *ngFor="let option of freightOptions" [value]="option.value">
+            {{option.text}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="form-error" *ngIf="freightOption.touched && freightOption.invalid">
+        Frete inválido
+      </div>
+
+      <ion-item>
+        <ion-label stacked>Sinópse</ion-label>
+        <ion-textarea rows="5" placeholder="Insira aqui sobre o assunto desse livro"
+                      [formControl]="synopsis"></ion-textarea>
+      </ion-item>
+      <div class="form-error" *ngIf="synopsis.touched && synopsis.invalid">
+        Tamanho máximo excedido (2000 caracteres)
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

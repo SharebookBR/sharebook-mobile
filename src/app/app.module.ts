@@ -14,6 +14,8 @@ import {SessionService} from "../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
 import {JwtInterceptor} from '../core/interceptors/jwt.interceptor';
 import {PhotoViewer} from "@ionic-native/photo-viewer";
+import {CategoryService} from "../services/category/category.service";
+import {Camera} from "@ionic-native/camera";
 
 @NgModule({
   declarations: [
@@ -33,12 +35,13 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
     StatusBar,
     SplashScreen,
     UserService,
-    // CategoryService,
+    CategoryService,
     BookService,
     AuthenticationService,
     SessionService,
     AppVersion,
     PhotoViewer,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {
       provide: HTTP_INTERCEPTORS,
