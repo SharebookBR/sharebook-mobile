@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController} from 'ionic-angular';
-import { BookService } from '../../services/book/book.service';
-import { BookRequestStatus } from '../../models/BookRequestStatus';
+import {Component} from '@angular/core';
+import {App, IonicPage, ModalController, NavController} from 'ionic-angular';
+import {BookService} from '../../services/book/book.service';
+import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
-import {DonatePage} from "../donate/donate";
+import {SessionService} from "../../services/session/session.service";
 
 @IonicPage()
 @Component({
@@ -14,28 +14,33 @@ import {DonatePage} from "../donate/donate";
 export class MyRequestsPage {
 
   requestedBooks: Array<Book> = [];
-  status = new Status();
+  donatedBooks: Array<Book> = [];
+  rStatus = new Status();
+  dStatus = new Status();
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     private bookService: BookService,
+    private sessionService: SessionService,
     private modalCtrl: ModalController,
+    private app: App,
   ) {
     this.getRequestedBooks();
+    this.getDonatedBooks();
   }
 
   getRequestedBooks() {
-    this.status.setAsDownloading();
+    this.rStatus.setAsDownloading();
 
     this
       .bookService
       .getRequestedBooks(1, 100)
       .subscribe(resp => {
-        this.status.setAsSuccess();
+        this.rStatus.setAsSuccess();
 
         this.requestedBooks = resp.items;
       }, err => {
-        this.status.setAsError();
+        this.rStatus.setAsError();
       });
   }
 
@@ -53,5 +58,53 @@ export class MyRequestsPage {
   donate() {
     const modal = this.modalCtrl.create('DonatePage');
     modal.present();
+  }
+
+  getDonatedBooks() {
+    this.dStatus.setAsDownloading();
+    this.bookService.getDonatedBooks().subscribe(books => {
+      this.dStatus.setAsSuccess();
+
+      this.donatedBooks = books;
+    }, err => {
+      this.dStatus.setAsError();
+
+      if (err && err.status === 401) {
+        // Token expired
+        this.logout();
+      }
+    })
+  }
+
+  logout() {
+    this.sessionService.clearSession();
+    this.app.getRootNav().setRoot('LoginPage');
+  }
+
+  retry() {
+    if (this.dStatus.isError()) {
+      this.getDonatedBooks();
+    }
+
+    if (this.rStatus.isError()) {
+      this.getRequestedBooks();
+    }
+  }
+
+  isDownloading() {
+    return this.rStatus.isDownloading() || this.dStatus.isDownloading();
+  }
+
+  isError() {
+    return this.rStatus.isError() || this.dStatus.isError();
+  }
+
+  isSuccess() {
+    return this.rStatus.isSuccess() && this.dStatus.isSuccess();
+  }
+
+  isEmpty() {
+    return this.requestedBooks.length === 0
+      && this.donatedBooks.length === 0 && this.isSuccess();
   }
 }

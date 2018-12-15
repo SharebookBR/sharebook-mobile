@@ -52,6 +52,9 @@
           Anexar
         </button>
       </ion-item>
+      <div class="form-error" *ngIf="imageBytes.touched && imageBytes.invalid">
+        Imagem inválida
+      </div>
 
       <ion-item>
         <ion-label stacked>Categoria *</ion-label>

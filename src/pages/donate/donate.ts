@@ -31,7 +31,6 @@ export class DonatePage {
 
   constructor(
     private navCtrl: NavController,
-    private navParams: NavParams,
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
     private camera: Camera,
@@ -66,8 +65,7 @@ export class DonatePage {
       author: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
       categoryId: ['', [Validators.required]],
       freightOption: ['', [Validators.required]],
-      imageBytes: [''],
-      imageName: [''], // , this.userProfile === 'User' && [Validators.required]],
+      imageBytes: ['', [Validators.required]],
       synopsis: ['', [Validators.maxLength(2000)]],
     });
 
@@ -81,7 +79,7 @@ export class DonatePage {
 
   attach() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 30,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -103,14 +101,16 @@ export class DonatePage {
       return;
     }
 
-    const data = {
+    const filename = this.title.value.split(/ /i).join('-');
+
+    const data:any = {
       title: this.title.value,
       author: this.author.value,
       categoryId: this.categoryId.value,
       freightOption: this.freightOption.value,
-      imageBytes: this.imageBytes.value,
       synopsis: this.synopsis.value,
-      imageName: this.title.value.split(/ /i).join('-'),
+      imageName: `${filename}.jpeg`,
+      imageBytes: this.imageBytes.value,
       userId: this.sessionService.user.userId
     };
 
@@ -118,25 +118,32 @@ export class DonatePage {
       content: 'Enviando... <3',
     });
 
+    const errorToast = this.toastCtrl.create({
+      message: 'Erro ao enviar formulário, tente novamente',
+      cssClass: 'toast-error',
+      duration: 3000
+    });
+
+    const successToast = this.toastCtrl.create({
+      message: 'Livro criado com sucesso! ♥',
+      cssClass: 'toast-success',
+      duration: 3000
+    });
+
     loading.present();
-    this.bookService.create(data).subscribe(() => {
-      loading.dismiss();
+    this.bookService.create(data).subscribe(resp => {
+      if (resp.success === false) {
+        loading.dismiss();
+        errorToast.present();
+      } else {
+        loading.dismiss();
+        successToast.present();
 
-      this.toastCtrl.create({
-        message: 'Livro criado com sucesso! ♥',
-        cssClass: 'toast-success',
-        duration: 3000
-      }).present();
-
-      this.navCtrl.pop();
+        this.navCtrl.pop();
+      }
     }, err => {
       loading.dismiss();
-
-      this.toastCtrl.create({
-        message: 'Erro ao enviar formulário, tente novamente',
-        cssClass: 'toast-error',
-        duration: 3000
-      }).present();
+      errorToast.present();
     });
   }
 
