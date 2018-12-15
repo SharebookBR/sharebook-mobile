@@ -25,6 +25,10 @@ export class MyRequestsPage {
     private modalCtrl: ModalController,
     private app: App,
   ) {
+
+  }
+
+  ionViewWillEnter() {
     this.getRequestedBooks();
     this.getDonatedBooks();
   }

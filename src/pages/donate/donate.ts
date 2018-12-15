@@ -39,10 +39,6 @@ export class DonatePage {
     private sessionService: SessionService,
     private bookService: BookService,
   ) {
-
-  }
-
-  ionViewWillEnter() {
     this.getCategories();
     this.setupForm();
   }
