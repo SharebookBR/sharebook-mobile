@@ -38,6 +38,10 @@
 
   <div *ngIf="isSuccess()">
     <ion-list *ngIf="rStatus.isSuccess()">
+      <ion-item-divider *ngIf="requestedBooks.length">
+        Livros doados
+      </ion-item-divider>
+
       <button ion-item *ngFor="let item of requestedBooks">
         <h2>{{item.title}}</h2>
         <p>{{item.author}}</p>
@@ -48,6 +52,10 @@
     </ion-list>
 
     <ion-list *ngIf="dStatus.isSuccess()">
+      <ion-item-divider *ngIf="donatedBooks.length">
+        Livros doados
+      </ion-item-divider>
+
       <button ion-item *ngFor="let item of donatedBooks">
         <h2>{{item.title}}</h2>
         <p>{{item.author}}</p>
