@@ -18,6 +18,7 @@ import {BookService} from "../../services/book/book.service";
 export class DonatePage {
 
   freightOptions;
+  book: Book;
   categories: Array<Category>;
 
   // Form
@@ -38,9 +39,29 @@ export class DonatePage {
     private toastCtrl: ToastController,
     private sessionService: SessionService,
     private bookService: BookService,
+    private navParams: NavParams,
   ) {
     this.getCategories();
     this.setupForm();
+    this.getBook();
+  }
+
+  getBook() {
+    const book = this.navParams.get('book');
+
+    if (book) {
+      this.bookService.getById(book.id).subscribe(resp => {
+        this.fillUpForm(resp);
+      }, err => {
+        this.toastCtrl.create({
+          message: 'Falha ao buscar livro, tente novamente...',
+          cssClass: 'toast-error',
+          duration: 3000
+        }).present();
+
+        this.dismiss();
+      })
+    }
   }
 
   getCategories() {
@@ -50,7 +71,13 @@ export class DonatePage {
       .subscribe(categories => {
         this.categories = categories;
       }, err => {
+        this.toastCtrl.create({
+          message: 'Falha ao buscar Categorias, tente novamente...',
+          cssClass: 'toast-error',
+          duration: 3000
+        }).present();
 
+        this.dismiss();
       })
   }
 
@@ -75,6 +102,17 @@ export class DonatePage {
     this.freightOption = this.form.get('freightOption');
     this.imageBytes = this.form.get('imageBytes');
     this.synopsis = this.form.get('synopsis');
+  }
+
+  fillUpForm(book) {
+    this.title.setValue(book.title);
+    this.author.setValue(book.author);
+    this.categoryId.setValue(book.categoryId);
+    this.freightOption.setValue(book.freightOption);
+    this.imageBytes.setValue(book.imageUrl);
+    this.synopsis.setValue(book.synopsis);
+
+    this.book = book;
   }
 
   attach() {
@@ -130,8 +168,11 @@ export class DonatePage {
       duration: 3000
     });
 
+    const subscription = this.book ?
+      this.bookService.update(this.book.id, data) : this.bookService.create(data);
+
     loading.present();
-    this.bookService.create(data).subscribe(resp => {
+    subscription.subscribe(resp => {
       if (resp.success === false) {
         loading.dismiss();
         errorToast.present();

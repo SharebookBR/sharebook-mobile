@@ -15,7 +15,7 @@
 
     <ion-buttons right>
       <button ion-button (click)="submit()">
-        Enviar
+        Salvar
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -44,7 +44,7 @@
         <ion-label>
           <div>Adicione uma foto :)</div>
           <div class="images-wrapper" *ngIf="imageBytes.value">
-            <img [src]="'data:image/jpeg;base64,' + imageBytes.value"/>
+            <img [src]="imageBytes.value.includes('http') ? imageBytes.value : 'data:image/jpeg;base64,' + imageBytes.value"/>
           </div>
         </ion-label>
 

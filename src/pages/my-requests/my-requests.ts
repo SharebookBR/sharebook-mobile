@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, ModalController, NavController} from 'ionic-angular';
+import {ActionSheetController, App, IonicPage, ModalController, NavController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
@@ -24,6 +24,7 @@ export class MyRequestsPage {
     private sessionService: SessionService,
     private modalCtrl: ModalController,
     private app: App,
+    private actionSheetCtrl: ActionSheetController,
   ) {
 
   }
@@ -115,5 +116,18 @@ export class MyRequestsPage {
   isEmpty() {
     return this.requestedBooks.length === 0
       && this.donatedBooks.length === 0 && this.isSuccess();
+  }
+
+  editDonatedBook(book) {
+    this.actionSheetCtrl.create({
+      title: 'Selecione uma das opções',
+      buttons: [{
+        text: 'Editar',
+        icon: 'create',
+        handler: () => {
+          this.modalCtrl.create('DonatePage', {book}).present();
+        }
+      }]
+    }).present();
   }
 }

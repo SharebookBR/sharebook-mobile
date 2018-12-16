@@ -15,6 +15,7 @@ export class Book {
   freightOption: string;
   category: Category;
   user: User;
+  synopsis: string;
 
   static freightLabels = {
     City: 'Cidade',
