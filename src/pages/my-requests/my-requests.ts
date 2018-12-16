@@ -34,7 +34,9 @@ export class MyRequestsPage {
   }
 
   getRequestedBooks() {
-    this.rStatus.setAsDownloading();
+    if (!this.rStatus.isSuccess()) {
+      this.rStatus.setAsDownloading();
+    }
 
     this
       .bookService
@@ -65,7 +67,10 @@ export class MyRequestsPage {
   }
 
   getDonatedBooks() {
-    this.dStatus.setAsDownloading();
+    if (!this.dStatus.isSuccess()) {
+      this.dStatus.setAsDownloading();
+    }
+
     this.bookService.getDonatedBooks().subscribe(books => {
       this.dStatus.setAsSuccess();
 
