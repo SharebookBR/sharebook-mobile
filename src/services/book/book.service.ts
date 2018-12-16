@@ -23,7 +23,7 @@ export class BookService {
     return this._http.get<Book[]>(`${config.apiEndpoint}/book/Random15Books`);
   }
 
-  public create(book: Book) {
+  public create(book) {
     return this._http.post<any>(`${config.apiEndpoint}/book`, book);
   }
 
@@ -35,8 +35,8 @@ export class BookService {
     return this._http.get<Book>(`${config.apiEndpoint}/book/Slug/${bookSlug}`);
   }
 
-  public update(book: Book) {
-    return this._http.put<Book>(`${config.apiEndpoint}/book/${book.id}`, book);
+  public update(id, book: Book) {
+    return this._http.put<Book>(`${config.apiEndpoint}/book/${id}`, book);
   }
 
   public delete(bookId: number) {
