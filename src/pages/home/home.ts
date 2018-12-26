@@ -3,7 +3,7 @@ import {App, IonicPage, NavController} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
-import {User} from "../../models/user";
+import {isAdmin, User} from "../../models/user";
 import {SessionService} from "../../services/session/session.service";
 
 @IonicPage()
@@ -70,6 +70,6 @@ export class HomePage {
   }
 
   isAdmin() {
-    return this.user && this.user.profile === 'Administrator';
+    return isAdmin(this.user);
   }
 }

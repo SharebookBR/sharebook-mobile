@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Meus pedidos</ion-title>
+    <ion-title>Meus pedidos {{isAdmin() ? '(Admin)' : ''}}</ion-title>
 
     <ion-buttons right>
       <button ion-button (click)="donate()">

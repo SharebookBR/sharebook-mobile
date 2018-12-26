@@ -1,4 +1,4 @@
-export class User {
+interface User {
   id?: string;
   userId?: string;
   name: string;
@@ -20,3 +20,9 @@ export class User {
     creationDate?: string,
   };
 }
+
+function isAdmin(user: User): boolean {
+  return user && user.profile === 'Administrator';
+}
+
+export {User, isAdmin};
