@@ -1,5 +1,3 @@
-import { Profile } from './profile';
-
 export class User {
   id?: string;
   userId?: string;
@@ -9,7 +7,7 @@ export class User {
   linkedin: string;
   password?: string;
   passwordSalt?: string;
-  profile?: Profile;
+  profile?: string;
   address: {
     street?: string,
     number?: string,
