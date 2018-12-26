@@ -1,0 +1,69 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left margin-left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Fale Conosco</ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="onSubmit()">
+        Enviar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Nome*</ion-label>
+        <ion-input [formControl]="name" placeholder="Seu nome*"></ion-input>
+      </ion-item>
+      <small *ngIf="name.touched && name.invalid" margin-left ion-text color="danger">
+        Nome obrigatório
+      </small>
+
+      <ion-item>
+        <ion-label stacked>E-mail*</ion-label>
+        <ion-input placeholder="Insira seu e-mail" [formControl]="email" type="email"></ion-input>
+      </ion-item>
+      <div *ngIf="email.touched && email.invalid">
+        <small margin-left ion-text color="danger" *ngIf="email.hasError('required')">
+          E-mail obrigatório
+        </small>
+        <small margin-left ion-text color="danger" *ngIf="email.hasError('pattern') ">
+          O e-mail deve ser um e-mail válido
+        </small>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>DDD + Telefone</ion-label>
+        <ion-input [formControl]="phone" placeholder="(XX) XXXXX-XXXX" type="tel"
+                   maxlength="15"></ion-input>
+      </ion-item>
+      <small *ngIf="phone.touched && phone.invalid" margin-left ion-text color="danger">
+        Telefone deve estar no formato (99) 99999-9999
+      </small>
+
+      <ion-item>
+        <ion-label stacked>Mensagem*</ion-label>
+        <ion-textarea [formControl]="message" placeholder="Insira aqui sua mensagem"
+                      maxlength="512" rows="10"></ion-textarea>
+      </ion-item>
+      <div *ngIf="message.touched && message.invalid">
+        <small margin-left ion-text color="danger" *ngIf="message.hasError('required')">
+          Mensagem obrigatória
+        </small>
+        <small margin-left ion-text color="danger" *ngIf="message.hasError('minlength') ">
+          Tamanho mínimo de 20 caracteres
+        </small>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

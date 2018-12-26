@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {App, IonicPage} from 'ionic-angular';
+import {App, IonicPage, ModalController} from 'ionic-angular';
 import {SessionService} from "../../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
 import {instagramUrl, linkedinUrl} from "../../core/utils/app.const";
@@ -17,6 +17,7 @@ export class SettingsPage {
     public app: App,
     public sessionService: SessionService,
     public appVersion: AppVersion,
+    public modalCtrl: ModalController,
   ) {
     this.getAppVersion();
   }
@@ -43,6 +44,9 @@ export class SettingsPage {
     window.open(linkedinUrl, '_blank');
   }
 
+  contactUs() {
+    this.modalCtrl.create('ContactUsPage').present();
+  }
 
   logOut() {
     this.sessionService.clearSession();
