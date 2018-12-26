@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {App, IonicPage} from 'ionic-angular';
 import {SessionService} from "../../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
+import {instagramUrl, linkedinUrl} from "../../core/utils/app.const";
 
 @IonicPage()
 @Component({
@@ -33,6 +34,15 @@ export class SettingsPage {
       isEditing: true
     });
   }
+
+  openInstagram() {
+    window.open(instagramUrl, '_blank');
+  }
+
+  openLinkedin() {
+    window.open(linkedinUrl, '_blank');
+  }
+
 
   logOut() {
     this.sessionService.clearSession();
