@@ -54,6 +54,14 @@ export class ContactUsPage {
     this.phone.valueChanges.subscribe(value => {
       this.phone.setValue(formatPhone(value), {emitEvent: false})
     });
+
+    if (this.user) {
+      this.name.setValue(this.user.name);
+      this.email.setValue(this.user.email);
+
+      this.name.disable();
+      this.email.disable();
+    }
   }
 
   onSubmit() {

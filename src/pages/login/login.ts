@@ -3,7 +3,7 @@ import {
   AlertController,
   IonicPage,
   LoadingController,
-  MenuController,
+  MenuController, ModalController,
   NavController,
   ToastController
 } from 'ionic-angular';
@@ -33,6 +33,7 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public userService: UserService,
+    public modalCtrl: ModalController,
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
@@ -133,6 +134,10 @@ export class LoginPage {
     });
 
     alert.present();
+  }
+
+  contactUs() {
+    this.modalCtrl.create('ContactUsPage').present();
   }
 }
 
