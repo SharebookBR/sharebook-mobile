@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Book} from "../../models/book";
 import {UserService} from "../../services/user/user.service";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
@@ -21,6 +21,7 @@ export class BookDetailsPage {
     public userService: UserService,
     public photoViewer: PhotoViewer,
     public modalCtrl: ModalController,
+    public toastCtrl: ToastController,
   ) {
     this.book = this.navParams.get('book');
   }
@@ -59,10 +60,26 @@ export class BookDetailsPage {
   }
 
   openBookRequest() {
-    const modal = this.modalCtrl.create('BookRequestPage', {
+    const bookModal = this.modalCtrl.create('BookRequestPage', {
       book: this.book
     });
 
-    modal.present();
+    const addressModal = this.modalCtrl.create('ConfirmAddressPage');
+
+    bookModal.onDidDismiss((data) => {
+      if (data && data.success) addressModal.present();
+    });
+
+    addressModal.onDidDismiss((data) => {
+      if (!(data && data.preventToast)) {
+        this.toastCtrl.create({
+          message: 'Livro solicitado com sucesso!',
+          cssClass: 'toast-success',
+          duration: 3000,
+        }).present();
+      }
+    });
+
+    bookModal.present();
   }
 }
