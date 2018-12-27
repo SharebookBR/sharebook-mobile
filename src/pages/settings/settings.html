@@ -7,16 +7,29 @@
 <ion-content>
   <button ion-item (click)="edit()">
     <ion-icon item-start color="primary" name="person"></ion-icon>
-
     Editar dados
+  </button>
+
+  <button ion-item (click)="openLinkedin()" class="linkedin-logo">
+    <ion-icon item-start name="logo-linkedin"></ion-icon>
+    LinkedIn
+  </button>
+
+  <button ion-item (click)="openInstagram()" class="instagram-logo">
+    <ion-icon item-start name="logo-instagram"></ion-icon>
+    Instagram
+  </button>
+
+  <button ion-item (click)="contactUs()">
+    <ion-icon item-start color="primary" name="chatbubbles"></ion-icon>
+    Fale conosco
   </button>
 
   <button ion-item>
     <ion-icon item-start color="primary" name="information-circle"></ion-icon>
-
     Versão
     <span item-right class="version">
-      v{{version || '0.0.1'}}
+      v{{version || '0.0.0'}}
     </span>
   </button>
 

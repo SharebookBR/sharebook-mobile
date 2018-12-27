@@ -237,4 +237,8 @@ export class RegisterPage {
     alert.addButton('Ok');
     alert.present();
   }
+
+  dismiss() {
+    this.navCtrl.pop();
+  }
 }

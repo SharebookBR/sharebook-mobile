@@ -16,6 +16,7 @@ import {JwtInterceptor} from '../core/interceptors/jwt.interceptor';
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {CategoryService} from "../services/category/category.service";
 import {Camera} from "@ionic-native/camera";
+import {ContactUsService} from "../providers/contact-us/contact-us-service";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {Camera} from "@ionic-native/camera";
     AppVersion,
     PhotoViewer,
     Camera,
+    ContactUsService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {
       provide: HTTP_INTERCEPTORS,

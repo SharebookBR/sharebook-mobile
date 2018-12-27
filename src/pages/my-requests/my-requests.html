@@ -1,12 +1,7 @@
+<script src="my-requests.ts"></script>
 <ion-header>
   <ion-navbar>
-    <ion-title>Meus pedidos</ion-title>
-
-    <ion-buttons right>
-      <button ion-button (click)="donate()">
-        Doar!
-      </button>
-    </ion-buttons>
+    <ion-title>Meus pedidos {{isAdmin() ? '(Admin)' : ''}}</ion-title>
   </ion-navbar>
 </ion-header>
 

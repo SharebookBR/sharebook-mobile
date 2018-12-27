@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, NavController} from 'ionic-angular';
+import {App, IonicPage, ModalController, NavController} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
-import {User} from "../../models/user";
+import {isAdmin, User} from "../../models/user";
+import {SessionService} from "../../services/session/session.service";
 
 @IonicPage()
 @Component({
@@ -11,6 +12,7 @@ import {User} from "../../models/user";
   templateUrl: 'home.html'
 })
 export class HomePage {
+  user: User;
   newBooks: Array<Book> = [];
   randomBooks: Array<Book> = [];
 
@@ -21,7 +23,11 @@ export class HomePage {
     public app: App,
     public navCtrl: NavController,
     public bookService: BookService,
+    public sessionService: SessionService,
+    public modalCtrl: ModalController,
   ) {
+    this.user = this.sessionService.user;
+
     this.getTop15();
     this.getRandomBooks();
   }
@@ -62,5 +68,14 @@ export class HomePage {
     }
 
     return names[0];
+  }
+
+  isAdmin() {
+    return isAdmin(this.user);
+  }
+
+  donate() {
+    const modal = this.modalCtrl.create('DonatePage');
+    modal.present();
   }
 }

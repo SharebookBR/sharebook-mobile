@@ -1,6 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Sharebook</ion-title>
+    <ion-title>Sharebook {{isAdmin() ? '(Admin)' : ''}}</ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="donate()">
+        Doar
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

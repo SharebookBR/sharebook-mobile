@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+  App,
+  IonicPage,
+  LoadingController,
+  NavController,
+  NavParams,
+  ToastController, ViewController
+} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Book} from "../../models/book";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -22,6 +29,8 @@ export class BookRequestPage {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public formBuilder: FormBuilder,
+    public app: App,
+    public viewCtrl: ViewController,
   ) {
     this.book = this.navParams.get('book');
 
@@ -59,14 +68,13 @@ export class BookRequestPage {
 
     loading.present();
     this.bookService.requestBook(this.book.id, reason).subscribe(resp => {
-      this.navCtrl.pop();
-
       if (resp.success) {
-        toast.setCssClass('toast-success');
-        toast.setMessage('Livro solicitado com sucesso!');
+        this.dismiss({success: true});
       } else {
         toast.setCssClass('toast-error');
         toast.setMessage('Desculpa o incoveniente. Tivemos algum erro.');
+
+        this.dismiss({success: false});
       }
 
       loading.dismiss();
@@ -77,10 +85,10 @@ export class BookRequestPage {
       toast.setCssClass('toast-error');
       toast.setMessage('Não foi possível solicitar este livro.');
       toast.present();
-    })
+    });
   }
 
-  dismiss() {
-    this.navCtrl.pop();
+  dismiss(data?) {
+    this.viewCtrl.dismiss(data);
   }
 }

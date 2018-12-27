@@ -5,6 +5,7 @@ import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
+import {isAdmin, User} from "../../models/user";
 
 @IonicPage()
 @Component({
@@ -13,6 +14,7 @@ import {SessionService} from "../../services/session/session.service";
 })
 export class MyRequestsPage {
 
+  user: User;
   requestedBooks: Array<Book> = [];
   donatedBooks: Array<Book> = [];
   rStatus = new Status();
@@ -26,7 +28,7 @@ export class MyRequestsPage {
     private app: App,
     private actionSheetCtrl: ActionSheetController,
   ) {
-
+    this.user = this.sessionService.user;
   }
 
   ionViewWillEnter() {
@@ -57,14 +59,12 @@ export class MyRequestsPage {
         return 'secondary';
       case BookRequestStatus.REFUSED:
         return 'danger';
+      case BookRequestStatus.AWAITING_ACTION:
+      case BookRequestStatus.AWAITING_APPROVAL:
+        return 'primary-light';
       default:
         return 'primary';
     }
-  }
-
-  donate() {
-    const modal = this.modalCtrl.create('DonatePage');
-    modal.present();
   }
 
   getDonatedBooks() {
@@ -129,5 +129,9 @@ export class MyRequestsPage {
         }
       }]
     }).present();
+  }
+
+  isAdmin(): boolean {
+    return isAdmin(this.user);
   }
 }
