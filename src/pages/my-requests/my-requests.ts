@@ -67,11 +67,6 @@ export class MyRequestsPage {
     }
   }
 
-  donate() {
-    const modal = this.modalCtrl.create('DonatePage');
-    modal.present();
-  }
-
   getDonatedBooks() {
     if (!this.dStatus.isSuccess()) {
       this.dStatus.setAsDownloading();

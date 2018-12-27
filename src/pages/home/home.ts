@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, NavController} from 'ionic-angular';
+import {App, IonicPage, ModalController, NavController} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Status} from "../../models/status";
 import {Book} from "../../models/book";
@@ -24,6 +24,7 @@ export class HomePage {
     public navCtrl: NavController,
     public bookService: BookService,
     public sessionService: SessionService,
+    public modalCtrl: ModalController,
   ) {
     this.user = this.sessionService.user;
 
@@ -71,5 +72,10 @@ export class HomePage {
 
   isAdmin() {
     return isAdmin(this.user);
+  }
+
+  donate() {
+    const modal = this.modalCtrl.create('DonatePage');
+    modal.present();
   }
 }
