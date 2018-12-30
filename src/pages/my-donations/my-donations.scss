@@ -1,0 +1,18 @@
+page-my-donations {
+  .spinner-wrapper {
+    text-align: center;
+  }
+
+  .item-divider {
+    background-color: #fafafa;
+  }
+
+  .label {
+    white-space: normal;
+  }
+
+  .heart-icon {
+    font-size: 30px;
+    color: color($colors, danger);
+  }
+}

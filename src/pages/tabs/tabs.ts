@@ -11,9 +11,12 @@ export class TabsPage {
 
   homePage = 'HomePage';
   myRequestsPage = 'MyRequestsPage';
+  myDonationsPage = 'MyDonationsPage';
   settingsPage = 'SettingsPage';
 
+  constructor(
+    public navCtrl: NavController
+  ) {
 
-  constructor(public navCtrl: NavController) {}
-
+  }
 }
