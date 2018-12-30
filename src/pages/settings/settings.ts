@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {App, IonicPage, ModalController} from 'ionic-angular';
 import {SessionService} from "../../services/session/session.service";
 import {AppVersion} from "@ionic-native/app-version";
-import {instagramUrl, linkedinUrl} from "../../core/utils/app.const";
+import {facebookUrl, instagramUrl, linkedinUrl} from "../../core/utils/app.const";
 
 @IonicPage()
 @Component({
@@ -42,6 +42,10 @@ export class SettingsPage {
 
   openLinkedin() {
     window.open(linkedinUrl, '_blank');
+  }
+
+  openFacebook() {
+    window.open(facebookUrl, '_blank');
   }
 
   contactUs() {
