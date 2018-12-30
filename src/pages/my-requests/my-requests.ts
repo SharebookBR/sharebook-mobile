@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, ModalController, NavController} from 'ionic-angular';
+import {App, IonicPage, NavController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
@@ -22,7 +22,6 @@ export class MyRequestsPage {
     public navCtrl: NavController,
     private bookService: BookService,
     private sessionService: SessionService,
-    private modalCtrl: ModalController,
     private app: App,
   ) {
     this.user = this.sessionService.user;
