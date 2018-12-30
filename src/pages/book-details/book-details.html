@@ -21,7 +21,7 @@
 
   <ion-item no-lines class="already-requested" *ngIf="alreadyRequested">
     Você já solicitou esse livro.<br>
-    Aguarde e boa sorte!
+    Aguarde e boa sorte! <br>
   </ion-item>
 
   <ion-item>
@@ -37,6 +37,11 @@
   <ion-item>
     <p>Categoria</p>
     <h4>{{book?.category?.name}}</h4>
+  </ion-item>
+
+  <ion-item *ngIf="chooseDateInfo">
+    <p>Quando será anunciado o ganhador?</p>
+    <h4><b>{{chooseDateInfo}}</b></h4>
   </ion-item>
 
   <ion-item>

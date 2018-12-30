@@ -18,6 +18,7 @@ export class Book {
   synopsis: string;
   totalInterested: number;
   daysInShowcase: number;
+  chooseDate: string;
 
   static freightLabels = {
     City: 'Cidade',

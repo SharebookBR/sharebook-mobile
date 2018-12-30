@@ -16,6 +16,7 @@ export class BookDetailsPage {
   book: Book;
   alreadyRequested: boolean;
   freightLabels = Book.freightLabels;
+  chooseDateInfo: string;
 
   constructor(
     public navCtrl: NavController,
@@ -44,6 +45,10 @@ export class BookDetailsPage {
   verifyIfRequested() {
     this.bookService.getRequested(this.book.id).subscribe(resp => {
       this.alreadyRequested = resp.value && resp.value.bookRequested;
+
+      if (this.alreadyRequested) {
+        this.calculateChoosingDate();
+      }
     }, err => {
 
     })
@@ -102,5 +107,14 @@ export class BookDetailsPage {
     });
 
     bookModal.present();
+  }
+
+  calculateChoosingDate() {
+    if (!this.book.chooseDate) return;
+    const chooseDate = Math.floor(new Date(this.book.chooseDate).getTime() / (3600 * 24 * 1000));
+    const todayDate   = Math.floor(new Date().getTime() / (3600 * 24 * 1000));
+
+    const daysToChoose = chooseDate - todayDate;
+    this.chooseDateInfo = daysToChoose <= 0 ? 'Hoje' : 'Daqui a ' + daysToChoose + ' dia(s)';
   }
 }
