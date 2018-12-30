@@ -32,6 +32,7 @@
   <button ion-item *ngFor="let item of donatedBooks">
     <h2>{{item.title}}</h2>
     <p>{{item.author}}</p>
+    <p>{{item.daysInShowcase}} dia(s) na vitrine</p>
     <p>{{item.totalInterested}} interessado(s)</p>
     <ion-badge color="{{getBadgeStatusColor(item.status)}}" item-right>
       {{item.status}}
