@@ -3,7 +3,7 @@
     <ion-title>{{book?.title}}</ion-title>
 
     <ion-buttons right>
-      <button ion-button (click)="openBookRequest()">
+      <button ion-button (click)="openBookRequest()" [disabled]="alreadyRequested === undefined || alreadyRequested">
         Solicitar
       </button>
     </ion-buttons>
@@ -13,6 +13,15 @@
 <ion-content>
   <ion-item tappable text-center class="book-cover" (click)="openBookCover()">
     <img [src]="book?.imageUrl">
+  </ion-item>
+
+  <ion-item no-lines *ngIf="alreadyRequested === undefined" text-center>
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-item>
+
+  <ion-item no-lines class="already-requested" *ngIf="alreadyRequested">
+    Você já solicitou esse livro.<br>
+    Aguarde e boa sorte!
   </ion-item>
 
   <ion-item>
