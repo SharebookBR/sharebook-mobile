@@ -5,4 +5,18 @@ page-book-details {
       max-height: 350px;
     }
   }
+
+  .already-requested {
+    color: white;
+    background: color($colors, secondary);
+
+    .label {
+      text-align: center;
+      white-space: normal;
+    }
+  }
+
+  .synopsis {
+    white-space: pre-line;
+  }
 }

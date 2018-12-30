@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, App, IonicPage, ModalController, NavController} from 'ionic-angular';
+import {App, IonicPage, ModalController, NavController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
@@ -16,9 +16,7 @@ export class MyRequestsPage {
 
   user: User;
   requestedBooks: Array<Book> = [];
-  donatedBooks: Array<Book> = [];
   rStatus = new Status();
-  dStatus = new Status();
 
   constructor(
     public navCtrl: NavController,
@@ -26,14 +24,12 @@ export class MyRequestsPage {
     private sessionService: SessionService,
     private modalCtrl: ModalController,
     private app: App,
-    private actionSheetCtrl: ActionSheetController,
   ) {
     this.user = this.sessionService.user;
   }
 
   ionViewWillEnter() {
     this.getRequestedBooks();
-    this.getDonatedBooks();
   }
 
   getRequestedBooks() {
@@ -67,68 +63,31 @@ export class MyRequestsPage {
     }
   }
 
-  getDonatedBooks() {
-    if (!this.dStatus.isSuccess()) {
-      this.dStatus.setAsDownloading();
-    }
-
-    this.bookService.getDonatedBooks().subscribe(books => {
-      this.dStatus.setAsSuccess();
-
-      this.donatedBooks = books;
-    }, err => {
-      this.dStatus.setAsError();
-
-      if (err && err.status === 401) {
-        // Token expired
-        this.logout();
-      }
-    })
-  }
-
   logout() {
     this.sessionService.clearSession();
     this.app.getRootNav().setRoot('LoginPage');
   }
 
   retry() {
-    if (this.dStatus.isError()) {
-      this.getDonatedBooks();
-    }
-
     if (this.rStatus.isError()) {
       this.getRequestedBooks();
     }
   }
 
   isDownloading() {
-    return this.rStatus.isDownloading() || this.dStatus.isDownloading();
+    return this.rStatus.isDownloading();
   }
 
   isError() {
-    return this.rStatus.isError() || this.dStatus.isError();
+    return this.rStatus.isError();
   }
 
   isSuccess() {
-    return this.rStatus.isSuccess() && this.dStatus.isSuccess();
+    return this.rStatus.isSuccess();
   }
 
   isEmpty() {
-    return this.requestedBooks.length === 0
-      && this.donatedBooks.length === 0 && this.isSuccess();
-  }
-
-  editDonatedBook(book) {
-    this.actionSheetCtrl.create({
-      title: 'Selecione uma das opções',
-      buttons: [{
-        text: 'Editar',
-        icon: 'create',
-        handler: () => {
-          this.modalCtrl.create('DonatePage', {book}).present();
-        }
-      }]
-    }).present();
+    return this.requestedBooks.length === 0 && this.isSuccess();
   }
 
   isAdmin(): boolean {
