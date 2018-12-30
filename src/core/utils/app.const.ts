@@ -6,3 +6,4 @@ export const passwordPattern      = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-z
 export const linkedinUrl          = 'https://www.linkedin.com/company/sharebook-br/?viewAsMember=true';
 export const instagramUrl         = 'https://www.instagram.com/sharebook.com.br/';
 export const facebookUrl          = 'https://www.facebook.com/sharebookbr/';
+export const quemSomosUrl         = 'http://sharebook.com.br/quem-somos/';
