@@ -23,6 +23,7 @@ export class SessionService {
 
   setSession(data: Session) {
     this._data = {...this.data, ...data};
+    this.storage.set('lastEmail', data.user.email);
     this.storage.set('session', JSON.stringify(data));
   }
 

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {
   AlertController,
   IonicPage,
@@ -12,6 +12,7 @@ import {Status} from "../../models/status";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import * as AppConst from "../../core/utils/app.const";
 import {UserService} from "../../services/user/user.service";
+import {Storage} from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -34,6 +35,7 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public userService: UserService,
     public modalCtrl: ModalController,
+    @Inject(Storage) public storage: Storage
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
@@ -42,10 +44,20 @@ export class LoginPage {
 
     this.email = this.form.get('email');
     this.password = this.form.get('password');
+
+    this.restoreLastEmail();
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+  }
+
+  async restoreLastEmail() {
+    const email = await this.storage.get('lastEmail');
+
+    if (email) {
+      this.email.setValue(email);
+    }
   }
 
   login() {
