@@ -15,6 +15,7 @@ export class LoginPage {
   email: AbstractControl;
   password: AbstractControl;
   status = new Status();
+  showPassword = false;
 
   constructor(
     public navCtrl: NavController,
@@ -66,6 +67,10 @@ export class LoginPage {
 
   cadastrar() {
     this.navCtrl.push('RegisterPage');
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
 
