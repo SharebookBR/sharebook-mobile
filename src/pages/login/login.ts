@@ -24,6 +24,7 @@ export class LoginPage {
   email: AbstractControl;
   password: AbstractControl;
   status = new Status();
+  showPassword = false;
 
   constructor(
     public navCtrl: NavController,
@@ -151,5 +152,8 @@ export class LoginPage {
   contactUs() {
     this.modalCtrl.create('ContactUsPage').present();
   }
-}
 
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+}
