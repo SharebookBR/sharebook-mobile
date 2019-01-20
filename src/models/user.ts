@@ -1,12 +1,28 @@
-import { Profile } from './profile';
-
-export class User {
-  id: number;
+interface User {
+  id?: string;
+  userId?: string;
   name: string;
+  phone: string;
   email: string;
-  password: string;
-  passwordSalt: string;
   linkedin: string;
-  postalCode: string;
-  profile: Profile;
+  password?: string;
+  passwordSalt?: string;
+  profile?: string;
+  address: {
+    street?: string,
+    number?: string,
+    complement?: string,
+    neighborhood?: string,
+    postalCode?: string,
+    city?: string,
+    state?: string,
+    country?: string,
+    creationDate?: string,
+  };
 }
+
+function isAdmin(user: User): boolean {
+  return user && user.profile === 'Administrator';
+}
+
+export {User, isAdmin};

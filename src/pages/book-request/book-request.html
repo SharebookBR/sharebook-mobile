@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left margin-left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Solicitar livro</ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="requestBook()">
+        Enviar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h4 text-center>Quanto você quer esse livro?</h4>
+
+  <h6>1 - Fale um pouco sobre você.</h6>
+  <h6>2 - Por que esse livro é importante?</h6>
+  <h6>3 - Planeja doar novamente?</h6>
+
+  <form [formGroup]="form">
+    <ion-item no-padding>
+      <ion-textarea
+        [formControl]="reason" rows="10"
+        placeholder="Digite aqui sua resposta...">
+      </ion-textarea>
+    </ion-item>
+    <small ion-text color="danger" *ngIf="reason.invalid && reason.touched">
+      Resposta inválida (mínimo 10 letras)
+    </small>
+  </form>
+</ion-content>

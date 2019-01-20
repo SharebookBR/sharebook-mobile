@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Configurações</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <button ion-item (click)="edit()">
+    <ion-icon item-start color="gray" name="person"></ion-icon>
+    Editar dados
+  </button>
+
+  <button ion-item (click)="openLinkedin()" class="linkedin-logo">
+    <ion-icon item-start name="logo-linkedin"></ion-icon>
+    Siga-nos no LinkedIn
+  </button>
+
+  <button ion-item (click)="openInstagram()" class="instagram-logo">
+    <ion-icon item-start name="logo-instagram"></ion-icon>
+    Siga-nos no Instagram
+  </button>
+
+  <button ion-item (click)="openFacebook()" class="facebook-logo">
+    <ion-icon item-start name="logo-facebook"></ion-icon>
+    Curta-nos no Facebook
+  </button>
+
+  <button ion-item (click)="openQuemSomos()">
+    <ion-icon item-start color="gray" name="people"></ion-icon>
+    Quem somos
+  </button>
+
+  <button ion-item (click)="contactUs()">
+    <ion-icon item-start color="gray" name="chatbubbles"></ion-icon>
+    Fale conosco
+  </button>
+
+  <button ion-item>
+    <ion-icon item-start color="gray" name="information-circle"></ion-icon>
+    Versão
+    <span item-right class="version">
+      v{{version || '0.0.0'}}
+    </span>
+  </button>
+
+  <button ion-item (click)="logOut()">
+    <ion-icon item-start color="gray" name="log-out"></ion-icon>
+
+    Sair
+  </button>
+</ion-content>

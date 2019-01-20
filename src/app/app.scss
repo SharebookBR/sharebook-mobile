@@ -36,3 +36,21 @@
     color: #fff;
   }
 }
+
+.toast-success {
+  .toast-message {
+    background: color($colors, secondary);
+  }
+}
+
+.toast-error {
+  .toast-message {
+    background: color($colors, danger);
+  }
+}
+
+.form-error {
+  font-size: 75%;
+  margin-left: 15px;
+  color: color($colors, danger);
+}

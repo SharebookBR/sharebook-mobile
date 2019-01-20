@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Meus pedidos {{isAdmin() ? '(Admin)' : ''}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isDownloading()"
+       text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+    <h6>Carregando...</h6>
+  </div>
+
+  <div *ngIf="isError()" margin-top padding>
+    <div text-center no-lines>
+      <h6>Infelizmente ocorreu um erro, clique abaixo para tentar novamente.</h6>
+    </div>
+
+    <div text-center>
+      <button ion-button outline small (click)="retry()">
+        Tentar novamente
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isEmpty()"
+       text-center padding>
+    <h6>Você ainda não fez um pedido.</h6>
+    <p>Não perca tempo, corra escolher o seu.</p>
+    🙂
+  </div>
+
+  <button ion-item *ngFor="let item of requestedBooks">
+    <h2>{{item.title}}</h2>
+    <p>{{item.author}}</p>
+    <ion-badge color="{{getBadgeStatusColor(item.status)}}" item-right>
+      {{item.status}}
+    </ion-badge>
+  </button>
+</ion-content>

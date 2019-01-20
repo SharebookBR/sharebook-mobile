@@ -1,14 +1,14 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../models/book';
 import { BooksVM } from '../../models/booksVM';
 import { DonateBookUser } from '../../models/donateBookUser';
 import { map } from 'rxjs/operators';
-import {config} from "../../../environments/environment";
+import { config } from "../../../environments/environment";
 
 @Injectable()
 export class BookService {
-  // TODO TypicodeInterceptor
+  
   constructor(private _http: HttpClient) {}
 
   public getAll() {
@@ -23,7 +23,7 @@ export class BookService {
     return this._http.get<Book[]>(`${config.apiEndpoint}/book/Random15Books`);
   }
 
-  public create(book: Book) {
+  public create(book) {
     return this._http.post<any>(`${config.apiEndpoint}/book`, book);
   }
 
@@ -35,8 +35,8 @@ export class BookService {
     return this._http.get<Book>(`${config.apiEndpoint}/book/Slug/${bookSlug}`);
   }
 
-  public update(book: Book) {
-    return this._http.put<Book>(`${config.apiEndpoint}/book/${book.id}`, book);
+  public update(id, book: Book) {
+    return this._http.put<Book>(`${config.apiEndpoint}/book/${id}`, book);
   }
 
   public delete(bookId: number) {
@@ -59,12 +59,19 @@ export class BookService {
     return this._http.put<any>(`${config.apiEndpoint}/book/Donate/${bookId}`, donateBookUser);
   }
 
-  public requestBook(bookId: string) {
-    return this._http.post<any>(`${config.apiEndpoint}/book/Request/${bookId}`, null);
+  public requestBook(bookId: string, reason: string) {
+    return this._http.post<any>(`${config.apiEndpoint}/book/Request`, {bookId, reason});
   }
 
   public getRequested(bookId: string) {
     return this._http.get<any>(`${config.apiEndpoint}/book/Requested/${bookId}`);
   }
 
+  public getRequestedBooks(page: number, items: number) {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyRequests/${page}/${items}`);
+  }
+
+  public getDonatedBooks() {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MyDonations`);
+  }
 }

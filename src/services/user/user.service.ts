@@ -2,7 +2,6 @@ import {Injectable, Inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {User} from '../../models/user';
-import {UpdateUserVM} from '../../models/updateUserVM';
 import {ChangePasswordUserVM} from '../../models/ChangePasswordUserVM';
 import {Profile} from '../../models/profile';
 import {config} from "../../../environments/environment";
@@ -25,23 +24,24 @@ export class UserService {
   }
 
   getUserData() {
-    return this._http.get<UpdateUserVM>(`${config.apiEndpoint}/Account`);
+    return this._http.get<User>(`${config.apiEndpoint}/Account`);
   }
 
   register(user: User) {
     return this._http.post<any>(`${config.apiEndpoint}/Account/Register`, user)
       .pipe(map(response => {
-        // login successful if there's a jwt token in the response
-        if (response.success || response.authenticated) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.sessionService.setSession({user: response})
+        if (response.authenticated) {
+          this.sessionService.setSession({
+            user: response,
+            accessToken: response.accessToken
+          })
         }
         return response;
       }));
   }
 
-  update(updateUserVM: UpdateUserVM) {
-    return this._http.put<any>(`${config.apiEndpoint}/Account`, updateUserVM);
+  update(updateUserVM: User) {
+    return this._http.put<User>(`${config.apiEndpoint}/Account`, updateUserVM);
   }
 
   changePassword(changePasswordUserVM: ChangePasswordUserVM) {
@@ -58,5 +58,9 @@ export class UserService {
 
   consultarCEP(cep) {
     return this._http.get("http://viacep.com.br/ws/" + cep + "/json/")
+  }
+
+  forgotPassword(email) {
+    return this._http.post(`${config.apiEndpoint}/Account/ForgotMyPassword/${email}`, {});
   }
 }

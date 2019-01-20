@@ -1,0 +1,13 @@
+page-donate {
+  .images-wrapper {
+    img {
+      height: 100px;
+      margin: 5px 5px 0 0;
+    }
+  }
+
+  .heart-icon {
+    color: color($colors, danger);
+    margin-left: 5px;
+  }
+}

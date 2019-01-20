@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Livro solicitado com sucesso!</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h1 text-center>
+    Agora precisamos que confirme suas informações
+  </h1>
+
+  <h4 text-center>
+    Leia com atenção o endereço abaixo.
+  </h4>
+
+  <div text-center *ngIf="user" padding>
+    <h6>{{user.address.street}}, {{user.address.number}}</h6>
+    <h6>{{user.address.neighborhood}} - {{user.address.city}} - {{user.address.state}}</h6>
+    <h6>{{user.address.postalCode}} - {{user.address.country}}</h6>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="buttons" padding-left padding-right>
+      <button ion-button color="primary-light" (click)="updateAddress()">
+        Atualizar
+      </button>
+
+      <button ion-button color="secondary" (click)="dismiss()">
+        Tudo certo!
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
