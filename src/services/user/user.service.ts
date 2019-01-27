@@ -61,6 +61,6 @@ export class UserService {
   }
 
   forgotPassword(email) {
-    return this._http.post(`${config.apiEndpoint}/Account/ForgotMyPassword/${email}`, {});
+    return this._http.post(`${config.apiEndpoint}/Account/ForgotMyPassword/`, {email});
   }
 }
