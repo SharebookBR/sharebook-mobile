@@ -13,7 +13,7 @@ export class SessionService {
 
   }
 
-  get data(): any {
+  get data(): Session {
     return this._data;
   }
 
