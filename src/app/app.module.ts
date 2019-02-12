@@ -17,6 +17,7 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {CategoryService} from "../services/category/category.service";
 import {Camera} from "@ionic-native/camera";
 import {ContactUsService} from "../providers/contact-us/contact-us-service";
+import {OneSignal} from "@ionic-native/onesignal";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ContactUsService} from "../providers/contact-us/contact-us-service";
     MyApp,
   ],
   providers: [
+    OneSignal,
     StatusBar,
     SplashScreen,
     UserService,
