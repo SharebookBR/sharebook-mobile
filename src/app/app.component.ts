@@ -30,11 +30,24 @@ export class MyApp {
   }
 
   setRootPage() {
-    if (this.sessionService.user) {
+    const isTokenValid = this.isTokenValid(this.sessionService.data.expiration);
+
+    if (this.sessionService.user && isTokenValid) {
       this.menuCtrl.enable(true);
       this.nav.setRoot('TabsPage');
     } else {
       this.nav.setRoot('LoginPage');
     }
+  }
+
+  isTokenValid(expiration): boolean {
+    if (expiration) {
+      const expireDate = new Date(expiration);
+      const today = new Date();
+
+      return expireDate.getTime() >= today.getTime();
+    }
+
+    return false;
   }
 }
