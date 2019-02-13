@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.makeztec.sharebook" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.makeztec.sharebook" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sharebook</name>
     <description>Uma plataforma solidária para compartilhamento e doação de livros.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">SharebookBR</author>
@@ -88,5 +88,6 @@
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <allow-navigation href="http://192.168.0.107:8100" />
-    <engine name="android" spec="7.0.0" />
+    <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
+    <engine name="android" spec="6.4.0" />
 </widget>
