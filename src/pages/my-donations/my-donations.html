@@ -34,6 +34,7 @@
     <p>{{item.author}}</p>
     <p>{{item.daysInShowcase}} {{item.daysInShowcase === 1 ? 'dia' : 'dias'}} na vitrine</p>
     <p>{{item.totalInterested}} {{item.totalInterested === 1 ? 'interessado' : 'interessados'}}</p>
+    <p *ngIf="item.trackingNumber">Rastreio: {{item.trackingNumber}}</p>
     <p *ngIf="!canChooseDonator(item) && item.chooseDate">
       Escolha o destinatário em {{getRemainingDays(item.chooseDate)}} dias
     </p>

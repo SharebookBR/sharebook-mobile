@@ -11,7 +11,7 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isCanceled, isDonated} from "../../models/book";
+import {Book, getStatusColor, isAvailable, isCanceled, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -85,7 +85,7 @@ export class MyDonationsPage {
 
   editDonatedBook(book: Book) {
     const edit: ActionSheetButton = {
-      text: 'Editar',
+      text: 'Editar (Admin)',
       icon: 'create',
       handler: () => {
         this.modalCtrl.create('DonatePage', {book}).present();
@@ -129,7 +129,7 @@ export class MyDonationsPage {
       text: 'Informar código de rastreio',
       icon: 'mail',
       handler: () => {
-
+        this.requestTrackingNumber(book)
       }
     };
 
@@ -139,12 +139,11 @@ export class MyDonationsPage {
       buttons.push(edit);
     }
 
-    // TODO falta implementar
-    // if (isDonated(book)) {
-    //   buttons.push(tracking);
-    // }
+    if (isDonated(book)) {
+      buttons.push(tracking);
+    }
 
-    if (!isDonated(book) && !isCanceled(book)) {
+    if (isAvailable(book)) {
       buttons.push(donator);
       buttons.push(postpone);
     }
@@ -176,19 +175,64 @@ export class MyDonationsPage {
 
   renewDonation(book: Book) {
     this.bookService.renewChooseDate(book.id).timeout(10000).subscribe(data => {
-      this.toastCtrl.create({
-        message: 'Data renovada com sucesso!',
-        cssClass: 'toast-success',
-        duration: 3000,
-      }).present();
+      this.successToast('Data renovada com sucesso!');
+      this.getDonatedBooks();
+    }, err => {
+      this.errorToast('Não foi possível renovar a data, tente novamente.');
+    })
+  }
+
+  requestTrackingNumber(book: Book) {
+    const alert = this.alertCtrl.create({
+      title: 'Código de rastreio',
+      message: 'Adicione o código abaixo',
+      buttons: [{
+        text: 'Adicionar',
+        handler: (data) => {
+          const {trackingNumber} = data;
+
+          if (trackingNumber.trim()) {
+            this.setTrackingNumber(book, trackingNumber);
+          } else {
+            this.errorToast('Necessário adicionar código de rastreio.');
+          }
+        }
+      }, 'Cancelar']
+    });
+
+    alert.addInput({
+      placeholder: 'Código de rastreio',
+      value: '',
+      type: 'text',
+      name: 'trackingNumber',
+    });
+
+    alert.present();
+  }
+
+  setTrackingNumber(book: Book, trackingNumber) {
+    this.bookService.setTrackingNumber(book.id, {trackingNumber}).timeout(10000).subscribe(data => {
+      this.successToast('Código adicionado com sucesso!');
 
       this.getDonatedBooks();
     }, err => {
-      this.toastCtrl.create({
-        message: 'Não foi possível renovar a data, tente novamente.',
-        cssClass: 'toast-error',
-        duration: 3000,
-      }).present();
+      this.errorToast('Não foi possível adicionar o código');
     })
+  }
+
+  successToast(msg: string) {
+    this.toastCtrl.create({
+      message: msg,
+      cssClass: 'toast-success',
+      duration: 3000,
+    }).present();
+  }
+
+  errorToast(msg: string) {
+    this.toastCtrl.create({
+      message: msg,
+      cssClass: 'toast-error',
+      duration: 3000,
+    }).present();
   }
 }

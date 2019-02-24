@@ -81,4 +81,8 @@ export class BookService {
   public renewChooseDate(bookId: string) {
     return this._http.put<any>(`${config.apiEndpoint}/book/RenewChooseDate/${bookId}`, null);
   }
+
+  public setTrackingNumber(bookId: string, trackingNumberBookVM: {trackingNumber: string}) {
+    return this._http.post<any>(`${config.apiEndpoint}/book/InformTrackingNumber/${bookId}`, trackingNumberBookVM);
+  }
 }

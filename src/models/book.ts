@@ -21,6 +21,7 @@ interface Book {
   chooseDate: string;
   status: BookRequestStatus;
   donated: boolean;
+  trackingNumber: string;
 }
 
 enum FreightLabels {
@@ -46,6 +47,10 @@ function isDonated(book: Book) {
 
 function isCanceled(book: Book) {
   return book.status.toUpperCase() === BookRequestStatus.CANCELED;
+}
+
+function isAvailable(book: Book) {
+  return book.status.toUpperCase() === BookRequestStatus.AVAILABLE;
 }
 
 function getStatusColor(status = '') {
@@ -78,4 +83,5 @@ export {
   getStatusColor,
   DonateBookUser,
   isCanceled,
+  isAvailable,
 };
