@@ -40,10 +40,10 @@
     <p>{{item.totalInterested}} {{item.totalInterested === 1 ? 'interessado' : 'interessados'}}</p>
     <p *ngIf="item.trackingNumber">Rastreio: {{item.trackingNumber}}</p>
     <p *ngIf="!canChooseDonator(item) && item.chooseDate">
-      Escolha o destinatário em {{getRemainingDays(item.chooseDate)}} dias
+      Escolha o granhador em {{getRemainingDays(item.chooseDate)}} dias
     </p>
     <ion-badge *ngIf="canChooseDonator(item)" color="primary-light">
-      Escolha o destinatário
+      Escolha o granhador
     </ion-badge>
     <ion-badge color="{{getStatusColor(item.status)}}" item-right>
       {{item.status}} {{item.status === 'Doado' ? '❤' : ''}}

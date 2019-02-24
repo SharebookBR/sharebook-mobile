@@ -117,7 +117,7 @@ export class MyDonationsPage {
     };
 
     const donator: ActionSheetButton = {
-      text: 'Escolher destinatário',
+      text: 'Escolher ganhador',
       icon: 'trophy',
       handler: () => {
         if (this.canChooseDonator(book)) {
