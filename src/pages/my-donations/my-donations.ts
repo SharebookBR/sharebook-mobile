@@ -123,11 +123,19 @@ export class MyDonationsPage {
         if (this.canChooseDonator(book)) {
           this.app.getRootNav().push('InteressadosPage', {bookId: book.id});
         } else {
-          this.alertCtrl.create({
-            title: 'Fora da data de escolha',
-            message: `Aguarde mais ${getRemainingDays(book.chooseDate)} dias para poder escolher. 😉`,
+          const alert = this.alertCtrl.create({
             buttons: ['Ok'],
-          }).present();
+          });
+
+          if (book.chooseDate) {
+            alert.setTitle('Fora da data de escolha');
+            alert.setMessage(`Aguarde mais ${getRemainingDays(book.chooseDate)} dias para poder escolher. 😉`)
+          } else {
+            alert.setTitle('Não existe data de escolha');
+            alert.setMessage('Clique em renovar data de escolha para criar uma.');
+          }
+
+          alert.present();
         }
       }
     };
