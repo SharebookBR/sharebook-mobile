@@ -26,7 +26,7 @@
   <div *ngIf="isEmpty()" text-center padding tappable (click)="donate()">
     <h6>Você ainda não doou nenhum livro.</h6>
     <p>Clique aqui para fazer essa boa ação!</p>
-    <div class="heart-icon">♥</div>
+    <h1 class="heart-icon">♥</h1>
   </div>
 
   <button ion-item *ngFor="let item of donatedBooks" (click)="editDonatedBook(item)">

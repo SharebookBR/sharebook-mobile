@@ -41,7 +41,11 @@ enum BookRequestStatus {
 }
 
 function isDonated(book: Book) {
-  return book.status === BookRequestStatus.DONATED;
+  return book.status.toUpperCase() === BookRequestStatus.DONATED;
+}
+
+function isCanceled(book: Book) {
+  return book.status.toUpperCase() === BookRequestStatus.CANCELED;
 }
 
 function getStatusColor(status = '') {
@@ -72,5 +76,6 @@ export {
   isDonated,
   BookRequestStatus,
   getStatusColor,
-  DonateBookUser
+  DonateBookUser,
+  isCanceled,
 };

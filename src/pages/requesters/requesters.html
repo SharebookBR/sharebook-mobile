@@ -5,6 +5,29 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="status.isDownloading()"
+       text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+    <h6>Carregando...</h6>
+  </div>
+
+  <div *ngIf="status.isError()" margin-top padding>
+    <div text-center no-lines>
+      <h6>Infelizmente ocorreu um erro, clique abaixo para tentar novamente.</h6>
+    </div>
+
+    <div text-center>
+      <button ion-button outline small (click)="getInteressados()">
+        Tentar novamente
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isEmpty()" text-center padding tappable>
+    <h6>Este livro ainda não possui interessados.</h6>
+    <h1>🙁</h1>
+  </div>
+
   <button ion-item *ngFor="let request of requests" (click)="choose(request)">
     <h2>{{request.requesterNickName}}</h2>
     <p>{{request.location}}</p>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AlertController, IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Request} from '../../models/request';
+import {Status} from "../../models/status";
+import 'rxjs/add/operator/timeout';
 
 @IonicPage()
 @Component({
@@ -10,13 +12,13 @@ import {Request} from '../../models/request';
 })
 export class InteressadosPage {
   bookId: string;
-  requests: Array<Request>;
+  requests: Array<Request> = [];
+  status = new Status();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public bookService: BookService,
-    public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
   ) {
@@ -28,8 +30,15 @@ export class InteressadosPage {
   }
 
   getInteressados() {
-    this.bookService.getRequestersList(this.bookId).subscribe(requests => {
+    if (!this.status.isSuccess()) {
+      this.status.setAsDownloading();
+    }
+
+    this.bookService.getRequestersList(this.bookId).timeout(10000).subscribe(requests => {
+      this.status.setAsSuccess();
       this.requests = <Request[]>requests;
+    }, err => {
+      this.status.setAsError();
     })
   }
 
@@ -51,11 +60,7 @@ export class InteressadosPage {
     modal.present();
   }
 
-  showErrorToast(msg) {
-    this.toastCtrl.create({
-      message: msg,
-      cssClass: 'toast-error',
-      duration: 3000,
-    }).present();
+  isEmpty() {
+    return this.requests.length === 0 && this.status.isSuccess();
   }
 }

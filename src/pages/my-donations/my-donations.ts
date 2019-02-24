@@ -10,7 +10,7 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isDonated} from "../../models/book";
+import {Book, getStatusColor, isCanceled, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -127,17 +127,22 @@ export class MyDonationsPage {
       buttons.push(edit);
     }
 
-    if (isDonated(book)) {
-      buttons.push(tracking);
-    } else {
+    // TODO falta implementar
+    // if (isDonated(book)) {
+    //   buttons.push(tracking);
+    // }
+
+    if (!isDonated(book) && !isCanceled(book)) {
       buttons.push(donator);
       buttons.push(postpone);
     }
 
-    this.actionSheetCtrl.create({
-      title: 'Selecione uma das opções',
-      buttons: buttons
-    }).present();
+    if (buttons.length) {
+      this.actionSheetCtrl.create({
+        title: 'Selecione uma das opções',
+        buttons: buttons
+      }).present();
+    }
   }
 
   isAdmin(): boolean {
