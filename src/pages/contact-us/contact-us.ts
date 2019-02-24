@@ -4,7 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {emailPattern, phonePattern} from "../../core/utils/app.const";
 import {SessionService} from "../../services/session/session.service";
 import {User} from "../../models/user";
-import {ContactUsService} from "../../providers/contact-us/contact-us-service";
+import {ContactUsService} from "../../services/contact-us/contact-us-service";
 import {formatPhone} from "../../core/utils/formatters";
 import 'rxjs/add/operator/timeout';
 
