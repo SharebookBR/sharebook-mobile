@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <div class="fireworks-background" *ngIf="showFireworks">
+    <fireworks></fireworks>
+  </div>
+
   <div *ngIf="isDownloading()"
        text-center padding no-lines>
     <ion-spinner></ion-spinner>

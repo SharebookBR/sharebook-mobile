@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
 import {Book, getStatusColor} from "../../models/book";
@@ -22,7 +22,6 @@ export class MyRequestsPage {
     public navCtrl: NavController,
     private bookService: BookService,
     private sessionService: SessionService,
-    private app: App,
   ) {
     this.user = this.sessionService.user;
   }

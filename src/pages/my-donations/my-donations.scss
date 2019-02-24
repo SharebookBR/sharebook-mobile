@@ -19,4 +19,14 @@ page-my-donations {
   .badge {
     color: white;
   }
+
+  .fireworks-background {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
 }

@@ -11,11 +11,12 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isAvailable, isCanceled, isDonated} from "../../models/book";
+import {Book, getStatusColor, isAvailable, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
 import 'rxjs/add/operator/timeout';
+import {Events} from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -29,6 +30,7 @@ export class MyDonationsPage {
   dStatus = new Status();
   getRemainingDays = getRemainingDays;
   getStatusColor = getStatusColor;
+  showFireworks: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -39,12 +41,34 @@ export class MyDonationsPage {
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
+    private events: Events,
   ) {
     this.user = this.sessionService.user;
   }
 
+  ionViewDidLoad() {
+    this.events.subscribe('fireworks', () => {
+      this.triggerFireworks();
+    })
+  }
+
+  ionViewWillUnload() {
+    this.events.unsubscribe('fireworks')
+  }
+
   ionViewWillEnter() {
     this.getDonatedBooks();
+  }
+
+  triggerFireworks() {
+    const audio = new Audio('assets/sounds/fireworks.mp3');
+    audio.play();
+
+    this.showFireworks = true;
+
+    setTimeout(() => {
+      this.showFireworks = false;
+    }, 5000)
   }
 
   getDonatedBooks() {

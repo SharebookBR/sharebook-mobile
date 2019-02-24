@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+  Events,
+  IonicPage,
+  ModalController,
+  NavController,
+  NavParams,
+  ToastController
+} from 'ionic-angular';
 import {BookService} from "../../services/book/book.service";
 import {Request} from '../../models/request';
 import {Status} from "../../models/status";
@@ -21,6 +28,7 @@ export class InteressadosPage {
     public bookService: BookService,
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
+    public events: Events,
   ) {
     this.bookId = this.navParams.get('bookId');
   }
@@ -54,6 +62,7 @@ export class InteressadosPage {
         }).present();
 
         this.navCtrl.pop();
+        this.events.publish('fireworks');
       }
     });
 
