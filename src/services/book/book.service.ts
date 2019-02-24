@@ -77,4 +77,8 @@ export class BookService {
   public getRequestersList(bookId: string) {
     return this._http.get(`${config.apiEndpoint}/book/RequestersList/${bookId}`);
   }
+
+  public renewChooseDate(bookId: string) {
+    return this._http.put<any>(`${config.apiEndpoint}/book/RenewChooseDate/${bookId}`, null);
+  }
 }

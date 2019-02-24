@@ -6,7 +6,8 @@ import {
   App,
   IonicPage,
   ModalController,
-  NavController
+  NavController,
+  ToastController,
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
@@ -14,6 +15,7 @@ import {Book, getStatusColor, isCanceled, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
+import 'rxjs/add/operator/timeout';
 
 @IonicPage()
 @Component({
@@ -36,6 +38,7 @@ export class MyDonationsPage {
     private app: App,
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
   ) {
     this.user = this.sessionService.user;
   }
@@ -109,7 +112,16 @@ export class MyDonationsPage {
       text: 'Renovar data de escolha',
       icon: 'calendar',
       handler: () => {
-
+        this.alertCtrl.create({
+          title: 'Atenção!',
+          message: 'Confirma a renovação da data de doação?',
+          buttons: [{
+            text: 'Sim',
+            handler: () => {
+              this.renewDonation(book);
+            }
+          }, 'Não']
+        }).present();
       }
     };
 
@@ -160,5 +172,23 @@ export class MyDonationsPage {
     const now = new Date();
 
     return !book.donated && now.getTime() > chooseDate.getTime();
+  }
+
+  renewDonation(book: Book) {
+    this.bookService.renewChooseDate(book.id).timeout(10000).subscribe(data => {
+      this.toastCtrl.create({
+        message: 'Data renovada com sucesso!',
+        cssClass: 'toast-success',
+        duration: 3000,
+      }).present();
+
+      this.getDonatedBooks();
+    }, err => {
+      this.toastCtrl.create({
+        message: 'Não foi possível renovar a data, tente novamente.',
+        cssClass: 'toast-error',
+        duration: 3000,
+      }).present();
+    })
   }
 }
