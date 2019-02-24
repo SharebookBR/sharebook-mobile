@@ -1,7 +1,7 @@
 import { Category } from './category';
 import {User} from "./user";
 
-export class Book {
+interface Book {
   id: string;
   userId: number;
   title: string;
@@ -19,12 +19,19 @@ export class Book {
   totalInterested: number;
   daysInShowcase: number;
   chooseDate: string;
-
-  static freightLabels = {
-    City: 'Cidade',
-    State: 'Estado',
-    Country: 'País',
-    World: 'Mundo',
-    WithoutFreight: 'Não',
-  };
+  status: string;
 }
+
+const FreightLabels = {
+  City: 'Cidade',
+  State: 'Estado',
+  Country: 'País',
+  World: 'Mundo',
+  WithoutFreight: 'Não',
+};
+
+function isDonated(book: Book) {
+  return book.status === 'Doado';
+}
+
+export {Book, FreightLabels, isDonated};

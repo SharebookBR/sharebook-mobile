@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {FormBuilder, AbstractControl, Validators, FormGroup} from "@angular/forms";
-import {Book} from "../../models/book";
+import {Book, FreightLabels} from "../../models/book";
 import {CategoryService} from "../../services/category/category.service";
 import {Category} from "../../models/category";
 import {Camera, CameraOptions} from '@ionic-native/camera';
@@ -82,9 +82,9 @@ export class DonatePage {
   }
 
   setupForm() {
-    this.freightOptions = Object.keys(Book.freightLabels)
+    this.freightOptions = Object.keys(FreightLabels)
       .map(value => {
-        return {value, text: Book.freightLabels[value]}
+        return {value, text: FreightLabels[value]}
       });
 
     this.form = this.formBuilder.group({

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {Book} from "../../models/book";
+import {Book, FreightLabels} from "../../models/book";
 import {UserService} from "../../services/user/user.service";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {BookService} from "../../services/book/book.service";
@@ -15,7 +15,7 @@ import {BookService} from "../../services/book/book.service";
 export class BookDetailsPage {
   book: Book;
   alreadyRequested: boolean;
-  freightLabels = Book.freightLabels;
+  freightLabels = FreightLabels;
   chooseDateInfo: string;
 
   constructor(
