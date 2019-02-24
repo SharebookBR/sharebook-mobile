@@ -29,11 +29,13 @@
     <div class="heart-icon">♥</div>
   </div>
 
-  <button ion-item *ngFor="let item of donatedBooks">
+  <button ion-item *ngFor="let item of donatedBooks" (click)="editDonatedBook(item)">
     <h2>{{item.title}}</h2>
     <p>{{item.author}}</p>
-    <p>{{item.daysInShowcase}} dia(s) na vitrine</p>
-    <p>{{item.totalInterested}} interessado(s)</p>
+    <p>{{item.daysInShowcase}} {{item.daysInShowcase === 1 ? 'dia' : 'dias'}} na vitrine</p>
+    <p>{{item.totalInterested}} {{item.totalInterested === 1 ? 'interessado' : 'interessados'}}</p>
+    <p *ngIf="!canChooseDonator(item)">Escolha o destinatário em {{getRemainingDays(item.chooseDate)}} dias</p>
+    <ion-badge *ngIf="canChooseDonator(item)" color="secondary">Escolha o destinatário!</ion-badge>
     <ion-badge color="{{getBadgeStatusColor(item.status)}}" item-right>
       {{item.status}}
     </ion-badge>

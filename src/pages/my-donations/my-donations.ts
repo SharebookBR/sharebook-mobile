@@ -1,11 +1,20 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, App, IonicPage, ModalController, NavController} from 'ionic-angular';
+import {
+  ActionSheetButton,
+  ActionSheetController,
+  AlertController,
+  App,
+  IonicPage,
+  ModalController,
+  NavController
+} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
-import {Book} from "../../models/book";
+import {Book, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
+import {getRemainingDays} from "../../core/utils/date";
 
 @IonicPage()
 @Component({
@@ -17,6 +26,7 @@ export class MyDonationsPage {
   user: User;
   donatedBooks: Array<Book> = [];
   dStatus = new Status();
+  getRemainingDays = getRemainingDays;
 
   constructor(
     public navCtrl: NavController,
@@ -25,6 +35,7 @@ export class MyDonationsPage {
     private modalCtrl: ModalController,
     private app: App,
     private actionSheetCtrl: ActionSheetController,
+    private alertCtrl: AlertController,
   ) {
     this.user = this.sessionService.user;
   }
@@ -93,17 +104,63 @@ export class MyDonationsPage {
     return this.donatedBooks.length === 0 && this.isSuccess();
   }
 
-  // TODO make use of this after fixing backend
-  editDonatedBook(book) {
+  editDonatedBook(book: Book) {
+    const edit: ActionSheetButton = {
+      text: 'Editar',
+      icon: 'create',
+      handler: () => {
+        this.modalCtrl.create('DonatePage', {book}).present();
+      }
+    };
+
+    const donator: ActionSheetButton = {
+      text: 'Escolher destinatário',
+      icon: 'trophy',
+      handler: () => {
+        if (this.canChooseDonator(book)) {
+
+        } else {
+          this.alertCtrl.create({
+            title: 'Fora da data de escolha',
+            message: `Aguarde mais ${getRemainingDays(book.chooseDate)} dias para poder escolher. 😉`,
+            buttons: ['Ok'],
+          }).present();
+        }
+      }
+    };
+
+    const postpone: ActionSheetButton = {
+      text: 'Renovar data de escolha',
+      icon: 'calendar',
+      handler: () => {
+
+      }
+    };
+
+    const tracking: ActionSheetButton = {
+      text: 'Informar código de rastreio',
+      icon: 'mail',
+      handler: () => {
+
+      }
+    };
+
+    const buttons = [];
+
+    if (this.isAdmin()) {
+      buttons.push(edit);
+    }
+
+    if (isDonated(book)) {
+      buttons.push(tracking);
+    } else {
+      buttons.push(donator);
+      buttons.push(postpone);
+    }
+
     this.actionSheetCtrl.create({
       title: 'Selecione uma das opções',
-      buttons: [{
-        text: 'Editar',
-        icon: 'create',
-        handler: () => {
-          this.modalCtrl.create('DonatePage', {book}).present();
-        }
-      }]
+      buttons: buttons
     }).present();
   }
 
@@ -115,5 +172,12 @@ export class MyDonationsPage {
     this.modalCtrl
       .create('DonatePage')
       .present();
+  }
+
+  canChooseDonator(book: Book) {
+    const chooseDate = new Date(book.chooseDate);
+    const now = new Date();
+
+    return now.getTime() > chooseDate.getTime();
   }
 }
