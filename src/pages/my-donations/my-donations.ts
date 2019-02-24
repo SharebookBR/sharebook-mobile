@@ -9,9 +9,8 @@ import {
   NavController
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
-import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
-import {Book, isDonated} from "../../models/book";
+import {Book, getStatusColor, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -27,6 +26,7 @@ export class MyDonationsPage {
   donatedBooks: Array<Book> = [];
   dStatus = new Status();
   getRemainingDays = getRemainingDays;
+  getStatusColor = getStatusColor;
 
   constructor(
     public navCtrl: NavController,
@@ -44,20 +44,6 @@ export class MyDonationsPage {
     this.getDonatedBooks();
   }
 
-  getBadgeStatusColor(status) {
-    switch (status.toUpperCase()) {
-      case BookRequestStatus.DONATED:
-        return 'secondary';
-      case BookRequestStatus.REFUSED:
-        return 'danger';
-      case BookRequestStatus.AWAITING_ACTION:
-      case BookRequestStatus.AWAITING_APPROVAL:
-        return 'primary-light';
-      default:
-        return 'primary';
-    }
-  }
-
   getDonatedBooks() {
     if (!this.dStatus.isSuccess()) {
       this.dStatus.setAsDownloading();
@@ -69,17 +55,7 @@ export class MyDonationsPage {
       this.donatedBooks = books;
     }, err => {
       this.dStatus.setAsError();
-
-      if (err && err.status === 401) {
-        // Token expired
-        this.logout();
-      }
     })
-  }
-
-  logout() {
-    this.sessionService.clearSession();
-    this.app.getRootNav().setRoot('LoginPage');
   }
 
   retry() {
@@ -118,7 +94,7 @@ export class MyDonationsPage {
       icon: 'trophy',
       handler: () => {
         if (this.canChooseDonator(book)) {
-
+          this.app.getRootNav().push('InteressadosPage', {bookId: book.id});
         } else {
           this.alertCtrl.create({
             title: 'Fora da data de escolha',
@@ -178,6 +154,6 @@ export class MyDonationsPage {
     const chooseDate = new Date(book.chooseDate);
     const now = new Date();
 
-    return now.getTime() > chooseDate.getTime();
+    return !book.donated && now.getTime() > chooseDate.getTime();
   }
 }

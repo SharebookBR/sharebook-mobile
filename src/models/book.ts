@@ -12,26 +12,65 @@ interface Book {
   imageSlug: string;
   approved: boolean;
   categoryId: number;
-  freightOption: string;
+  freightOption: FreightLabels;
   category: Category;
   user: User;
   synopsis: string;
   totalInterested: number;
   daysInShowcase: number;
   chooseDate: string;
-  status: string;
+  status: BookRequestStatus;
+  donated: boolean;
 }
 
-const FreightLabels = {
-  City: 'Cidade',
-  State: 'Estado',
-  Country: 'País',
-  World: 'Mundo',
-  WithoutFreight: 'Não',
-};
+enum FreightLabels {
+  City = 'Cidade',
+  State = 'Estado',
+  Country = 'País',
+  World = 'Mundo',
+  WithoutFreight = 'Não',
+}
+
+enum BookRequestStatus {
+  DONATED = 'DOADO',
+  REFUSED = 'NÃO FOI DESSA VEZ',
+  AWAITING_ACTION = 'AGUARDANDO AÇÃO',
+  AWAITING_APPROVAL = 'AGUARDANDO APROVAÇÃO',
+  AVAILABLE = 'DISPONÍVEL',
+  CANCELED = 'CANCELADO'
+}
 
 function isDonated(book: Book) {
-  return book.status === 'Doado';
+  return book.status === BookRequestStatus.DONATED;
 }
 
-export {Book, FreightLabels, isDonated};
+function getStatusColor(status = '') {
+  switch (status.toUpperCase()) {
+    case BookRequestStatus.AVAILABLE:
+      return 'secondary';
+    case BookRequestStatus.DONATED:
+      return 'orange';
+    case BookRequestStatus.REFUSED:
+    case BookRequestStatus.CANCELED:
+      return 'danger';
+    case BookRequestStatus.AWAITING_ACTION:
+    case BookRequestStatus.AWAITING_APPROVAL:
+      return 'primary-light';
+    default:
+      return 'primary';
+  }
+}
+
+interface DonateBookUser {
+  userId: string;
+  note: string;
+}
+
+export {
+  Book,
+  FreightLabels,
+  isDonated,
+  BookRequestStatus,
+  getStatusColor,
+  DonateBookUser
+};

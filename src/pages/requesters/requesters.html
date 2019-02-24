@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Escolha um destinatário</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <button ion-item *ngFor="let request of requests" (click)="choose(request)">
+    <h2>{{request.requesterNickName}}</h2>
+    <p>{{request.location}}</p>
+    <p>Total de livros doados: {{request.totalBooksDonated}}</p>
+    <p>Total de livros recebidos: {{request.totalBooksWon}}</p>
+    <br>
+    <p text-wrap>Mensagem:<br>{{request.requestText}}</p>
+
+    <ion-icon name="ios-arrow-forward" item-right color="gray"></ion-icon>
+  </button>
+</ion-content>
