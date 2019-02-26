@@ -2,12 +2,13 @@
   <ion-navbar>
     <ion-title>Minhas doações {{isAdmin() ? '(Admin)' : ''}}</ion-title>
   </ion-navbar>
-</ion-header>
 
-<ion-content>
   <div class="fireworks-background" *ngIf="showFireworks">
     <fireworks></fireworks>
   </div>
+</ion-header>
+
+<ion-content>
 
   <div *ngIf="isDownloading()"
        text-center padding no-lines>

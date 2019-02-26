@@ -61,8 +61,9 @@ export class InteressadosPage {
           duration: 3000,
         }).present();
 
-        this.navCtrl.pop();
-        this.events.publish('fireworks');
+        this.navCtrl.pop().then(() => {
+          this.events.publish('fireworks');
+        })
       }
     });
 

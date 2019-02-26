@@ -68,7 +68,7 @@ export class MyDonationsPage {
 
     setTimeout(() => {
       this.showFireworks = false;
-    }, 5000)
+    }, 10000)
   }
 
   getDonatedBooks() {
