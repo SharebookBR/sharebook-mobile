@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
-import {BookRequestStatus} from '../../models/BookRequestStatus';
 import {Status} from "../../models/status";
-import {Book} from "../../models/book";
+import {Book, getStatusColor} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 
@@ -17,12 +16,12 @@ export class MyRequestsPage {
   user: User;
   requestedBooks: Array<Book> = [];
   rStatus = new Status();
+  getStatusColor = getStatusColor;
 
   constructor(
     public navCtrl: NavController,
     private bookService: BookService,
     private sessionService: SessionService,
-    private app: App,
   ) {
     this.user = this.sessionService.user;
   }
@@ -46,25 +45,6 @@ export class MyRequestsPage {
       }, err => {
         this.rStatus.setAsError();
       });
-  }
-
-  getBadgeStatusColor(status) {
-    switch (status.toUpperCase()) {
-      case BookRequestStatus.DONATED:
-        return 'secondary';
-      case BookRequestStatus.REFUSED:
-        return 'danger';
-      case BookRequestStatus.AWAITING_ACTION:
-      case BookRequestStatus.AWAITING_APPROVAL:
-        return 'primary-light';
-      default:
-        return 'primary';
-    }
-  }
-
-  logout() {
-    this.sessionService.clearSession();
-    this.app.getRootNav().setRoot('LoginPage');
   }
 
   retry() {

@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left margin-left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Confirme o granhador</ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="onSubmit()">
+        Enviar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h4 text-center>Qual o motivo da sua escolha?</h4>
+  <h6>Descreva o que te fez escolher {{request.requesterNickName}} como ganhador.</h6>
+
+  <form [formGroup]="form">
+    <ion-item no-padding>
+      <ion-textarea
+        [formControl]="reason" rows="10"
+        placeholder="Digite aqui sua resposta...">
+      </ion-textarea>
+    </ion-item>
+    <small ion-text color="danger" *ngIf="reason.invalid && reason.touched">
+      Resposta inválida (mínimo 10 letras)
+    </small>
+  </form>
+</ion-content>

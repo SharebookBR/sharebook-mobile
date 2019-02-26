@@ -15,4 +15,18 @@ page-my-donations {
     font-size: 30px;
     color: color($colors, danger);
   }
+
+  .badge {
+    color: white;
+  }
+
+  .fireworks-background {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Book } from '../../models/book';
+import {Book, DonateBookUser} from '../../models/book';
 import { BooksVM } from '../../models/booksVM';
-import { DonateBookUser } from '../../models/donateBookUser';
 import { map } from 'rxjs/operators';
 import { config } from "../../../environments/environment";
 
@@ -73,5 +72,17 @@ export class BookService {
 
   public getDonatedBooks() {
     return this._http.get<any>(`${config.apiEndpoint}/book/MyDonations`);
+  }
+
+  public getRequestersList(bookId: string) {
+    return this._http.get(`${config.apiEndpoint}/book/RequestersList/${bookId}`);
+  }
+
+  public renewChooseDate(bookId: string) {
+    return this._http.put<any>(`${config.apiEndpoint}/book/RenewChooseDate/${bookId}`, null);
+  }
+
+  public setTrackingNumber(bookId: string, trackingNumberBookVM: {trackingNumber: string}) {
+    return this._http.post<any>(`${config.apiEndpoint}/book/InformTrackingNumber/${bookId}`, trackingNumberBookVM);
   }
 }

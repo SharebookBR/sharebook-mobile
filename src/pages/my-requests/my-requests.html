@@ -33,8 +33,8 @@
   <button ion-item *ngFor="let item of requestedBooks">
     <h2>{{item.title}}</h2>
     <p>{{item.author}}</p>
-    <ion-badge color="{{getBadgeStatusColor(item.status)}}" item-right>
-      {{item.status}}
+    <ion-badge color="{{getStatusColor(item.status)}}" item-right>
+      {{item.status}} {{item.status === 'Doado' ? '❤' : ''}}
     </ion-badge>
   </button>
 </ion-content>

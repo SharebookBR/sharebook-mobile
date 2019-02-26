@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Escolha um ganhador</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="status.isDownloading()"
+       text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+    <h6>Carregando...</h6>
+  </div>
+
+  <div *ngIf="status.isError()" margin-top padding>
+    <div text-center no-lines>
+      <h6>Infelizmente ocorreu um erro, clique abaixo para tentar novamente.</h6>
+    </div>
+
+    <div text-center>
+      <button ion-button outline small (click)="getInteressados()">
+        Tentar novamente
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isEmpty()" text-center padding tappable>
+    <h6>Este livro ainda não possui interessados.</h6>
+    <h1>🙁</h1>
+  </div>
+
+  <button ion-item *ngFor="let request of requests" (click)="choose(request)">
+    <h2>{{request.requesterNickName}}</h2>
+    <p>{{request.location}}</p>
+    <p>Total de livros doados: {{request.totalBooksDonated}}</p>
+    <p>Total de livros recebidos: {{request.totalBooksWon}}</p>
+    <br>
+    <p text-wrap>Mensagem:<br>{{request.requestText}}</p>
+
+    <ion-icon name="ios-arrow-forward" item-right color="gray"></ion-icon>
+  </button>
+</ion-content>

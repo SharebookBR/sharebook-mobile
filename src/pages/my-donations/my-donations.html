@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <div class="fireworks-background" *ngIf="showFireworks">
+    <fireworks></fireworks>
+  </div>
+
   <div *ngIf="isDownloading()"
        text-center padding no-lines>
     <ion-spinner></ion-spinner>
@@ -26,16 +30,23 @@
   <div *ngIf="isEmpty()" text-center padding tappable (click)="donate()">
     <h6>Você ainda não doou nenhum livro.</h6>
     <p>Clique aqui para fazer essa boa ação!</p>
-    <div class="heart-icon">♥</div>
+    <h1 class="heart-icon">♥</h1>
   </div>
 
-  <button ion-item *ngFor="let item of donatedBooks">
+  <button ion-item *ngFor="let item of donatedBooks" (click)="editDonatedBook(item)">
     <h2>{{item.title}}</h2>
     <p>{{item.author}}</p>
-    <p>{{item.daysInShowcase}} dia(s) na vitrine</p>
-    <p>{{item.totalInterested}} interessado(s)</p>
-    <ion-badge color="{{getBadgeStatusColor(item.status)}}" item-right>
-      {{item.status}}
+    <p>{{item.daysInShowcase}} {{item.daysInShowcase === 1 ? 'dia' : 'dias'}} na vitrine</p>
+    <p>{{item.totalInterested}} {{item.totalInterested === 1 ? 'interessado' : 'interessados'}}</p>
+    <p *ngIf="item.trackingNumber">Rastreio: {{item.trackingNumber}}</p>
+    <p *ngIf="!canChooseDonator(item) && item.chooseDate">
+      Escolha o granhador em {{getRemainingDays(item.chooseDate)}} dias
+    </p>
+    <ion-badge *ngIf="canChooseDonator(item)" color="primary-light">
+      Escolha o granhador
+    </ion-badge>
+    <ion-badge color="{{getStatusColor(item.status)}}" item-right>
+      {{item.status}} {{item.status === 'Doado' ? '❤' : ''}}
     </ion-badge>
   </button>
 </ion-content>

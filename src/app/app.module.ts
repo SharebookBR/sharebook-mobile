@@ -16,7 +16,7 @@ import {JwtInterceptor} from '../core/interceptors/jwt.interceptor';
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {CategoryService} from "../services/category/category.service";
 import {Camera} from "@ionic-native/camera";
-import {ContactUsService} from "../providers/contact-us/contact-us-service";
+import {ContactUsService} from "../services/contact-us/contact-us-service";
 import {OneSignal} from "@ionic-native/onesignal";
 
 @NgModule({
