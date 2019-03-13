@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndpoint: `http://www.sharebook.com.br/api`
+  apiEndpoint: `https://www.sharebook.com.br/api`
 };
