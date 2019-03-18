@@ -3,7 +3,7 @@ import {
   AlertController,
   IonicPage,
   LoadingController,
-  MenuController,
+  MenuController, ModalController,
   NavController, NavParams,
   ToastController
 } from 'ionic-angular';
@@ -37,6 +37,7 @@ export class RegisterPage {
               private loadingController: LoadingController,
               private navParams: NavParams,
               private sessionService: SessionService,
+              private modalCtrl: ModalController,
               private formBuilder: FormBuilder) {
 
     this.isEditing = this.navParams.get('isEditing');
@@ -56,6 +57,7 @@ export class RegisterPage {
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
+      terms: [false, [Validators.requiredTrue]],
     }, {
       validator: PasswordValidation.MatchPassword
     });
@@ -240,5 +242,9 @@ export class RegisterPage {
 
   dismiss() {
     this.navCtrl.pop();
+  }
+
+  openTerms() {
+    this.modalCtrl.create('TermsPage').present();
   }
 }
