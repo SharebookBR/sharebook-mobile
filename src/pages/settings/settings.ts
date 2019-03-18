@@ -60,4 +60,8 @@ export class SettingsPage {
     this.sessionService.clearSession();
     this.app.getRootNav().setRoot('LoginPage');
   }
+
+  openTerms() {
+    this.modalCtrl.create('TermsPage').present();
+  }
 }
