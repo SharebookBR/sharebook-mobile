@@ -173,6 +173,25 @@
       </ion-item>
     </div>
 
+    <ion-list *ngIf="!isEditing">
+      <ion-item-divider style="background-color: #f2f2f2;">
+        Termos de uso
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label>Li e aceito os termos de uso.</ion-label>
+        <ion-checkbox formControlName="terms"></ion-checkbox>
+      </ion-item>
+      <div class="form-error" ion-text color="danger"
+           *ngIf="form.get('terms').touched && form.get('terms').invalid">
+        Necessário aceitar os termos de uso
+      </div>
+
+      <div text-md-center padding ion-text text-center>
+        <a (click)="openTerms()">Clique aqui para ler</a>
+      </div>
+    </ion-list>
+
     <button style="display: none;"></button>
   </form>
 
