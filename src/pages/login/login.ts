@@ -13,6 +13,7 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
 import * as AppConst from "../../core/utils/app.const";
 import {UserService} from "../../services/user/user.service";
 import {Storage} from "@ionic/storage";
+import {OneSignalService} from "../../services/one-signal/one-signal";
 
 @IonicPage()
 @Component({
@@ -36,6 +37,7 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public userService: UserService,
     public modalCtrl: ModalController,
+    public oneSignalService: OneSignalService,
     @Inject(Storage) public storage: Storage
   ) {
     this.form = this.formBuilder.group({
@@ -78,6 +80,9 @@ export class LoginPage {
 
       this.menuCtrl.enable(true);
       this.navCtrl.setRoot('TabsPage');
+
+      const {name, userId: id, email} = data;
+      this.oneSignalService.sendOneSignalTags({name, id, email})
     }, err => {
       loading.dismiss();
       this.toastCtrl.create({

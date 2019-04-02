@@ -1,2 +1,6 @@
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<div *ngIf="!environment.production" class="dev-sticker">
+  <div class="sticker">DEV</div>
+</div>
+
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

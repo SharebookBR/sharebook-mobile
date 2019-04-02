@@ -3,13 +3,15 @@ import {MenuController, Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {SessionService} from "../services/session/session.service";
-import {OneSignal} from "@ionic-native/onesignal";
+import {OneSignalService} from "../services/one-signal/one-signal";
+import {config} from "../../environments/environment";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  environment = config;
 
   constructor(
     public platform: Platform,
@@ -17,7 +19,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public sessionService: SessionService,
-    public oneSignal: OneSignal,
+    public oneSignalService: OneSignalService,
   ) {
     this.initializeApp();
   }
@@ -27,7 +29,7 @@ export class MyApp {
       await this.sessionService.restoreSession();
       this.statusBar.backgroundColorByHexString('#1f3b60');
       this.setRootPage();
-      this.loadPushNotificationsConfig();
+      this.oneSignalService.loadConfig();
       this.splashScreen.hide();
     });
   }
@@ -52,22 +54,5 @@ export class MyApp {
     }
 
     return false;
-  }
-
-  loadPushNotificationsConfig() {
-    if (!(this.platform.is('core') || this.platform.is('mobileweb'))) {
-      this.oneSignal.startInit('6a87a746-9a45-4ecf-a869-911d3b3a75b9', 'sharebook-mobile');
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-
-      this.oneSignal.handleNotificationReceived().subscribe((pushNotification) => {
-        console.log('notifications received = ', pushNotification);
-      });
-
-      this.oneSignal.handleNotificationOpened().subscribe((notification) => {
-        console.log('notifications opened =', notification);
-      });
-
-      this.oneSignal.endInit();
-    }
   }
 }

@@ -7,6 +7,7 @@ import {Profile} from '../../models/profile';
 import {config} from "../../../environments/environment";
 import {Storage} from "@ionic/storage";
 import {SessionService} from "../session/session.service";
+import {OneSignalService} from "../one-signal/one-signal";
 
 @Injectable()
 export class UserService {
@@ -14,6 +15,7 @@ export class UserService {
   constructor(
     private _http: HttpClient,
     private sessionService: SessionService,
+    private oneSingalService: OneSignalService,
     @Inject(Storage) public storage: Storage
   ) {
 
@@ -34,7 +36,10 @@ export class UserService {
           this.sessionService.setSession({
             user: response,
             accessToken: response.accessToken
-          })
+          });
+
+          const {name, userId: id, email} = response;
+          this.oneSingalService.sendOneSignalTags({name, id, email});
         }
         return response;
       }));

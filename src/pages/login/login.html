@@ -21,7 +21,7 @@
       <ion-label stacked>Senha</ion-label>
       <ion-input placeholder="Insira sua senha" [formControl]="password"
                  [type]="showPassword ? 'text' : 'password'"></ion-input>
-      <button ion-button item-right clear (click)="toggleShowPassword()">
+      <button ion-button item-right clear (click)="toggleShowPassword()" type="button">
         <ion-icon name="eye"></ion-icon>
       </button>
     </ion-item>
