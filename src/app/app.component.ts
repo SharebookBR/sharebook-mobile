@@ -4,12 +4,14 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {SessionService} from "../services/session/session.service";
 import {OneSignalService} from "../services/one-signal/one-signal";
+import {config} from "../../environments/environment";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  environment = config;
 
   constructor(
     public platform: Platform,

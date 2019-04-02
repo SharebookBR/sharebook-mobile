@@ -54,3 +54,19 @@
   margin-left: 15px;
   color: color($colors, danger);
 }
+
+.dev-sticker {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 99;
+
+  .sticker {
+    padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+    background: #8eb484;
+    display: inline-block;
+    color: white;
+  }
+}
