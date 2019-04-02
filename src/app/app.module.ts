@@ -18,6 +18,7 @@ import {CategoryService} from "../services/category/category.service";
 import {Camera} from "@ionic-native/camera";
 import {ContactUsService} from "../services/contact-us/contact-us-service";
 import {OneSignal} from "@ionic-native/onesignal";
+import {OneSignalService} from '../services/one-signal/one-signal';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {OneSignal} from "@ionic-native/onesignal";
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    }
+    },
+    OneSignalService
   ]
 })
 export class AppModule {
