@@ -28,10 +28,12 @@
     </div>
   </div>
 
-  <div *ngIf="isEmpty()" text-center padding tappable (click)="donate()">
-    <h6>Você ainda não doou nenhum livro.</h6>
-    <p>Clique aqui para fazer essa boa ação!</p>
-    <h1 class="heart-icon">♥</h1>
+  <div *ngIf="isEmpty()" text-center padding>
+    <h5>Você ainda não doou nenhum livro.</h5>
+    <h6>Clique abaixo para fazer essa boa ação!</h6>
+    <button ion-button (click)="donate()" color="danger" outline>
+      Doar <span class="heart-icon">❤</span>
+    </button>
   </div>
 
   <button ion-item *ngFor="let item of donatedBooks" (click)="editDonatedBook(item)">

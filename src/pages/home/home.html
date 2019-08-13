@@ -13,7 +13,7 @@
 <ion-content>
   <!------------- Livros em destaque ------------->
 
-  <ion-item-divider no-lines>
+  <ion-item-divider no-lines *ngIf="randomStatus.isDownloading() || (randomStatus.isSuccess() && randomBooks.length)">
     <h2>Livros em destaque</h2>
   </ion-item-divider>
 
@@ -38,7 +38,7 @@
 
   <!------------- Livros mais recentes ------------->
 
-  <ion-item-divider>
+  <ion-item-divider *ngIf="newStatus.isDownloading() || (newStatus.isSuccess() && newBooks.length)">
     <h2>Livros mais recentes</h2>
   </ion-item-divider>
 
@@ -59,4 +59,18 @@
     <h4>{{book.title}}</h4>
     <p>{{book.author}}</p>
   </button>
+
+  <!-- Para quando não houver livro nenhum -->
+
+  <div class="no-books-message"
+       *ngIf="newStatus.isSuccess() && newBooks.length === 0 && randomStatus.isSuccess() && randomBooks.length === 0">
+    <h4>
+      Nenhum livro encontrado 😞<br/>
+      Ajude o Sharebook doando um livro agora.<br>
+    </h4>
+
+    <button ion-button (click)="donate()" color="danger" outline>
+      Doar <span class="heart-icon">❤</span>
+    </button>
+  </div>
 </ion-content>
