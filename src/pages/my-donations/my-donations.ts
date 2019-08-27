@@ -11,7 +11,7 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isAvailable, isDonated} from "../../models/book";
+import {Book, getStatusColor, isAvailable, isDonated, isDue} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -117,11 +117,14 @@ export class MyDonationsPage {
     };
 
     const donator: ActionSheetButton = {
-      text: 'Escolher ganhador',
+      text: book.donated ? 'Ver interessados' : 'Escolher ganhador',
       icon: 'trophy',
       handler: () => {
-        if (this.canChooseDonator(book)) {
-          this.app.getRootNav().push('InteressadosPage', {bookId: book.id});
+        if (isDue(book)) {
+          this.app.getRootNav().push('InteressadosPage', {
+            bookId: book.id,
+            donated: book.donated,
+          });
         } else {
           const alert = this.alertCtrl.create({
             buttons: ['Ok'],
@@ -176,8 +179,11 @@ export class MyDonationsPage {
     }
 
     if (isAvailable(book)) {
-      buttons.push(donator);
       buttons.push(postpone);
+    }
+
+    if (isDue(book)) {
+      buttons.push(donator);
     }
 
     if (buttons.length) {
@@ -198,11 +204,8 @@ export class MyDonationsPage {
       .present();
   }
 
-  canChooseDonator(book: Book) {
-    const chooseDate = new Date(book.chooseDate);
-    const now = new Date();
-
-    return !book.donated && now.getTime() > chooseDate.getTime();
+  canChooseDonator (book: Book) {
+    return isDue(book)
   }
 
   renewDonation(book: Book) {

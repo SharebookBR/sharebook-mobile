@@ -53,6 +53,12 @@ function isAvailable(book: Book) {
   return book.status.toUpperCase() === BookRequestStatus.AVAILABLE;
 }
 
+function isDue(book: Book) {
+  return book && book.chooseDate ? (
+    new Date(book.chooseDate).getTime() < new Date().getTime()
+  ) : false;
+}
+
 function getStatusColor(status = '') {
   switch (status.toUpperCase()) {
     case BookRequestStatus.AVAILABLE:
@@ -84,4 +90,5 @@ export {
   DonateBookUser,
   isCanceled,
   isAvailable,
+  isDue,
 };
