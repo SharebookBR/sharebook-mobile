@@ -19,6 +19,7 @@ import 'rxjs/add/operator/timeout';
 })
 export class InteressadosPage {
   bookId: string;
+  donated: string;
   requests: Array<Request> = [];
   status = new Status();
 
@@ -31,6 +32,7 @@ export class InteressadosPage {
     public events: Events,
   ) {
     this.bookId = this.navParams.get('bookId');
+    this.donated = this.navParams.get('donated');
   }
 
   ionViewWillEnter() {
@@ -51,6 +53,7 @@ export class InteressadosPage {
   }
 
   choose(request: Request) {
+    if (this.donated) return;
     const modal = this.modalCtrl.create('RequesterPickerPage', {request, bookId: this.bookId});
 
     modal.onDidDismiss((data) => {

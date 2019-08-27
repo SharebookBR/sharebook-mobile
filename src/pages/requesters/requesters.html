@@ -36,6 +36,7 @@
     <br>
     <p text-wrap>Mensagem:<br>{{request.requestText}}</p>
 
-    <ion-icon name="ios-arrow-forward" item-right color="gray"></ion-icon>
+    <ion-icon name="ios-arrow-forward" item-right color="gray" *ngIf="!donated"></ion-icon>
+    <ion-icon name="trophy" item-right color="gray" *ngIf="donated && request.status === 'Donated'"></ion-icon>
   </button>
 </ion-content>

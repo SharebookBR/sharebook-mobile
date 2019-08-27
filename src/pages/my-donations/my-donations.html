@@ -45,7 +45,7 @@
     <p *ngIf="!canChooseDonator(item) && item.chooseDate">
       Escolha o granhador em {{getRemainingDays(item.chooseDate)}} dias
     </p>
-    <ion-badge *ngIf="canChooseDonator(item)" color="primary-light">
+    <ion-badge *ngIf="canChooseDonator(item) && !item.donated" color="primary-light">
       Escolha o granhador
     </ion-badge>
     <ion-badge color="{{getStatusColor(item.status)}}" item-right>
