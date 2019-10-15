@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {OneSignal} from "@ionic-native/onesignal";
 import {Platform} from "ionic-angular";
+import {config} from '../../../environments/environment';
 
 @Injectable()
 export class OneSignalService {
@@ -26,6 +27,8 @@ export class OneSignalService {
       });
 
       this.oneSignal.endInit();
+
+      this.oneSignal.sendTag('env', config.name)
     }
   }
 
