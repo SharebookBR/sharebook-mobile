@@ -182,9 +182,7 @@ export class MyDonationsPage {
       buttons.push(postpone);
     }
 
-    if (isDue(book)) {
-      buttons.push(donator);
-    }
+    buttons.push(donator);
 
     if (buttons.length) {
       this.actionSheetCtrl.create({
