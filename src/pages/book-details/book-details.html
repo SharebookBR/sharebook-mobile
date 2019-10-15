@@ -44,19 +44,19 @@
     <h4><b>{{chooseDateInfo}}</b></h4>
   </ion-item>
 
-  <ion-item>
+  <ion-item *ngIf="book.user.address?.city || book.user.address?.state">
     <p>Cidade:</p>
-    <h4>{{book.user.city || '-'}}</h4>
+    <h4>{{book.user.address.city}} - {{book.user.address.state}}</h4>
   </ion-item>
 
-  <ion-item>
-    <p>Estado:</p>
-    <h4>{{book.user.state || '-'}}</h4>
-  </ion-item>
-
-  <ion-item>
-    <p>Doador paga o frete:</p>
+  <ion-item *ngIf="isFreeFreight === undefined">
+    <p>Doador paga o frete para:</p>
     <h4>{{freightLabels[book?.freightOption]}}</h4>
+  </ion-item>
+
+  <ion-item *ngIf="isFreeFreight !== undefined">
+    <p>Frete grátis:</p>
+    <h4>{{isFreeFreight ? 'Sim' : 'Não'}}</h4>
   </ion-item>
 
   <ion-item>

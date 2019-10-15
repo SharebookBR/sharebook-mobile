@@ -22,6 +22,7 @@ interface Book {
   status: BookRequestStatus;
   donated: boolean;
   trackingNumber: string;
+  slug: string;
 }
 
 enum FreightLabels {
