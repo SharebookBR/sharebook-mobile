@@ -47,7 +47,7 @@ export class RegisterPage {
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
       password: ['', [Validators.required, Validators.pattern(AppConst.passwordPattern)]],
       confirmPassword: ['', [Validators.required]],
-      phone: ['', [Validators.pattern(AppConst.phonePattern)]],
+      phone: ['', [Validators.required, Validators.pattern(AppConst.phonePattern)]],
       linkedin: ['', [Validators.pattern(AppConst.linkedInUrlPattern)]],
       postalCode: ['', [Validators.required, Validators.pattern(AppConst.postalCodePattern)]],
       street: ['', [Validators.required]],

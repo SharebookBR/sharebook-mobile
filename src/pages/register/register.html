@@ -82,6 +82,11 @@
       <ion-label stacked>DDD + Telefone</ion-label>
       <ion-input formControlName="phone" placeholder="(XX) XXXXX-XXXX" type="tel" maxlength="15"></ion-input>
     </ion-item>
+    <div *ngIf="form.get('phone').touched && form.get('phone').invalid">
+      <div class="form-error" *ngIf="form.get('phone').hasError('required')">
+        Telefone obrigatório.
+      </div>
+    </div>
 
     <div *ngIf="form.get('phone').touched && form.get('phone').invalid">
       <div class="form-error" *ngIf="form.get('phone').hasError('pattern')">
