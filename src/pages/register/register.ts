@@ -57,7 +57,7 @@ export class RegisterPage {
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      terms: [false, [Validators.requiredTrue]],
+      terms: [this.isEditing, [Validators.requiredTrue]],
     }, {
       validator: PasswordValidation.MatchPassword
     });
