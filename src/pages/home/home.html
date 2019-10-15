@@ -52,7 +52,7 @@
     </button>
   </ion-item>
 
-  <button ion-item *ngFor="let book of newBooks" (click)="openDetails(book)">
+  <button ion-item *ngFor="let book of newBooks" (click)="openDetails(book)" text-wrap>
     <ion-avatar item-left class="book-avatar">
       <img [src]="book.imageUrl" (error)="onImgLoadError(book)">
     </ion-avatar>
