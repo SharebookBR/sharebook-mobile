@@ -11,6 +11,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingText="Puxe para atualizar"
+      refreshingText="Atualizando..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+
   <!------------- Livros em destaque ------------->
 
   <ion-item-divider no-lines *ngIf="randomStatus.isDownloading() || (randomStatus.isSuccess() && randomBooks.length)">

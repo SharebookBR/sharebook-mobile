@@ -32,8 +32,19 @@ export class HomePage {
     this.getRandomBooks();
   }
 
+  doRefresh(refresher) {
+    this.getRandomBooks();
+    this.getTop15();
+    setTimeout(() => refresher.complete(), 1000);
+  }
+
   getTop15() {
-    this.newStatus.setAsDownloading();
+    if (this.newStatus.isSuccess()) {
+      this.newStatus.setAsRefreshing();
+    } else {
+      this.newStatus.setAsSuccess();
+    }
+    
     this.bookService.getTop15NewBooks().subscribe((books) => {
       this.newStatus.setAsSuccess();
       this.newBooks = books;
@@ -43,7 +54,12 @@ export class HomePage {
   }
 
   getRandomBooks() {
-    this.randomStatus.setAsDownloading();
+    if (this.randomStatus.isSuccess()) {
+      this.randomStatus.setAsRefreshing();
+    } else {
+      this.randomStatus.setAsSuccess();
+    }
+
     this.bookService.getRandom15Books().subscribe((books) => {
       this.randomStatus.setAsSuccess();
       this.randomBooks = books;
