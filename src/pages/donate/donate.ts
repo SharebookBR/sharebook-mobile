@@ -165,7 +165,7 @@ export class DonatePage {
     });
 
     const successToast = this.toastCtrl.create({
-      message: 'Livro criado com sucesso! ♥',
+      message: 'Livro criado com sucesso!\nVerifique seu e-mail e aguarde a aprovação.\nObrigado! ♥',
       cssClass: 'toast-success',
       duration: 3000
     });

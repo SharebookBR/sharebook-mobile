@@ -4,6 +4,8 @@ import {Book, DonateBookUser} from '../../models/book';
 import { BooksVM } from '../../models/booksVM';
 import { map } from 'rxjs/operators';
 import { config } from "../../../environments/environment";
+import { Observable } from 'rxjs';
+import FacilitatorNotes from '../../models/facilitadorNotes';
 
 @Injectable()
 export class BookService {
@@ -84,5 +86,17 @@ export class BookService {
 
   public setTrackingNumber(bookId: string, trackingNumberBookVM: {trackingNumber: string}) {
     return this._http.post<any>(`${config.apiEndpoint}/book/InformTrackingNumber/${bookId}`, trackingNumberBookVM);
+  }
+
+  public setFacilitatorNotes(facilitatorNotes: FacilitatorNotes) {
+    return this._http.post<any>(`${config.apiEndpoint}/book/AddFacilitatorNotes`, facilitatorNotes);
+  }
+
+  public getFullSearch(criteria: string, page: number, items: number): Observable<any> {
+    return this._http.get<any[]>(`${config.apiEndpoint}/book/FullSearch/${criteria}/${page}/${items}`);
+  }
+
+  public getMainUsers(bookId: string) {
+    return this._http.get<any>(`${config.apiEndpoint}/book/MainUsers/${bookId}`);
   }
 }

@@ -42,7 +42,7 @@ Hora de colocar a mão na massa. A parte mais divertida, trabalhar no código-fo
 # caso não tenha, baixe em (https://nodejs.org)
 $ node -v
 
-$ npm install -g ionic
+$ npm install -g ionic cordova@8.1.1
 
 $ npm install
 

@@ -83,10 +83,14 @@ export class LoginPage {
 
       const {name, userId: id, email} = data;
       this.oneSignalService.sendOneSignalTags({name, id, email})
-    }, err => {
+    }, ({error}) => {
+      const msg = error.messages && error.messages.length > 0 
+        ? error.messages[0]
+        : 'E-mail e/ou senha inválido'
+
       loading.dismiss();
       this.toastCtrl.create({
-        message: 'E-mail e/ou senha inválido',
+        message: msg,
         duration: 2500
       }).present();
     })

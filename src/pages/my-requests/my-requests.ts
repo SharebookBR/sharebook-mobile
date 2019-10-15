@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, ModalController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
 import {Book, getStatusColor} from "../../models/book";
@@ -22,6 +22,7 @@ export class MyRequestsPage {
     public navCtrl: NavController,
     private bookService: BookService,
     private sessionService: SessionService,
+    private modalCtrl: ModalController,
   ) {
     this.user = this.sessionService.user;
   }
@@ -71,5 +72,10 @@ export class MyRequestsPage {
 
   isAdmin(): boolean {
     return isAdmin(this.user);
+  }
+
+  donate() {
+    const modal = this.modalCtrl.create('DonatePage');
+    modal.present();
   }
 }

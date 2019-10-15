@@ -4,6 +4,9 @@ import {Book, FreightLabels} from "../../models/book";
 import {UserService} from "../../services/user/user.service";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {BookService} from "../../services/book/book.service";
+import {SessionService} from '../../services/session/session.service';
+import {User} from '../../models/user';
+import "rxjs/add/operator/timeout";
 
 @IonicPage({
   defaultHistory: ['HomePage']
@@ -17,6 +20,8 @@ export class BookDetailsPage {
   alreadyRequested: boolean;
   freightLabels = FreightLabels;
   chooseDateInfo: string;
+  isFreeFreight: boolean;
+  user: User;
 
   constructor(
     public navCtrl: NavController,
@@ -26,6 +31,7 @@ export class BookDetailsPage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public bookService: BookService,
+    public sessionService: SessionService,
   ) {
     this.book = this.navParams.get('book');
   }
@@ -39,7 +45,36 @@ export class BookDetailsPage {
   }
 
   ionViewDidLoad() {
+    this.loadUser();
     this.verifyAddress();
+  }
+
+  loadUser() {
+    this.userService.getUserData().timeout(15000).subscribe(user => {
+      this.user = user;
+      this.calculateIsFreeFreight();
+    }, err => {
+      
+    })
+  }
+
+
+  calculateIsFreeFreight() {
+    if (this.book.user.address && this.user.address) {
+      switch (this.book.freightOption.toString()) {
+        case 'City':
+          this.isFreeFreight = this.book.user.address.city === this.user.address.city;
+          break;
+        case 'State':
+          this.isFreeFreight = this.book.user.address.state === this.user.address.state
+          break;
+        case 'WithoutFreight':
+          this.isFreeFreight = false;
+          break;
+        default:
+          this.isFreeFreight = true;
+      }
+    }
   }
 
   verifyIfRequested() {

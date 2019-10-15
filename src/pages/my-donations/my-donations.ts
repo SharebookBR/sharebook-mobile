@@ -117,29 +117,13 @@ export class MyDonationsPage {
     };
 
     const donator: ActionSheetButton = {
-      text: book.donated ? 'Ver interessados' : 'Escolher ganhador',
-      icon: 'trophy',
+      text: 'Ver interessados',
+      icon: 'list',
       handler: () => {
-        if (isDue(book)) {
-          this.app.getRootNav().push('InteressadosPage', {
-            bookId: book.id,
-            donated: book.donated,
-          });
-        } else {
-          const alert = this.alertCtrl.create({
-            buttons: ['Ok'],
-          });
-
-          if (book.chooseDate) {
-            alert.setTitle('Fora da data de escolha');
-            alert.setMessage(`Aguarde mais ${getRemainingDays(book.chooseDate)} dias para poder escolher. 😉`)
-          } else {
-            alert.setTitle('Não existe data de escolha');
-            alert.setMessage('Clique em renovar data de escolha para criar uma.');
-          }
-
-          alert.present();
-        }
+        this.app.getRootNav().push('InteressadosPage', {
+          bookId: book.id,
+          donated: book.donated,
+        });
       }
     };
 
@@ -182,9 +166,7 @@ export class MyDonationsPage {
       buttons.push(postpone);
     }
 
-    if (isDue(book)) {
-      buttons.push(donator);
-    }
+    buttons.push(donator);
 
     if (buttons.length) {
       this.actionSheetCtrl.create({
