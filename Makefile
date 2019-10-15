@@ -1,7 +1,7 @@
 build:
 	@echo BUILDING PROD ENVIRONTMENT
 	@echo "import {environment} from './environment.prod'; \nexport let config = environment;" > ./environments/environment.ts
-	ionic cordova build android --prod --release
+	ionic cordova build android --prod --release --no-native-run
 	git checkout environments/environment.ts
 
 deploy:
