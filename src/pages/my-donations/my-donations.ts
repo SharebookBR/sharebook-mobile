@@ -121,7 +121,7 @@ export class MyDonationsPage {
       icon: 'list',
       handler: () => {
         this.app.getRootNav().push('InteressadosPage', {
-          bookId: book.id,
+          book: book,
           donated: book.donated,
         });
       }
@@ -162,7 +162,7 @@ export class MyDonationsPage {
       buttons.push(tracking);
     }
 
-    if (isAvailable(book)) {
+    if (isAvailable(book) && isDue(book)) {
       buttons.push(postpone);
     }
 
