@@ -42,7 +42,7 @@ export class HomePage {
     if (this.newStatus.isSuccess()) {
       this.newStatus.setAsRefreshing();
     } else {
-      this.newStatus.setAsSuccess();
+      this.newStatus.setAsDownloading();
     }
     
     this.bookService.getTop15NewBooks().subscribe((books) => {
@@ -57,7 +57,7 @@ export class HomePage {
     if (this.randomStatus.isSuccess()) {
       this.randomStatus.setAsRefreshing();
     } else {
-      this.randomStatus.setAsSuccess();
+      this.randomStatus.setAsDownloading();
     }
 
     this.bookService.getRandom15Books().subscribe((books) => {
