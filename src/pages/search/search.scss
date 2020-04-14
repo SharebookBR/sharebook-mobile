@@ -3,4 +3,14 @@ page-search {
     text-align: center;
     padding: 10px 0;
   }
+
+  .book-avatar {
+    img {
+      border-radius: unset;
+      max-width: 110px;
+      min-width: 75px;
+      height: auto;
+      width: auto;
+    }
+  }
 }
