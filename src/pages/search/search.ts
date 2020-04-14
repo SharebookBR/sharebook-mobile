@@ -55,7 +55,9 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    this.searchbar.setFocus();
+    // This is to workaround an Ionic issue that makes searchbar loose focus after some seconds
+    // https://forum.ionicframework.com/t/the-focus-gets-lost-after-1-or-2-seconds-later/4011
+    setTimeout(() => this.searchbar.setFocus(), 500)
   }
 
   openDetails(book) {
