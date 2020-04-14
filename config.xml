@@ -3,7 +3,7 @@
     <name>Sharebook</name>
     <description>Uma plataforma solidária para compartilhamento e doação de livros.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">SharebookBR</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -89,5 +89,6 @@
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <allow-navigation href="http://192.168.0.107:8100" />
     <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
-    <engine name="android" spec="6.4.0" />
+    <allow-navigation href="http://localhost:8100" sessionid="fc7b128d" />
+    <engine name="android" spec="^7.1.4" />
 </widget>
