@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-searchbar #searchbar placeholder='Busque por título ou autor' [formControl]="searchInput"></ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item *ngIf="status.isDownloading()" text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+  </ion-item>
+
+  <div class="no-books-message" *ngIf="books.length === 0 && !searchInput.value?.length && !status.isDownloading()">
+    <h4>
+      Digite o nome do seu livro favorito! <br>
+      📚
+    </h4>
+  </div>  
+
+  <button ion-item *ngFor="let book of books" (click)="openDetails(book)" text-wrap>
+    <ion-avatar item-left class="book-avatar">
+      <img [src]="book.imageUrl" (error)="onImgLoadError(book)">
+    </ion-avatar>
+    <h4>{{book.title}}</h4>
+    <p>{{book.author}}</p>
+  </button>
+
+  <div class="no-books-message"
+       *ngIf="status.isSuccess() && books.length === 0 && searchInput.value.length">
+    <h4>
+      Infelizmente não o encontramos<br/>
+      Altere sua busca e tente novamente<br>
+      😊
+    </h4>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="searchForBooks($event)" *ngIf="books.length % BOOKS_LIMIT_PER_REQUEST === 0">
+    <ion-infinite-scroll-content
+      loadingSpinner="dots"
+      loadingText="Buscando mais livros...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>    
+</ion-content>
