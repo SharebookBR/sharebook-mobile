@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{book?.title}}</ion-title>
 
-    <ion-buttons right>
+    <ion-buttons right *ngIf="book.approved">
       <button ion-button (click)="openBookRequest()" [disabled]="alreadyRequested === undefined || alreadyRequested">
         Solicitar
       </button>
