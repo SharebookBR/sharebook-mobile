@@ -23,6 +23,8 @@
     </ion-avatar>
     <h4>{{book.title}}</h4>
     <p>{{book.author}}</p>
+    <ion-badge color="secondary" *ngIf="book.approved">Disponível</ion-badge>
+    <ion-badge color="danger" *ngIf="!book.approved">Indisponível</ion-badge>
   </button>
 
   <div class="no-books-message"
