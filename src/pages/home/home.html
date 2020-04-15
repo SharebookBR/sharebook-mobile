@@ -8,6 +8,12 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
+  <ion-toolbar (click)="onSearchBarClick($event)">
+    <div style="pointer-events: none;">
+      <ion-searchbar></ion-searchbar>
+    </div>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>

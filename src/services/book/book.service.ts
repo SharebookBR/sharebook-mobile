@@ -93,7 +93,7 @@ export class BookService {
   }
 
   public getFullSearch(criteria: string, page: number, items: number): Observable<any> {
-    return this._http.get<any[]>(`${config.apiEndpoint}/book/FullSearch/${criteria}/${page}/${items}`);
+    return this._http.get<any[]>(`${config.apiEndpoint}/book/FullSearch/${encodeURIComponent(criteria)}/${page}/${items}`);
   }
 
   public getMainUsers(bookId: string) {

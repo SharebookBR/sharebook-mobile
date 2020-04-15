@@ -1,6 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Escolha um ganhador</ion-title>
+    <ion-title>
+      {{isBookDue && !donated  ? 'Escolha um ganhador' : 'Lista de candidatos'}}
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -28,7 +30,11 @@
     <h1>🙁</h1>
   </div>
 
-  <button ion-item *ngFor="let request of requests" (click)="choose(request)">
+  <ion-item *ngIf="requests.length && !donated && !isBookDue" color="light" text-center>
+    Escolha o ganhador em {{remainingDays}} dias 😊
+  </ion-item>
+
+  <button ion-item *ngFor="let request of requests" (click)="handleRequestClick(request)">
     <h2>{{request.requesterNickName}}</h2>
     <p>{{request.location}}</p>
     <p>Total de livros doados: {{request.totalBooksDonated}}</p>
