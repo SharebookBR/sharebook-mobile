@@ -22,6 +22,10 @@ export class SettingsPage {
     this.getAppVersion();
   }
 
+  openSearchPage() {
+    this.app.getRootNav().push('SearchPage');
+  }
+
   getAppVersion() {
     this.appVersion.getVersionNumber().then((version) => {
       this.version = version;

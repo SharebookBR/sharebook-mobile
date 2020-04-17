@@ -32,10 +32,6 @@ export class HomePage {
     this.getRandomBooks();
   }
 
-  onSearchBarClick() {
-    this.app.getRootNav().push('SearchPage');
-  }
-
   doRefresh(refresher) {
     this.getRandomBooks();
     this.getTop15();
