@@ -12,20 +12,24 @@ interface Book {
   imageSlug: string;
   approved: boolean;
   categoryId: number;
-  freightOption: FreightLabels;
+  freightOption: string;
   category: Category;
   user: User;
   synopsis: string;
   totalInterested: number;
   daysInShowcase: number;
   chooseDate: string;
-  status: BookRequestStatus;
+  status: BookStatus;
   donated: boolean;
   trackingNumber: string;
   slug: string;
+
+  state: string;
+  city: string;
+  postalCode: string;
 }
 
-enum FreightLabels {
+enum FreightOptionsLabels {
   City = 'Cidade',
   State = 'Estado',
   Country = 'País',
@@ -33,25 +37,49 @@ enum FreightLabels {
   WithoutFreight = 'Não',
 }
 
-enum BookRequestStatus {
-  DONATED = 'DOADO',
-  REFUSED = 'NÃO FOI DESSA VEZ',
-  AWAITING_ACTION = 'AGUARDANDO AÇÃO',
-  AWAITING_APPROVAL = 'AGUARDANDO APROVAÇÃO',
-  AVAILABLE = 'DISPONÍVEL',
-  CANCELED = 'CANCELADO'
+enum FreightOptions {
+  City = 'City',
+  State = 'State',
+  Country = 'Country',
+  World = 'World',
+  WithoutFreight = 'WithoutFreight',
+}
+
+enum BookStatus {
+  WAITING_APPROVAL = 'WAITING_APPROVAL',
+  AVAILABLE = 'AVAILABLE',
+  WAITING_DECISION = 'WAITING_DECISION',
+  WAITING_SEND = 'WAITING_SEND',
+  SENT = 'SENT',
+  RECEIVED = 'RECEIVED',
+  CANCELED = 'CANCELED',
+}
+
+enum BookStatusLabel {
+  WAITING_APPROVAL = 'Aguardando aprovação',
+  AVAILABLE = 'Disponível',
+  WAITING_DECISION = 'Aguardando decisão do doador',
+  WAITING_SEND = 'Aguardando envio',
+  SENT = 'Enviado',
+  RECEIVED = 'Recebido',
+  CANCELED = 'Cancelado',
 }
 
 function isDonated(book: Book) {
-  return book.status.toUpperCase() === BookRequestStatus.DONATED;
+  return book.status === BookStatus.SENT ||
+    book.status === BookStatus.RECEIVED;
 }
 
 function isCanceled(book: Book) {
-  return book.status.toUpperCase() === BookRequestStatus.CANCELED;
+  return book.status === BookStatus.CANCELED;
 }
 
 function isAvailable(book: Book) {
-  return book.status.toUpperCase() === BookRequestStatus.AVAILABLE;
+  return book.status === BookStatus.AVAILABLE;
+}
+
+function isWaitingDecision(book: Book) {
+  return book.status === BookStatus.WAITING_DECISION;
 }
 
 function isDue(book: Book) {
@@ -61,16 +89,16 @@ function isDue(book: Book) {
 }
 
 function getStatusColor(status = '') {
-  switch (status.toUpperCase()) {
-    case BookRequestStatus.AVAILABLE:
+  switch (status) {
+    case BookStatus.AVAILABLE:
       return 'secondary';
-    case BookRequestStatus.DONATED:
+    case BookStatus.SENT:
+    case BookStatus.RECEIVED:
       return 'orange';
-    case BookRequestStatus.REFUSED:
-    case BookRequestStatus.CANCELED:
+    case BookStatus.CANCELED:
       return 'danger';
-    case BookRequestStatus.AWAITING_ACTION:
-    case BookRequestStatus.AWAITING_APPROVAL:
+    case BookStatus.WAITING_APPROVAL:
+    case BookStatus.WAITING_DECISION:
       return 'primary-light';
     default:
       return 'primary';
@@ -84,12 +112,13 @@ interface DonateBookUser {
 
 export {
   Book,
-  FreightLabels,
+  FreightOptionsLabels,
   isDonated,
-  BookRequestStatus,
+  BookStatus,
   getStatusColor,
   DonateBookUser,
   isCanceled,
   isAvailable,
   isDue,
+  isWaitingDecision,
 };

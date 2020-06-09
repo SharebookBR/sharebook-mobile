@@ -2,7 +2,7 @@ import { Component, ViewChild, } from '@angular/core';
 import { IonicPage, NavController, NavParams, Searchbar, App } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import { BookService } from '../../services/book/book.service';
-import { Book } from '../../models/book';
+import { Book, isAvailable } from '../../models/book';
 import { Status } from '../../models/status';
 import 'rxjs/add/operator/debounceTime';
 
@@ -18,10 +18,11 @@ export class SearchPage {
   searchInput = new FormControl();
   books: Book[] = [];
   status = new Status();
+  isAvailable = isAvailable;
 
   constructor(
     public app: App,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public bookService: BookService,
   ) {
@@ -33,7 +34,7 @@ export class SearchPage {
       this.searchForBooks();
     })
   }
-  
+
   searchForBooks(event?) {
     if (this.books.length) {
       this.status.setAsRefreshing();

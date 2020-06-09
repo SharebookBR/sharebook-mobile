@@ -15,7 +15,7 @@
       Digite o nome do seu livro favorito! <br>
       📚
     </h4>
-  </div>  
+  </div>
 
   <button ion-item *ngFor="let book of books" (click)="openDetails(book)" text-wrap>
     <ion-avatar item-left class="book-avatar">
@@ -23,8 +23,8 @@
     </ion-avatar>
     <h4>{{book.title}}</h4>
     <p>{{book.author}}</p>
-    <ion-badge color="secondary" *ngIf="book.approved">Disponível</ion-badge>
-    <ion-badge color="danger" *ngIf="!book.approved">Indisponível</ion-badge>
+    <ion-badge color="secondary" *ngIf="isAvailable(book)">Disponível</ion-badge>
+    <ion-badge color="danger" *ngIf="!isAvailable(book)">Indisponível</ion-badge>
   </button>
 
   <div class="no-books-message"
@@ -41,5 +41,5 @@
       loadingSpinner="dots"
       loadingText="Buscando mais livros...">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>    
+  </ion-infinite-scroll>
 </ion-content>
