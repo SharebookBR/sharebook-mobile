@@ -9,15 +9,15 @@ import FacilitatorNotes from '../../models/facilitadorNotes';
 
 @Injectable()
 export class BookService {
-  
+
   constructor(private _http: HttpClient) {}
 
   public getAll() {
     return this._http.get<BooksVM[]>(`${config.apiEndpoint}/book/1/100`);
   }
 
-  public getTop15NewBooks() {
-    return this._http.get<Book[]>(`${config.apiEndpoint}/book/Top15NewBooks`);
+  public getAvailableBooks() {
+    return this._http.get<Book[]>(`${config.apiEndpoint}/book/AvailableBooks`);
   }
 
   public getRandom15Books() {

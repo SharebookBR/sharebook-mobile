@@ -28,24 +28,24 @@ export class HomePage {
   ) {
     this.user = this.sessionService.user;
 
-    this.getTop15();
+    this.getAvailableBooks();
     this.getRandomBooks();
   }
 
   doRefresh(refresher) {
     this.getRandomBooks();
-    this.getTop15();
+    this.getAvailableBooks();
     setTimeout(() => refresher.complete(), 1000);
   }
 
-  getTop15() {
+  getAvailableBooks() {
     if (this.newStatus.isSuccess()) {
       this.newStatus.setAsRefreshing();
     } else {
       this.newStatus.setAsDownloading();
     }
-    
-    this.bookService.getTop15NewBooks().subscribe((books) => {
+
+    this.bookService.getAvailableBooks().subscribe((books) => {
       this.newStatus.setAsSuccess();
       this.newBooks = books;
     }, err => {
