@@ -55,7 +55,7 @@
       Escolha o granhador
     </ion-badge>
     <ion-badge color="{{getStatusColor(item.status)}}" item-right>
-      {{item.status}} {{item.status === 'Doado' ? '❤' : ''}}
+      {{BookStatusLabel[item.status]}} {{isDonated(item) ? '❤' : ''}}
     </ion-badge>
   </button>
 </ion-content>

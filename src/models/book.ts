@@ -46,23 +46,23 @@ enum FreightOptions {
 }
 
 enum BookStatus {
-  WAITING_APPROVAL = 'WAITING_APPROVAL',
-  AVAILABLE = 'AVAILABLE',
-  WAITING_DECISION = 'WAITING_DECISION',
-  WAITING_SEND = 'WAITING_SEND',
-  SENT = 'SENT',
-  RECEIVED = 'RECEIVED',
-  CANCELED = 'CANCELED',
+  WAITING_APPROVAL = 'WaitingApproval',
+  AVAILABLE = 'Available',
+  WAITING_DECISION = 'Waiting_decision',
+  WAITING_SEND = 'Waiting_send',
+  SENT = 'Sent',
+  RECEIVED = 'Received',
+  CANCELED = 'Canceled',
 }
 
 enum BookStatusLabel {
-  WAITING_APPROVAL = 'Aguardando aprovação',
-  AVAILABLE = 'Disponível',
-  WAITING_DECISION = 'Aguardando decisão do doador',
-  WAITING_SEND = 'Aguardando envio',
-  SENT = 'Enviado',
-  RECEIVED = 'Recebido',
-  CANCELED = 'Cancelado',
+  WaitingApproval = 'Aguardando aprovação',
+  Available = 'Disponível',
+  WaitingDecision = 'Aguardando decisão do doador',
+  WaitingSend = 'Aguardando envio',
+  Sent = 'Enviado',
+  Received = 'Recebido',
+  Canceled = 'Cancelado',
 }
 
 function isDonated(book: Book) {
@@ -121,4 +121,5 @@ export {
   isAvailable,
   isDue,
   isWaitingDecision,
+  BookStatusLabel,
 };

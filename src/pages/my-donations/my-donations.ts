@@ -11,7 +11,7 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isAvailable, isDonated, isDue, isWaitingDecision} from "../../models/book";
+import {Book, getStatusColor, isAvailable, isDonated, isDue, isWaitingDecision, BookStatusLabel} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -31,6 +31,8 @@ export class MyDonationsPage {
   getRemainingDays = getRemainingDays;
   getStatusColor = getStatusColor;
   isWaitingDecision = isWaitingDecision;
+  isDonated = isDonated;
+  BookStatusLabel = BookStatusLabel;
   showFireworks: boolean;
 
   constructor(
