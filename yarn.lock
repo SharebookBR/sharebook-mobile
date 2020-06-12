@@ -134,7 +134,7 @@
   resolved "https://registry.yarnpkg.com/@ionic-native/status-bar/-/status-bar-4.20.0.tgz#76b3f44ee496a4815fe4ddb9b5701aea22e6855f"
   integrity sha512-y/Sqo4c0rQcLVhF/mj72wcn2ReKOW5SxBOD5I7YILNfXvEpDlUgWUxkTM5gNZn3ecCbYFrypNXIn2tsxZBAd+w==
 
-"@ionic/app-scripts@^3.2.0":
+"@ionic/app-scripts@3.2.4":
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/@ionic/app-scripts/-/app-scripts-3.2.4.tgz#db3f6a215ba226099db2a9af41f0f6bb5d4cc368"
   integrity sha512-Wt6bBnLtyknbTn6ikUTst2HLs5ww+BL9FpYv2dQWZwDODYqyWFkQQvdXj0IFibU2umXFOH5nQXJin2vvgtovzA==
@@ -940,7 +940,7 @@ color-name@1.1.3:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
   integrity sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
 
-com-sarriaroman-photoviewer@^1.1.18:
+com-sarriaroman-photoviewer@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/com-sarriaroman-photoviewer/-/com-sarriaroman-photoviewer-1.2.5.tgz#e8b2c749f031cedb32bef29dc8f9dcf49e55ccbc"
   integrity sha512-VH7Yo8O2qe1ZR7hiZqtiAwsv2FLztEXsA+ksXVIBGEDiY+o5IxOrMb+9g+nGCVMxfxmID3T8GZxpGxAAZXTv2A==
@@ -1019,7 +1019,7 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-cordova-android@^7.1.4:
+cordova-android@7.1.4:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/cordova-android/-/cordova-android-7.1.4.tgz#25261ad66cc64f42a30b70be005901fa30e2430e"
   integrity sha512-Rtvu002I83uzfVyCsE6p2krFKVHt9TSAqZUATes+zH+o9cdxYGrLHY+PKCQo4SLCdSMdrkIHCDnQPTYTp/d7+g==
@@ -1062,32 +1062,32 @@ cordova-plugin-app-version@^0.1.9:
   resolved "https://registry.yarnpkg.com/cordova-plugin-app-version/-/cordova-plugin-app-version-0.1.9.tgz#9db0607863337a710489302e5f50a904f1449bdb"
   integrity sha1-nbBgeGMzenEEiTAuX1CpBPFEm9s=
 
-cordova-plugin-camera@^4.0.3:
+cordova-plugin-camera@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-camera/-/cordova-plugin-camera-4.1.0.tgz#6474a3e080c4662aa00fd7425705d301c693ddc0"
   integrity sha512-fCLhWjWYn49q3X5xaypAPgTz6MAWSKFFQvD2Gpi5SuVlrRPRphtX2jIqR2zCBuDTBR082QVnlc+yUDXt65Mjgw==
 
-cordova-plugin-device@^2.0.2:
+cordova-plugin-device@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-device/-/cordova-plugin-device-2.0.3.tgz#c2b41b7efd0455dd097f89356d85bfdd5dadeb0f"
   integrity sha512-Jb3V72btxf3XHpkPQsGdyc8N6tVBYn1vsxSFj43fIz9vonJDUThYPCJJHqk6PX6N4dJw6I4FjxkpfCR4LDYMlw==
 
-cordova-plugin-ionic-keyboard@^2.1.2:
+cordova-plugin-ionic-keyboard@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.2.0.tgz#53ba9ccd5e765165446a094cfe042a2ddd87d81d"
   integrity sha512-yDUG+9ieKVRitq5mGlNxjaZh/MgEhFFIgTIPhqSbUaQ8UuZbawy5mhJAVClqY97q8/rcQtL6dCDa7x2sEtCLcA==
 
-cordova-plugin-ionic-webview@^2.2.0:
+cordova-plugin-ionic-webview@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.5.3.tgz#2d3be2a53485410bb5ece2f9fce09f6c4099a7a3"
   integrity sha512-RBnreApWtKO/pFR+rI3cnoCZWW0vR/1pCC5Q/6rKZJsEu8YQXfJ6M7D2Oqd97811R2dbDmWvHDUSUEVwxdcl3Q==
 
-cordova-plugin-splashscreen@^5.0.2:
+cordova-plugin-splashscreen@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.4.tgz#1bb6fc2d0d5a55cb987e35af554a2693f80abc39"
   integrity sha512-zmyhBrObNuwDH4KB4zuZrJ9IKC113EM6KJpqC0/2f3o9GRznPk1S4j9O9rosJT4EASg4X3hdssv9XkAH3D5ZYg==
 
-cordova-plugin-whitelist@^1.3.3:
+cordova-plugin-whitelist@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/cordova-plugin-whitelist/-/cordova-plugin-whitelist-1.3.4.tgz#31938545c7c3e7de35c20ab08c2c3afa06e8a3f9"
   integrity sha512-EYC5eQFVkoYXq39l7tYKE6lEjHJ04mvTmKXxGL7quHLdFPfJMNzru/UYpn92AOfpl3PQaZmou78C7EgmFOwFQQ==
@@ -1097,17 +1097,17 @@ cordova-registry-mapper@*, cordova-registry-mapper@^1.1.8:
   resolved "https://registry.yarnpkg.com/cordova-registry-mapper/-/cordova-registry-mapper-1.1.15.tgz#e244b9185b8175473bff6079324905115f83dc7c"
   integrity sha1-4kS5GFuBdUc7/2B5MkkFEV+D3Hw=
 
-cordova-sqlite-storage-dependencies@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/cordova-sqlite-storage-dependencies/-/cordova-sqlite-storage-dependencies-1.2.1.tgz#35bd0087c0e54c248f3b6f4d9bc54a58fa1eecc1"
-  integrity sha512-4ihQApBGVKR1QZ4oOSGctKFfthtCfiWMTcIIfxe97vKxlvGr9NyXOvYG9vXU9S7yVR7Ua+Rj47hkE7pQIKvQTg==
+cordova-sqlite-storage-dependencies@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/cordova-sqlite-storage-dependencies/-/cordova-sqlite-storage-dependencies-2.1.1.tgz#3706fd035289bdaca5770599986d5b9829b4bab0"
+  integrity sha512-1lV5Pg1FttjBmGO8z4gxtuA4BbPKtgTfUEh1Vx4boa41inizyxaowRyTeaaqEhi5gmYAaX8sRTABm9U/XckRFg==
 
-cordova-sqlite-storage@^2.4.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/cordova-sqlite-storage/-/cordova-sqlite-storage-2.6.0.tgz#84f5c56509d83b8629338f863e027482afd7fdcd"
-  integrity sha512-m+KylFwNRsQloJ6TZihupfma2muXkmNglh8cFSiJQqriTTm6eq0gyPaAuKxgoPswe679G+0aUai07NFC/f0GGQ==
+cordova-sqlite-storage@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/cordova-sqlite-storage/-/cordova-sqlite-storage-5.0.0.tgz#19323c5e810ed596e802e72392c17d341badd2b4"
+  integrity sha512-AFb3t3yrdFZ0ZY16FKJupyx71bq+iKHSWHfHH1xmFjEuGK7VPbSHwGEf9hpypin42Z10OdkR1CgnTyvkWNtLlw==
   dependencies:
-    cordova-sqlite-storage-dependencies "1.2.1"
+    cordova-sqlite-storage-dependencies "2.1.1"
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -3086,7 +3086,7 @@ once@*, once@^1.3.0:
   dependencies:
     wrappy "1"
 
-onesignal-cordova-plugin@^2.4.6:
+onesignal-cordova-plugin@^2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/onesignal-cordova-plugin/-/onesignal-cordova-plugin-2.9.1.tgz#72e68ec1395bd93a5ac4c183120914ce934b55b6"
   integrity sha512-lxHaHHgd5r0/YEpkbO7C4L2/QgYf8etmwJZdoEGaxaeWOd4ShYgqF1rsxzETlIsdrjCvbYq/1pgGyhqQ1Y9qzw==
