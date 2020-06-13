@@ -1,20 +1,20 @@
 ﻿import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {config} from "../../../environments/environment";
 import {SessionService} from "../session/session.service";
+import {HttpService} from '../http/http.service';
 
 @Injectable()
 export class AuthenticationService {
   constructor(
-    private http: HttpClient,
+    private http: HttpService,
     private sessionService: SessionService,
   ) {
 
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>(`${config.apiEndpoint}/Account/Login/`, {email: email, password: password})
+    return this.http.post(`${config.apiEndpoint}/Account/Login/`, {email: email, password: password})
       .pipe(map(response => {
         const {success, value} = response;
 

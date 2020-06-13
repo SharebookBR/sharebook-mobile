@@ -19,6 +19,7 @@ import {Camera} from "@ionic-native/camera";
 import {ContactUsService} from "../services/contact-us/contact-us-service";
 import {OneSignal} from "@ionic-native/onesignal";
 import {OneSignalService} from '../services/one-signal/one-signal';
+import {HttpService} from '../services/http/http.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {OneSignalService} from '../services/one-signal/one-signal';
       useClass: JwtInterceptor,
       multi: true
     },
-    OneSignalService
+    OneSignalService,
+    HttpService,
   ]
 })
 export class AppModule {
