@@ -10,7 +10,7 @@ import {
 import {BookService} from "../../services/book/book.service";
 import {Request} from '../../models/request';
 import {Status} from "../../models/status";
-import {isDue, Book} from "../../models/book";
+import {isDue, Book, isDonated} from "../../models/book";
 import {getRemainingDays} from "../../core/utils/date";
 import 'rxjs/add/operator/timeout';
 
@@ -43,7 +43,7 @@ export class InteressadosPage {
   }
 
   ionViewDidLoad() {
-    this.donated = this.book.donated;
+    this.donated = isDonated(this.book);
     this.isBookDue = isDue(this.book);
     this.remainingDays = getRemainingDays(this.book.chooseDate);
     this.getInteressados();

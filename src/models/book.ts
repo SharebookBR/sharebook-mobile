@@ -91,9 +91,7 @@ function isWaitingSend(book: Book) {
 }
 
 function isDue(book: Book) {
-  return book && book.chooseDate ? (
-    new Date(book.chooseDate).getTime() < new Date().getTime()
-  ) : false;
+  return book.status === BookStatus.WAITING_ACTION;
 }
 
 function getStatusColor(status = '') {
