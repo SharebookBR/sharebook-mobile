@@ -88,6 +88,14 @@
       <div class="form-error" *ngIf="synopsis.touched && synopsis.invalid">
         Tamanho máximo excedido (2000 caracteres)
       </div>
+
+      <ion-item>
+        <ion-label text-wrap>Declaro que estou ciente da importância desta doação e que irei tratar a mesma com carinho, evitando atrasos no processo. Reconheço que existe uma pessoa do outro lado que deseja e precisa desse livro.</ion-label>
+        <ion-checkbox formControlName="agreeToTerms"></ion-checkbox>
+      </ion-item>
+      <div class="form-error" *ngIf="agreeToTerms.touched && agreeToTerms.invalid">
+        Necessário concordar com os termos de doação.
+      </div>
     </ion-list>
   </form>
 </ion-content>

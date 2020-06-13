@@ -29,6 +29,7 @@ export class DonatePage {
   freightOption: AbstractControl;
   imageBytes: AbstractControl;
   synopsis: AbstractControl;
+  agreeToTerms: AbstractControl;
 
   constructor(
     private navCtrl: NavController,
@@ -94,6 +95,7 @@ export class DonatePage {
       freightOption: ['', [Validators.required]],
       imageBytes: ['', [Validators.required]],
       synopsis: ['', [Validators.maxLength(2000)]],
+      agreeToTerms: [false, [Validators.requiredTrue]],
     });
 
     this.title = this.form.get('title');
@@ -102,6 +104,7 @@ export class DonatePage {
     this.freightOption = this.form.get('freightOption');
     this.imageBytes = this.form.get('imageBytes');
     this.synopsis = this.form.get('synopsis');
+    this.agreeToTerms = this.form.get('agreeToTerms');
   }
 
   fillUpForm(book) {
