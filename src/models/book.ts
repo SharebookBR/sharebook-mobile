@@ -48,11 +48,13 @@ enum FreightOptions {
 enum BookStatus {
   WAITING_APPROVAL = 'WaitingApproval',
   AVAILABLE = 'Available',
-  WAITING_DECISION = 'Waiting_decision',
-  WAITING_SEND = 'Waiting_send',
+  WAITING_DECISION = 'WaitingDecision',
+  WAITING_SEND = 'WaitingSend',
+  WAITING_ACTION = 'WaitingAction',
   SENT = 'Sent',
   RECEIVED = 'Received',
   CANCELED = 'Canceled',
+  DENIED = 'Denied',
 }
 
 enum BookStatusLabel {
@@ -60,9 +62,11 @@ enum BookStatusLabel {
   Available = 'Disponível',
   WaitingDecision = 'Aguardando decisão do doador',
   WaitingSend = 'Aguardando envio',
+  WaitingAction = 'Aguardando ação',
   Sent = 'Enviado',
   Received = 'Recebido',
   Canceled = 'Cancelado',
+  Denied = 'Negado',
 }
 
 function isDonated(book: Book) {
@@ -82,6 +86,10 @@ function isWaitingDecision(book: Book) {
   return book.status === BookStatus.WAITING_DECISION;
 }
 
+function isWaitingSend(book: Book) {
+  return book.status === BookStatus.WAITING_SEND;
+}
+
 function isDue(book: Book) {
   return book && book.chooseDate ? (
     new Date(book.chooseDate).getTime() < new Date().getTime()
@@ -95,10 +103,12 @@ function getStatusColor(status = '') {
     case BookStatus.SENT:
     case BookStatus.RECEIVED:
       return 'orange';
+    case BookStatus.DENIED:
     case BookStatus.CANCELED:
       return 'danger';
     case BookStatus.WAITING_APPROVAL:
     case BookStatus.WAITING_DECISION:
+    case BookStatus.WAITING_ACTION:
       return 'primary-light';
     default:
       return 'primary';
@@ -122,4 +132,5 @@ export {
   isDue,
   isWaitingDecision,
   BookStatusLabel,
+  isWaitingSend,
 };
