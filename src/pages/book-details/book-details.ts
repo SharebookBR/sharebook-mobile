@@ -112,7 +112,8 @@ export class BookDetailsPage {
 
   openBookRequest() {
     const bookModal = this.modalCtrl.create('BookRequestPage', {
-      book: this.book
+      book: this.book,
+      isFreeFreight: this.isFreeFreight,
     });
 
     const addressModal = this.modalCtrl.create('ConfirmAddressPage');
