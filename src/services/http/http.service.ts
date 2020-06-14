@@ -19,7 +19,8 @@ export class HttpService {
     this.appVersion.getVersionNumber().then(version => {
       this.version = `v${version}`;
     }, err => {
-      this.version = 'v0.0.0'
+      // Minimum acceptable version
+      this.version = 'v1.0.0'
     })
   }
 
@@ -27,6 +28,7 @@ export class HttpService {
     return {
       ...options,
       headers: {
+        'X-Requested-With': 'com.makeztec.sharebook',
         'Client-Version': this.version,
       },
     }
