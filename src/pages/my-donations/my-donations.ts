@@ -138,12 +138,12 @@ export class MyDonationsPage {
         this.alertCtrl.create({
           title: 'Atenção!',
           message: 'Confirma a renovação da data de doação?',
-          buttons: [{
+          buttons: ['Não', {
             text: 'Sim',
             handler: () => {
               this.renewDonation(book);
             }
-          }, 'Não']
+          }]
         }).present();
       }
     };
@@ -166,7 +166,7 @@ export class MyDonationsPage {
       buttons.push(tracking);
     }
 
-    if (isAvailable(book) && isDue(book)) {
+    if (isWaitingDecision(book)) {
       buttons.push(postpone);
     }
 

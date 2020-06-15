@@ -61,7 +61,7 @@ enum BookStatus {
 enum BookStatusLabel {
   WaitingApproval = 'Aguardando aprovação',
   Available = 'Disponível',
-  AwaitingDonorDecision = 'Aguardando decisão do doador',
+  AwaitingDonorDecision = 'Aguardando decisão',
   WaitingSend = 'Aguardando envio',
   Sent = 'Enviado',
   Received = 'Recebido',
