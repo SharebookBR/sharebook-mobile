@@ -84,8 +84,8 @@ export class LoginPage {
       const {name, userId: id, email} = data;
       this.oneSignalService.sendOneSignalTags({name, id, email})
     }, ({error}) => {
-      const msg = error.Messages && error.Messages.length > 0
-        ? error.Messages[0]
+      const msg = error.messages && error.messages.length > 0 
+        ? error.messages[0]
         : 'E-mail e/ou senha inválido'
 
       loading.dismiss();
