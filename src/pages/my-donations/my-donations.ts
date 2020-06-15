@@ -32,6 +32,7 @@ export class MyDonationsPage {
   getStatusColor = getStatusColor;
   isWaitingDecision = isWaitingDecision;
   isDonated = isDonated;
+  isAvailable = isAvailable;
   BookStatusLabel = BookStatusLabel;
   showFireworks: boolean;
 

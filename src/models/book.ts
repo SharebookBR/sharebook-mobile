@@ -48,24 +48,26 @@ enum FreightOptions {
 enum BookStatus {
   WAITING_APPROVAL = 'WaitingApproval',
   AVAILABLE = 'Available',
-  WAITING_DECISION = 'WaitingDecision',
+  WAITING_DECISION = 'AwaitingDonorDecision',
   WAITING_SEND = 'WaitingSend',
   WAITING_ACTION = 'WaitingAction',
   SENT = 'Sent',
   RECEIVED = 'Received',
   CANCELED = 'Canceled',
   DENIED = 'Denied',
+  DONATED = 'Donated',
 }
 
 enum BookStatusLabel {
   WaitingApproval = 'Aguardando aprovação',
   Available = 'Disponível',
-  WaitingDecision = 'Aguardando decisão do doador',
+  AwaitingDonorDecision = 'Aguardando decisão do doador',
   WaitingSend = 'Aguardando envio',
-  WaitingAction = 'Aguardando ação',
   Sent = 'Enviado',
   Received = 'Recebido',
   Canceled = 'Cancelado',
+  WaitingAction = 'Aguardando ação',
+  Donated = 'Doado',
   Denied = 'Negado',
 }
 

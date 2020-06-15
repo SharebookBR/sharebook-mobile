@@ -48,10 +48,10 @@
     <p>{{item.daysInShowcase}} {{item.daysInShowcase === 1 ? 'dia' : 'dias'}} na vitrine</p>
     <p>{{item.totalInterested}} {{item.totalInterested === 1 ? 'interessado' : 'interessados'}}</p>
     <p *ngIf="item.trackingNumber">Rastreio: {{item.trackingNumber}}</p>
-    <p *ngIf="!canChooseDonator(item) && item.chooseDate">
+    <p *ngIf="isAvailable(item)">
       Escolha o granhador em {{getRemainingDays(item.chooseDate)}} dias
     </p>
-    <ion-badge *ngIf="canChooseDonator(item) && isWaitingDecision(item)" color="primary-light">
+    <ion-badge *ngIf="isWaitingDecision(item)" color="primary-light">
       Escolha o granhador
     </ion-badge>
     <ion-badge color="{{getStatusColor(item.status)}}" item-right>

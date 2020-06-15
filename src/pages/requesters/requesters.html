@@ -30,7 +30,7 @@
     <h1>🙁</h1>
   </div>
 
-  <ion-item *ngIf="requests.length && !donated && !isBookDue" color="light" text-center>
+  <ion-item *ngIf="requests.length && isAvailable(book)" color="light" text-center>
     Escolha o ganhador em {{remainingDays}} dias 😊
   </ion-item>
 
