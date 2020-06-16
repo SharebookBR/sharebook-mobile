@@ -45,11 +45,8 @@ $ node -v
 # Caso queira rodar em seu dispositivo ou emulador Android
 $ npm install -g ionic cordova@8.1.1
 
-# Recomendamos utilizar yarn como o package manager
-$ npm i -g yarn # Caso não tenha instalado
-$ ionic config set -g npmClient yarn
-
-$ yarn install
+# Instale os módulos
+$ npm install
 
 # Para rodar no browser
 $ ionic serve
