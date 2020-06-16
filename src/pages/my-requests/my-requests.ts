@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, ModalController} from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor} from "../../models/book";
+import {Book, getStatusColor, BookStatusLabel, isDonated} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 
@@ -17,6 +17,8 @@ export class MyRequestsPage {
   requestedBooks: Array<Book> = [];
   rStatus = new Status();
   getStatusColor = getStatusColor;
+  isDonated = isDonated;
+  BookStatusLabel = BookStatusLabel;
 
   constructor(
     public navCtrl: NavController,

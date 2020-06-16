@@ -19,6 +19,10 @@ export class ConfirmAddressPage {
     public alertCtrl: AlertController,
     public viewCtrl: ViewController,
   ) {
+
+  }
+
+  ionViewWillEnter() {
     this.loadUser();
   }
 
@@ -43,11 +47,7 @@ export class ConfirmAddressPage {
   }
 
   updateAddress() {
-    this.navCtrl.push('RegisterPage', {isEditing: true}).then(() => {
-      this.dismiss({
-        preventToast: true
-      });
-    });
+    this.navCtrl.push('RegisterPage', {isEditing: true});
   }
 
   dismiss(data?) {

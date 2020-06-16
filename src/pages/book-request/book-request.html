@@ -29,11 +29,19 @@
     <ion-item no-padding>
       <ion-textarea
         [formControl]="reason" rows="10"
-        placeholder="Digite aqui sua resposta...">
+        placeholder="Seja criativo e verdadeiro, vai te ajudar a ser o escolhido! ☺">
       </ion-textarea>
     </ion-item>
     <small ion-text color="danger" *ngIf="reason.invalid && reason.touched">
       Resposta inválida (mínimo 10 letras)
     </small>
+
+    <ion-item *ngIf="!isFreeFreight" no-padding>
+      <ion-label text-wrap>Estou ciente que o frete não é grátis. Caso seja escolhido, me comprometo a reembolsar o doador.</ion-label>
+      <ion-checkbox formControlName="agreeToTerms"></ion-checkbox>
+    </ion-item>
+    <div class="form-error" *ngIf="agreeToTerms.touched && agreeToTerms.invalid">
+      Necessário concordar com os termos de doação.
+    </div>
   </form>
 </ion-content>

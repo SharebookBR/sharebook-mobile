@@ -8,6 +8,7 @@ interface User {
   password?: string;
   passwordSalt?: string;
   profile?: string;
+  allowSendingEmail: boolean;
   address: {
     street?: string,
     number?: string,

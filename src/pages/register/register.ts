@@ -58,6 +58,7 @@ export class RegisterPage {
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
       terms: [this.isEditing, [Validators.requiredTrue]],
+      allowSendingEmail: [false],
     }, {
       validator: PasswordValidation.MatchPassword
     });
@@ -118,6 +119,7 @@ export class RegisterPage {
     this.form.get('city').setValue(user.address.city);
     this.form.get('state').setValue(user.address.state);
     this.form.get('country').setValue(user.address.country);
+    this.form.get('allowSendingEmail').setValue(user.allowSendingEmail);
   }
 
   getAddress(cep) {
@@ -199,7 +201,7 @@ export class RegisterPage {
       email: values.email,
       phone: values.phone,
       linkedin: values.linkedin,
-
+      allowSendingEmail: values.allowSendingEmail,
       address: {
         street: values.street,
         number: values.number,

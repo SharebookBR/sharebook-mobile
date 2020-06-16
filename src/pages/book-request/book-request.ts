@@ -20,7 +20,9 @@ export class BookRequestPage {
 
   form: FormGroup;
   reason: AbstractControl;
+  agreeToTerms: AbstractControl;
   book: Book;
+  isFreeFreight: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -33,16 +35,19 @@ export class BookRequestPage {
     public viewCtrl: ViewController,
   ) {
     this.book = this.navParams.get('book');
+    this.isFreeFreight = this.navParams.get('isFreeFreight');
 
     this.form = this.formBuilder.group({
       reason: ['', Validators.compose([
         Validators.maxLength(500),
         Validators.minLength(10),
         Validators.required,
-      ])]
+      ])],
+      agreeToTerms: [this.isFreeFreight, [Validators.requiredTrue]],
     });
 
     this.reason = this.form.get('reason');
+    this.agreeToTerms = this.form.get('agreeToTerms');
   }
 
   ionViewCanEnter() {
@@ -52,6 +57,7 @@ export class BookRequestPage {
   requestBook() {
     if (this.form.invalid) {
       this.reason.markAsTouched();
+      this.agreeToTerms.markAsTouched();
       return;
     }
 

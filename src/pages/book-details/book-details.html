@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{book?.title}}</ion-title>
 
-    <ion-buttons right *ngIf="book.approved">
+    <ion-buttons right *ngIf="isAvailable(book)">
       <button ion-button (click)="openBookRequest()" [disabled]="alreadyRequested === undefined || alreadyRequested">
         Solicitar
       </button>
@@ -13,10 +13,6 @@
 <ion-content>
   <ion-item tappable text-center class="book-cover" (click)="openBookCover()">
     <img [src]="book?.imageUrl">
-  </ion-item>
-
-  <ion-item no-lines *ngIf="alreadyRequested === undefined" text-center>
-    <ion-spinner name="dots"></ion-spinner>
   </ion-item>
 
   <ion-item no-lines class="already-requested" *ngIf="alreadyRequested">
@@ -36,7 +32,7 @@
 
   <ion-item>
     <p>Categoria</p>
-    <h4>{{book?.category?.name}}</h4>
+    <h4>{{book?.category}}</h4>
   </ion-item>
 
   <ion-item *ngIf="chooseDateInfo">
@@ -44,14 +40,14 @@
     <h4><b>{{chooseDateInfo}}</b></h4>
   </ion-item>
 
-  <ion-item *ngIf="book.user.address?.city || book.user.address?.state">
+  <ion-item *ngIf="book.city || book.state">
     <p>Local:</p>
-    <h4>{{book.user.address.city}} - {{book.user.address.state}}</h4>
+    <h4>{{book.city}} - {{book.state}}</h4>
   </ion-item>
 
   <ion-item *ngIf="isFreeFreight === undefined">
     <p>Doador paga o frete para:</p>
-    <h4>{{freightLabels[book?.freightOption]}}</h4>
+    <h4>{{book.freightOption}}</h4>
   </ion-item>
 
   <ion-item *ngIf="isFreeFreight !== undefined">

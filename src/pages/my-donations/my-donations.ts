@@ -11,7 +11,7 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isAvailable, isDonated, isDue} from "../../models/book";
+import {Book, getStatusColor, isAvailable, isDonated, isDue, isWaitingDecision, BookStatusLabel, isWaitingSend} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -30,6 +30,10 @@ export class MyDonationsPage {
   dStatus = new Status();
   getRemainingDays = getRemainingDays;
   getStatusColor = getStatusColor;
+  isWaitingDecision = isWaitingDecision;
+  isDonated = isDonated;
+  isAvailable = isAvailable;
+  BookStatusLabel = BookStatusLabel;
   showFireworks: boolean;
 
   constructor(
@@ -134,12 +138,12 @@ export class MyDonationsPage {
         this.alertCtrl.create({
           title: 'Atenção!',
           message: 'Confirma a renovação da data de doação?',
-          buttons: [{
+          buttons: ['Não', {
             text: 'Sim',
             handler: () => {
               this.renewDonation(book);
             }
-          }, 'Não']
+          }]
         }).present();
       }
     };
@@ -158,11 +162,11 @@ export class MyDonationsPage {
       buttons.push(edit);
     }
 
-    if (isDonated(book)) {
+    if (isWaitingSend(book)) {
       buttons.push(tracking);
     }
 
-    if (isAvailable(book) && isDue(book)) {
+    if (isWaitingDecision(book)) {
       buttons.push(postpone);
     }
 

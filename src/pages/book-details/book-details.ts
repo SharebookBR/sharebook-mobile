@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {Book, FreightLabels} from "../../models/book";
+import {Book, isAvailable} from "../../models/book";
 import {UserService} from "../../services/user/user.service";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {BookService} from "../../services/book/book.service";
@@ -18,10 +18,11 @@ import "rxjs/add/operator/timeout";
 export class BookDetailsPage {
   book: Book;
   alreadyRequested: boolean;
-  freightLabels = FreightLabels;
   chooseDateInfo: string;
   isFreeFreight: boolean;
   user: User;
+
+  isAvailable = isAvailable;
 
   constructor(
     public navCtrl: NavController,
@@ -54,26 +55,24 @@ export class BookDetailsPage {
       this.user = user;
       this.calculateIsFreeFreight();
     }, err => {
-      
+
     })
   }
 
 
   calculateIsFreeFreight() {
-    if (this.book.user.address && this.user.address) {
-      switch (this.book.freightOption.toString()) {
-        case 'City':
-          this.isFreeFreight = this.book.user.address.city === this.user.address.city;
-          break;
-        case 'State':
-          this.isFreeFreight = this.book.user.address.state === this.user.address.state
-          break;
-        case 'WithoutFreight':
-          this.isFreeFreight = false;
-          break;
-        default:
-          this.isFreeFreight = true;
-      }
+    switch (this.book.freightOption) {
+      case 'City':
+        this.isFreeFreight = this.book.city === this.user.address.city;
+        break;
+      case 'State':
+        this.isFreeFreight = this.book.state === this.user.address.state;
+        break;
+      case 'WithoutFreight':
+        this.isFreeFreight = false;
+        break;
+      default:
+        this.isFreeFreight = true;
     }
   }
 
@@ -90,14 +89,8 @@ export class BookDetailsPage {
   }
 
   verifyAddress() {
-    const { address } = this.book.user;
-
-    if (address) {
-      if (!address.city && address.postalCode) {
-        this.getCity(address.postalCode);
-      }
-    } else {
-      this.book.user.address = {};
+    if (!this.book.city && this.book.postalCode) {
+      this.getCity(this.book.postalCode);
     }
   }
 
@@ -105,8 +98,8 @@ export class BookDetailsPage {
     this.userService.consultarCEP(cep).subscribe(address => {
       const {localidade, uf} = <any>address;
       if (localidade && uf) {
-        this.book.user.address.city = localidade;
-        this.book.user.address.state = uf;
+        this.book.city = localidade;
+        this.book.state = uf;
       }
     }, err => {
 
@@ -119,7 +112,8 @@ export class BookDetailsPage {
 
   openBookRequest() {
     const bookModal = this.modalCtrl.create('BookRequestPage', {
-      book: this.book
+      book: this.book,
+      isFreeFreight: this.isFreeFreight,
     });
 
     const addressModal = this.modalCtrl.create('ConfirmAddressPage');

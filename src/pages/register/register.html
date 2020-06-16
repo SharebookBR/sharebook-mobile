@@ -6,11 +6,11 @@
       </button>
     </ion-buttons>
 
-    <ion-title>Registro</ion-title>
+    <ion-title>{{isEditing ? 'Editar dados' : 'Cadastrar'}}</ion-title>
 
     <ion-buttons right>
       <button ion-button (click)="submit(form.value)">
-        {{isEditing ? 'Salvar' : 'Registrar'}}
+        {{isEditing ? 'Salvar' : 'Enviar'}}
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -175,9 +175,14 @@
 
       <ion-item>
         <ion-label stacked>Complemento</ion-label>
-        <ion-input formControlName="complement" placeholder="Insira o complemento"></ion-input>
+        <ion-textarea rows="3" formControlName="complement" placeholder="Insira o complemento"></ion-textarea>
       </ion-item>
     </div>
+
+    <ion-item>
+      <ion-label text-wrap>Aceito receber e-mails e newletter do Sharebook.</ion-label>
+      <ion-checkbox formControlName="allowSendingEmail"></ion-checkbox>
+    </ion-item>
 
     <ion-list *ngIf="!isEditing">
       <ion-item-divider style="background-color: #f2f2f2;">

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {FormBuilder, AbstractControl, Validators, FormGroup} from "@angular/forms";
-import {Book, FreightLabels} from "../../models/book";
+import {Book, FreightOptionsLabels} from "../../models/book";
 import {CategoryService} from "../../services/category/category.service";
 import {Category} from "../../models/category";
 import {Camera, CameraOptions} from '@ionic-native/camera';
@@ -29,6 +29,7 @@ export class DonatePage {
   freightOption: AbstractControl;
   imageBytes: AbstractControl;
   synopsis: AbstractControl;
+  agreeToTerms: AbstractControl;
 
   constructor(
     private navCtrl: NavController,
@@ -82,9 +83,9 @@ export class DonatePage {
   }
 
   setupForm() {
-    this.freightOptions = Object.keys(FreightLabels)
+    this.freightOptions = Object.keys(FreightOptionsLabels)
       .map(value => {
-        return {value, text: FreightLabels[value]}
+        return {value, text: FreightOptionsLabels[value]}
       });
 
     this.form = this.formBuilder.group({
@@ -94,6 +95,7 @@ export class DonatePage {
       freightOption: ['', [Validators.required]],
       imageBytes: ['', [Validators.required]],
       synopsis: ['', [Validators.maxLength(2000)]],
+      agreeToTerms: [false, [Validators.requiredTrue]],
     });
 
     this.title = this.form.get('title');
@@ -102,6 +104,7 @@ export class DonatePage {
     this.freightOption = this.form.get('freightOption');
     this.imageBytes = this.form.get('imageBytes');
     this.synopsis = this.form.get('synopsis');
+    this.agreeToTerms = this.form.get('agreeToTerms');
   }
 
   fillUpForm(book) {

@@ -39,18 +39,46 @@ Hora de colocar a mão na massa. A parte mais divertida, trabalhar no código-fo
 
 ```bash
 # Verique se possui o Node instalado
-# caso não tenha, baixe em (https://nodejs.org)
+# Caso não tenha, baixe a versão mais atual em (https://nodejs.org)
 $ node -v
 
+# Caso queira rodar em seu dispositivo ou emulador Android
 $ npm install -g ionic cordova@8.1.1
 
+# Instale os módulos
 $ npm install
 
+# Para rodar no browser
 $ ionic serve
 
-# crie seu primeiro componente. Exemplo.
-$ ionic generate page nomeDoComponente
+# Para rodar no emulador
+$ ionic cordova emulate android # Adicione -l para livereload
+
+# Para rodar no dispositivo Android
+$ ionic cordova run android # Adicione -l para livereload
+
+# Crie seu primeiro componente
+$ ionic generate page NomeDoComponente
 ```
+
+# Para fazer o build e publicar
+
+No momento, temos scripts prontos para Ubuntu e OSx.
+
+```bash
+# Para gerar o apk versão release e production
+$ make build
+
+# Para assinar o apk assinado no Mac
+$ make deploy-mac
+
+# Para assinar o apk assinado no Ubuntu
+$ make deploy-ubuntu
+```
+
+O apk será colocado na raíz do projeto.
+
+Agora é só fazer o upload para a Play Store Console.
 
 ## API no ambiente de dev
 
