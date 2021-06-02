@@ -77,3 +77,8 @@
   color: color($colors, danger);
   margin-left: 5px;
 }
+
+.error-banner {
+  padding: 10px;
+  background-color: color($colors, gray-light);
+}
