@@ -19,17 +19,17 @@
 
     <ion-item>
       <p>E-mail:</p>
-      <a href="{{'mailto:' + winner.email}}" target="_blank"><h4>{{winner.email}}</h4></a>
+      <a href="{{'mailto:' + winner.email}}" target="_blank" rel="noopener"><h4>{{winner.email}}</h4></a>
     </ion-item>
 
     <ion-item *ngIf="winner.linkedin">
       <p>LinkedIn:</p>
-      <a href="{{winner.linkedin}}" target="_blank"><h4>{{winner.linkedin}}</h4></a>
+      <a href="{{winner.linkedin}}" target="_blank" rel="noopener"><h4>{{winner.linkedin}}</h4></a>
     </ion-item>
 
     <ion-item *ngIf="winner.phone">
       <p>Telefone:</p>
-      <a href="{{'tel:' + winner.phone}}" target="_blank"><h4>{{winner.phone}}</h4></a>
+      <a href="{{'tel:' + winner.phone}}" target="_blank" rel="noopener"><h4>{{winner.phone}}</h4></a>
     </ion-item>
 
     <ion-item>
