@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left margin-left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Ganhador</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="status.isSuccess() && winner">
+    <ion-item>
+      <p>Nome:</p>
+      <h4>{{winner.name}}</h4>
+    </ion-item>
+
+    <ion-item>
+      <p>E-mail:</p>
+      <a href="{{'mailto:' + winner.email}}" target="_blank"><h4>{{winner.email}}</h4></a>
+    </ion-item>
+
+    <ion-item *ngIf="winner.linkedin">
+      <p>LinkedIn:</p>
+      <a href="{{winner.linkedin}}" target="_blank"><h4>{{winner.linkedin}}</h4></a>
+    </ion-item>
+
+    <ion-item *ngIf="winner.phone">
+      <p>Telefone:</p>
+      <a href="{{'tel:' + winner.phone}}" target="_blank"><h4>{{winner.phone}}</h4></a>
+    </ion-item>
+
+    <ion-item>
+      <p>Endereço:</p>
+      <h4>
+        {{ winner.address?.street }}, {{ winner.address?.number }} {{winner.address?.neighborhood ? ' - ' + winner.address?.neighborhood : ''}}<br />
+        {{ winner.address?.complement || '-' }}<br />
+        {{ winner.address?.city }} - {{ winner.address?.state }}<br />
+        {{ winner.address?.country }}
+      </h4>
+    </ion-item>
+
+    <ion-item>
+      <p>País:</p>
+      <h4>{{ winner.address?.country || '-' }}</h4>
+    </ion-item>
+
+    <ion-item>
+      <p>CEP:</p>
+      <h4>{{ winner.address?.postalCode }}</h4>
+    </ion-item>
+  </div>
+
+  <div *ngIf="status.isSuccess() && !winner" padding>
+    <div text-center no-lines>
+      <h6>
+        Este livro ainda não possui vencedor.<br />
+        😊
+      </h6>
+    </div>
+  </div>
+
+  <div *ngIf="status.isDownloading()" text-center padding no-lines>
+    <ion-spinner></ion-spinner>
+    <h6>Carregando...</h6>
+  </div>
+
+  <div *ngIf="status.isError()" padding>
+    <div text-center no-lines>
+      <h6>Infelizmente ocorreu um erro, clique abaixo para tentar novamente.</h6>
+
+      <p *ngIf="error?.messages" class="error-banner">
+        {{error.messages[0]}}
+      </p>
+    </div>
+
+    <div text-center>
+      <button ion-button outline small (click)="getMainUsers()">
+        Tentar novamente
+      </button>
+    </div>
+  </div>
+</ion-content>

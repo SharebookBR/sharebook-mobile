@@ -96,6 +96,12 @@ function isDue(book: Book) {
   return book.status === BookStatus.WAITING_ACTION;
 }
 
+function hasWinner (book: Book) {
+  return book.status === BookStatus.WAITING_SEND
+    || book.status === BookStatus.SENT
+    || book.status === BookStatus.RECEIVED
+}
+
 function getStatusColor(status = '') {
   switch (status) {
     case BookStatus.AVAILABLE:
@@ -123,6 +129,7 @@ interface DonateBookUser {
 export {
   Book,
   FreightOptionsLabels,
+  FreightOptions,
   isDonated,
   BookStatus,
   getStatusColor,
@@ -133,4 +140,5 @@ export {
   isWaitingDecision,
   BookStatusLabel,
   isWaitingSend,
+  hasWinner,
 };

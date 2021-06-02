@@ -11,7 +11,7 @@ import {
 } from 'ionic-angular';
 import {BookService} from '../../services/book/book.service';
 import {Status} from "../../models/status";
-import {Book, getStatusColor, isAvailable, isDonated, isDue, isWaitingDecision, BookStatusLabel, isWaitingSend} from "../../models/book";
+import {Book, getStatusColor, isAvailable, isDonated, isDue, isWaitingDecision, BookStatusLabel, isWaitingSend, hasWinner} from "../../models/book";
 import {SessionService} from "../../services/session/session.service";
 import {isAdmin, User} from "../../models/user";
 import {getRemainingDays} from "../../core/utils/date";
@@ -131,6 +131,15 @@ export class MyDonationsPage {
       }
     };
 
+    const winner: ActionSheetButton = {
+      text: 'Ver ganhador',
+      icon: 'trophy',
+      handler: () => {
+        const modal = this.modalCtrl.create('WinnerPage', { book });
+        modal.present();
+      }
+    };
+
     const postpone: ActionSheetButton = {
       text: 'Renovar data de escolha',
       icon: 'calendar',
@@ -172,6 +181,10 @@ export class MyDonationsPage {
 
     buttons.push(donator);
 
+    if (hasWinner(book)) {
+      buttons.push(winner)
+    }
+
     if (buttons.length) {
       this.actionSheetCtrl.create({
         title: 'Selecione uma das opções',
@@ -207,7 +220,7 @@ export class MyDonationsPage {
     const alert = this.alertCtrl.create({
       title: 'Código de rastreio',
       message: 'Adicione o código abaixo',
-      buttons: [{
+      buttons: ['Cancelar', {
         text: 'Adicionar',
         handler: (data) => {
           const {trackingNumber} = data;
@@ -218,7 +231,7 @@ export class MyDonationsPage {
             this.errorToast('Necessário adicionar código de rastreio.');
           }
         }
-      }, 'Cancelar']
+      }]
     });
 
     alert.addInput({
