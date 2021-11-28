@@ -10,6 +10,7 @@ log.txt
 *.sublime-project
 *.sublime-workspace
 *.apk
+*.aab
 .vscode/
 npm-debug.log*
 
