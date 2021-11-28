@@ -34,6 +34,22 @@
       </div>
     </div>
 
+    <ion-item *ngIf="!isEditing">
+      <ion-label stacked>Idade*</ion-label>
+      <ion-input formControlName="age" placeholder="Sua idade" type="number"></ion-input>
+    </ion-item>
+    <div *ngIf="form.get('age')?.touched && form.get('age')?.invalid">
+      <div class="form-error" *ngIf="form.get('age').hasError('required')">
+        Idade obrigatória.
+      </div>
+      <div class="form-error" *ngIf="form.get('age').hasError('min')">
+        Infelizmente a idade mínima é 8 anos.
+      </div>
+      <div class="form-error" *ngIf="form.get('age').hasError('max')">
+        Infelizmente a idade máxima é 100 anos.
+      </div>
+    </div>
+
     <ion-item>
       <ion-label stacked>E-mail*</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Seu e-mail"></ion-input>

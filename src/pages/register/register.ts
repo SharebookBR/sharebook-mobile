@@ -44,6 +44,7 @@ export class RegisterPage {
 
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      age: [null, [Validators.required, Validators.min(8), Validators.max(100)]],
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]],
       confirmPassword: ['', [Validators.required]],
