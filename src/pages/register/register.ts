@@ -45,6 +45,7 @@ export class RegisterPage {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       age: [null, [Validators.required, Validators.min(8), Validators.max(100)]],
+      parentEmail: [''],
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]],
       confirmPassword: ['', [Validators.required]],
@@ -149,9 +150,41 @@ export class RegisterPage {
     this.form.get('country').setValue('');
   }
 
-  submit(values) {
+  askForParentEmail() {
+    this.alertController.create({
+      title: 'Só mais um detalhe...',
+      message: 'Por você ser menor de 12 anos, precisamos que nos forneça o e-mail de um dos seus pais.',
+      inputs: [{
+        id: 'email',
+        name: 'email',
+        type: 'text',
+        placeholder: 'E-mail',
+      }],
+      buttons: ['Cancelar', {
+        text: 'Inserir',
+        handler: ({ email }) => {
+          if (new RegExp(AppConst.emailPattern).test(email)) {
+            this.form.get('parentEmail').setValue(email);
+            this.submit(this.form.value);
+          } else {
+            this.alertController.create({
+              message: 'E-mail inválido, tente novamente!',
+              buttons: ['Ok'],
+            }).present();
+          }
+        },
+      }]
+    }).present();
+  }
 
+  submit(values) {
     if (this.form.valid) {
+      const age = this.form.get('age').value;
+      if (age < 12 && !this.form.get('parentEmail').value) {
+        this.askForParentEmail();
+        return;
+      }
+
       this.isEditing ?
         this.update(values) :
         this.create(values);
