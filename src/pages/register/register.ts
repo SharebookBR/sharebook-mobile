@@ -206,9 +206,19 @@ export class RegisterPage {
       data => {
         loading.dismiss();
 
-        if (data.success || data.authenticated) {
+        if (data.authenticated) {
           this.menuController.enable(true);
           this.navCtrl.setRoot('TabsPage');
+        } if (data.success) {
+          this.navCtrl.setRoot('LoginPage').then(() => {
+            if (data.successMessage) {
+              this.alertController.create({
+                title: 'Importante!',
+                message: data.successMessage,
+                buttons: ['Ok!'],
+              }).present();
+            }
+          });
         } else {
           const alert = this.alertController.create();
           alert.setTitle('Ops...');
