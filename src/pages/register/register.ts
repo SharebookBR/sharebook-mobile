@@ -44,7 +44,7 @@ export class RegisterPage {
 
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      age: [null, [Validators.required, Validators.min(8), Validators.max(100)]],
+      age: [null, this.isEditing ? undefined : [Validators.required, Validators.min(8), Validators.max(100)]],
       parentEmail: [''],
       email: ['', [Validators.required, Validators.pattern(AppConst.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]],
@@ -180,7 +180,7 @@ export class RegisterPage {
   submit(values) {
     if (this.form.valid) {
       const age = this.form.get('age').value;
-      if (age < 12 && !this.form.get('parentEmail').value) {
+      if (age && age < 12 && !this.form.get('parentEmail').value) {
         this.askForParentEmail();
         return;
       }
