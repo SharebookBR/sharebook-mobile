@@ -20,7 +20,7 @@ export class HttpService {
       this.version = `v${version}`;
     }, err => {
       // Minimum acceptable version
-      this.version = 'v1.0.0'
+      this.version = 'v2.0.0'
     })
   }
 
