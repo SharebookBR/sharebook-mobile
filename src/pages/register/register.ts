@@ -61,6 +61,7 @@ export class RegisterPage {
       country: ['', [Validators.required]],
       terms: [this.isEditing, [Validators.requiredTrue]],
       allowSendingEmail: [false],
+      recaptchaReactive: ['', Validators.required],
     }, {
       validator: PasswordValidation.MatchPassword
     });
@@ -91,6 +92,10 @@ export class RegisterPage {
 
       this.loadUser();
     }
+  }
+
+  resolved(captchaResponse: string) {
+    this.form.get('recaptchaReactive').setValue(captchaResponse);
   }
 
   loadUser() {
@@ -209,7 +214,7 @@ export class RegisterPage {
         if (data.authenticated) {
           this.menuController.enable(true);
           this.navCtrl.setRoot('TabsPage');
-        } if (data.success) {
+        } else if (data.success) {
           this.navCtrl.setRoot('LoginPage').then(() => {
             if (data.successMessage) {
               this.alertController.create({
@@ -246,6 +251,7 @@ export class RegisterPage {
       phone: values.phone,
       linkedin: values.linkedin,
       allowSendingEmail: values.allowSendingEmail,
+      recaptchaReactive: values.recaptchaReactive,
       address: {
         street: values.street,
         number: values.number,

@@ -21,6 +21,7 @@ export class ContactUsPage {
   email: AbstractControl;
   phone: AbstractControl;
   message: AbstractControl;
+  recaptchaReactive: AbstractControl;
 
   constructor(
     public navCtrl: NavController,
@@ -35,6 +36,10 @@ export class ContactUsPage {
     this.setupForm();
   }
 
+  resolved(captchaResponse: string) {
+    this.recaptchaReactive.setValue(captchaResponse);
+  }
+
   setupForm() {
     this.user = this.sessionService.user;
 
@@ -44,12 +49,14 @@ export class ContactUsPage {
       email: ['',  [Validators.required, Validators.pattern(emailPattern)]],
       phone: ['', [Validators.pattern(phonePattern)]],
       message: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(512)]],
+      recaptchaReactive: ['', Validators.required],
     });
 
     this.name = this.form.get('name');
     this.email = this.form.get('email');
     this.phone = this.form.get('phone');
     this.message = this.form.get('message');
+    this.recaptchaReactive = this.form.get('recaptchaReactive');
 
     this.phone.valueChanges.subscribe(value => {
       this.phone.setValue(formatPhone(value), {emitEvent: false})
@@ -70,6 +77,7 @@ export class ContactUsPage {
       this.email.markAsTouched();
       this.phone.markAsTouched();
       this.message.markAsTouched();
+      this.recaptchaReactive.markAsTouched();
       return;
     }
 
@@ -89,8 +97,16 @@ export class ContactUsPage {
       content: 'Enviando...'
     });
 
+    const data = {
+      name: this.form.get('name').value,
+      email: this.form.get('email').value,
+      phone: this.form.get('phone').value,
+      message: this.form.get('message').value,
+      recaptchaReactive: this.form.get('recaptchaReactive').value,
+    }
+
     loading.present();
-    this.contactUsService.contactUs(this.form.value).timeout(10000).subscribe((resp) => {
+    this.contactUsService.contactUs(data).timeout(10000).subscribe((resp) => {
       loading.dismiss();
 
       if (resp && resp.success) {

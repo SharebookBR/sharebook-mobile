@@ -6,3 +6,4 @@ export const linkedinUrl          = 'https://www.linkedin.com/company/sharebook-
 export const instagramUrl         = 'https://www.instagram.com/sharebook.com.br/';
 export const facebookUrl          = 'https://www.facebook.com/sharebookbr/';
 export const quemSomosUrl         = 'http://sharebook.com.br/quem-somos/';
+export const GOOGLE_RECAPTCHA_KEY = '6LcxaXAUAAAAAGM8zgwQvgMuykwiBPgMr0P7sNL3'

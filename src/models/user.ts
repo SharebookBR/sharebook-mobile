@@ -9,6 +9,7 @@ interface User {
   passwordSalt?: string;
   profile?: string;
   allowSendingEmail: boolean;
+  recaptchaReactive?: string;
   address: {
     street?: string,
     number?: string,
