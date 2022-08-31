@@ -86,9 +86,8 @@ http://dev.sharebook.com.br/swagger/
 
 ## Temporary fix
 
-At line 241 paste this:
+At line 241 of [this file](node_modules/@angular-devkit/build-optimizer/src/transforms/scrub-file.js#241) paste:
 ```
-    // node_modules/@angular-devkit/build-optimizer/src/transforms/scrub-file.js
     // Workaround for missing metadata.
     if(!decorateArray.elements[1]) {
       return false;
