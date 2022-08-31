@@ -83,3 +83,14 @@ Agora é só fazer o upload para a Play Store Console.
 ## API no ambiente de dev
 
 http://dev.sharebook.com.br/swagger/
+
+## Temporary fix
+
+At line 241 paste this:
+```
+    // node_modules/@angular-devkit/build-optimizer/src/transforms/scrub-file.js
+    // Workaround for missing metadata.
+    if(!decorateArray.elements[1]) {
+      return false;
+    }
+```
