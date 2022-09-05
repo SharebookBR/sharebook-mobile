@@ -20,6 +20,8 @@ import {ContactUsService} from "../services/contact-us/contact-us-service";
 import {OneSignal} from "@ionic-native/onesignal";
 import {OneSignalService} from '../services/one-signal/one-signal';
 import {HttpService} from '../services/http/http.service';
+import { GOOGLE_RECAPTCHA_KEY } from './../core/utils/app.const';
+import {RecaptchaModule, RecaptchaSettings, RECAPTCHA_LANGUAGE, RECAPTCHA_SETTINGS} from "ng-recaptcha";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {HttpService} from '../services/http/http.service';
   ],
   imports: [
     BrowserModule,
+    RecaptchaModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
@@ -56,6 +59,16 @@ import {HttpService} from '../services/http/http.service';
     },
     OneSignalService,
     HttpService,
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: "pt-br",
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: GOOGLE_RECAPTCHA_KEY,
+      } as RecaptchaSettings,
+    },
   ]
 })
 export class AppModule {

@@ -203,6 +203,22 @@
       <ion-checkbox formControlName="allowSendingEmail"></ion-checkbox>
     </ion-item>
 
+    <!-- Captcha -->
+    <ion-item-divider style="background-color: #f2f2f2;">
+      Valide que você é um humano
+    </ion-item-divider>
+
+    <div class="captcha-wrapper">
+      <re-captcha (resolved)="resolved($event)"></re-captcha>
+    </div>
+
+    <div class="form-error" ion-text color="danger" *ngIf="form.get('recaptchaReactive').touched && form.get('recaptchaReactive').invalid">
+      Por favor, valide o captcha acima.
+    </div>
+
+    <div style="height: 10px;"></div>
+    <!-- --- -->
+
     <ion-list *ngIf="!isEditing">
       <ion-item-divider style="background-color: #f2f2f2;">
         Termos de uso
