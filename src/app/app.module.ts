@@ -17,7 +17,7 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {CategoryService} from "../services/category/category.service";
 import {Camera} from "@ionic-native/camera";
 import {ContactUsService} from "../services/contact-us/contact-us-service";
-import {OneSignal} from "@ionic-native/onesignal";
+import {OneSignal} from "@ionic-native/onesignal/ngx";
 import {OneSignalService} from '../services/one-signal/one-signal';
 import {HttpService} from '../services/http/http.service';
 import { GOOGLE_RECAPTCHA_KEY } from './../core/utils/app.const';
