@@ -17,8 +17,6 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {CategoryService} from "../services/category/category.service";
 import {Camera} from "@ionic-native/camera";
 import {ContactUsService} from "../services/contact-us/contact-us-service";
-import {OneSignal} from "@ionic-native/onesignal";
-import {OneSignalService} from '../services/one-signal/one-signal';
 import {HttpService} from '../services/http/http.service';
 import { GOOGLE_RECAPTCHA_KEY } from './../core/utils/app.const';
 import {RecaptchaModule, RecaptchaSettings, RECAPTCHA_LANGUAGE, RECAPTCHA_SETTINGS} from "ng-recaptcha";
@@ -39,7 +37,6 @@ import {RecaptchaModule, RecaptchaSettings, RECAPTCHA_LANGUAGE, RECAPTCHA_SETTIN
     MyApp,
   ],
   providers: [
-    OneSignal,
     StatusBar,
     SplashScreen,
     UserService,
@@ -57,7 +54,6 @@ import {RecaptchaModule, RecaptchaSettings, RECAPTCHA_LANGUAGE, RECAPTCHA_SETTIN
       useClass: JwtInterceptor,
       multi: true
     },
-    OneSignalService,
     HttpService,
     {
       provide: RECAPTCHA_LANGUAGE,
