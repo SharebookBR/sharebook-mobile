@@ -96,5 +96,4 @@
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <allow-navigation href="http://192.168.0.107:8100" />
-    <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
 </widget>

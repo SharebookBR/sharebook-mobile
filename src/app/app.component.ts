@@ -3,7 +3,6 @@ import {MenuController, Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {SessionService} from "../services/session/session.service";
-import {OneSignalService} from "../services/one-signal/one-signal";
 import {config} from "../../environments/environment";
 
 @Component({
@@ -19,7 +18,6 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public sessionService: SessionService,
-    public oneSignalService: OneSignalService,
   ) {
     this.initializeApp();
   }
@@ -29,7 +27,6 @@ export class MyApp {
       await this.sessionService.restoreSession();
       this.statusBar.backgroundColorByHexString('#1f3b60');
       this.setRootPage();
-      this.oneSignalService.loadConfig();
       this.splashScreen.hide();
     });
   }

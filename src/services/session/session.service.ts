@@ -2,14 +2,12 @@ import {Inject, Injectable} from '@angular/core';
 import {User} from "../../models/user";
 import {Storage} from "@ionic/storage";
 import {Session} from "../../models/session";
-import {OneSignalService} from "../one-signal/one-signal";
 
 @Injectable()
 export class SessionService {
   private _data: Session = {};
 
   constructor(
-    public oneSignalService: OneSignalService,
     @Inject(Storage) public storage: Storage,
   ) {
 
@@ -37,6 +35,5 @@ export class SessionService {
   clearSession() {
     this._data = {};
     this.storage.remove('session');
-    this.oneSignalService.deleteOneSignalTags();
   }
 }
